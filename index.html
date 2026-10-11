@@ -808,8 +808,8 @@ const Sim = (() => {
   const canvas = field.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const toggle = document.getElementById('sim-toggle');
-  const M = { MU: 1.8, I0: 1.5, DT: 0.0045, DMIN: 3e-4, D0: 0.03, SWITCH: 1.25, LIGHT_R: 80, LIGHT: 40, CG: 36,
-              WAVE_T: 2.8, WAVE_L: 640, FILM0: 298, FILM1: 372, NUTRIENTS: 12, NUTRIENT_W: 0.32 };
+  const M = { MU: 1.8, I0: 1.5, DT: 0.009, DMIN: 3e-4, D0: 0.03, SWITCH: 1.25, LIGHT_R: 80, LIGHT: 40, CG: 22,
+              WAVE_T: 3.2, WAVE_L: 720, FILM0: 298, FILM1: 372, NUTRIENTS: 12, NUTRIENT_W: 0.32 };
   let W = 0, H = 0, nN = 0, nE = 0, nx, ny, ea, eb, eL, emx, emy, D, Q, P, B, Rr, Z, Dd, Ad, diag, g;
   let adjS, adjE, food = [], fedWork = null, src = 0, srcT = 0, running = false, wanted = !reduceMotion, raf = 0;
   let built = false, settled = false, last = 0, clock = 0, parts = null;
@@ -822,12 +822,15 @@ const Sim = (() => {
     W = r.width; H = r.height;
     const dpr = Math.min(2, devicePixelRatio || 1);
     canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const s = W < 700 ? 16 : 19;
+    const s = W < 700 ? 21 : 26;              // junction spacing (px)
     const rects = [...field.querySelectorAll('.node img')].map(img => {
       const b = img.getBoundingClientRect();
       return { x0: b.left - r.left, y0: b.top - r.top, x1: b.right - r.left, y1: b.bottom - r.top, work: img.closest('.node').dataset.work };
     });
     const inRect = (x, y, pad) => rects.some(q => x > q.x0 - pad && x < q.x1 + pad && y > q.y0 - pad && y < q.y1 + pad);
+    // the titles under the works stay readable: the organism grows around them, as around the images
+    const labels = [...field.querySelectorAll('.node-title')].map(t => { const b = t.getBoundingClientRect(); return { x0: b.left - r.left, y0: b.top - r.top, x1: b.right - r.left, y1: b.bottom - r.top }; });
+    const inLabel = (x, y, pad) => labels.some(q => x > q.x0 - pad && x < q.x1 + pad && y > q.y0 - pad && y < q.y1 + pad);
     // junctions: Poisson-disk sampling (Bridson), so the mesh has no preferred direction
     const cell = s/Math.SQRT2, gw = Math.ceil(W/cell), gh = Math.ceil(H/cell), grid = new Int32Array(gw*gh).fill(-1);
     const X = [], Y = [], active = [];
@@ -846,7 +849,7 @@ const Sim = (() => {
       if (!found) active.splice(ai, 1);
     }
     const KX = [], KY = [];
-    for (let i = 0; i < X.length; i++) if (!inRect(X[i], Y[i], 3)) { KX.push(X[i]); KY.push(Y[i]); }
+    for (let i = 0; i < X.length; i++) if (!inRect(X[i], Y[i], 3) && !inLabel(X[i], Y[i], 9)) { KX.push(X[i]); KY.push(Y[i]); }
     nN = KX.length; nx = Float32Array.from(KX); ny = Float32Array.from(KY);
     // tubes: the Delaunay triangulation of the junctions, minus anything that would cross a work
     const pts = new Float64Array(2*nN); for (let i = 0; i < nN; i++) { pts[2*i] = nx[i]; pts[2*i + 1] = ny[i]; }
@@ -855,7 +858,7 @@ const Sim = (() => {
       if (e < HE[e]) continue;
       const a = T[e], b = T[e % 3 === 2 ? e - 2 : e + 1];
       if (Math.hypot(nx[a] - nx[b], ny[a] - ny[b]) > 2.1*s) continue;
-      if (inRect((nx[a] + nx[b])/2, (ny[a] + ny[b])/2, 1)) continue;
+      if (inRect((nx[a] + nx[b])/2, (ny[a] + ny[b])/2, 1) || inLabel((nx[a] + nx[b])/2, (ny[a] + ny[b])/2, 5)) continue;
       E.push(a, b);
     }
     nE = E.length/2;
@@ -897,6 +900,7 @@ const Sim = (() => {
     const nP = W < 700 ? 320 : 900;
     parts = { e: new Int32Array(nP), u: new Float32Array(nP) };
     for (let k = 0; k < nP; k++) { parts.e[k] = (Math.random()*nE)|0; parts.u[k] = Math.random(); }
+    setupRender();
     built = true; settled = false; clock = 0; srcT = 0; src = 0;
     return true;
   }
@@ -975,39 +979,98 @@ const Sim = (() => {
     }
   }
 
-  /* ── drawing: radius r = D^¼ (Poiseuille), colour by thin-film interference ── */
-  const BINS = 18, paths = new Array(BINS);
-  const filmRGB = rr => { const c = FILM[Math.max(0, Math.min(240, Math.round(M.FILM0 + (M.FILM1 - M.FILM0)*rr - 200)))]; return c; };
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round';
-    for (let b = 0; b < BINS; b++) paths[b] = new Path2D();
-    const om = 2*Math.PI/M.WAVE_T, kw = 2*Math.PI/M.WAVE_L, ph = clock*om;
-    // a peristaltic contraction wave: bin by radius, modulated by the wave's phase where each tube sits
-    for (let e = 0; e < nE; e++) {
-      const r = Math.pow(D[e], 0.25); if (r < 0.16) continue;
-      const wave = reduceMotion ? 0 : 0.16*Math.sin(ph - kw*(emx[e]*0.8 + emy[e]*0.4));
-      let b = Math.floor((r*(1 + wave) - 0.16)/0.9*BINS); if (b < 0) b = 0; if (b >= BINS) b = BINS - 1;
-      const a = ea[e], c = eb[e]; paths[b].moveTo(nx[a], ny[a]); paths[b].lineTo(nx[c], ny[c]);
+  /* ── drawing: a gooey, pulsing body ──
+     Tubes are painted into a soft low-resolution mask (width from r = D^¼, swelling and
+     squeezing with a travelling peristaltic wave; cytoplasm lumps ride the flow inside them),
+     blurred so they run together like liquid, then thresholded and lit as a glossy, wet,
+     translucent yellow surface. The thin idle mesh reads as the plasmodium's sheet; busy
+     tubes become opaque veins. */
+  let RS = 0.42, mw = 0, mh = 0, mcv, mctx, ocv, octx, img, A, Bf;
+  function setupRender() {
+    RS = W < 700 ? 0.5 : 0.36;
+    mw = Math.ceil(W*RS); mh = Math.ceil(H*RS);
+    ocv = document.createElement('canvas'); ocv.width = mw; ocv.height = mh; octx = ocv.getContext('2d');
+    img = octx.createImageData(mw, mh); A = new Float32Array(mw*mh); Bf = new Float32Array(mw*mh);
+  }
+  function blur(src, tmp, w, h, r) {           // separable box blur with running sums (twice ≈ Gaussian)
+    const inv = 1/(2*r + 1);
+    for (let y = 0; y < h; y++) {
+      const o = y*w; let acc = 0;
+      for (let x = -r; x <= r; x++) acc += src[o + (x < 0 ? 0 : x >= w ? w - 1 : x)];
+      for (let x = 0; x < w; x++) { tmp[o + x] = acc*inv; const xa = x + r + 1, xs = x - r; acc += src[o + (xa >= w ? w - 1 : xa)] - src[o + (xs < 0 ? 0 : xs)]; }
     }
-    for (let b = 0; b < BINS; b++) {
-      const rr = 0.16 + (b + 0.5)/BINS*0.9, col = filmRGB(Math.min(1, rr)), al = Math.min(1, Math.max(0, (rr - 0.2)/0.5));
-      const w = 0.45 + 4.4*rr*rr;
-      if (rr > 0.6) { ctx.strokeStyle = `rgba(${col[0]|0},${col[1]|0},${col[2]|0},${0.07*al})`; ctx.lineWidth = w*3; ctx.stroke(paths[b]); }
-      ctx.strokeStyle = `rgba(${col[0]|0},${col[1]|0},${col[2]|0},${0.1 + 0.72*al})`; ctx.lineWidth = w; ctx.stroke(paths[b]);
+    for (let x = 0; x < w; x++) {
+      let acc = 0;
+      for (let y = -r; y <= r; y++) acc += tmp[(y < 0 ? 0 : y >= h ? h - 1 : y)*w + x];
+      for (let y = 0; y < h; y++) { src[y*w + x] = acc*inv; const ya = y + r + 1, ys = y - r; acc += tmp[(ya >= h ? h - 1 : ya)*w + x] - tmp[(ys < 0 ? 0 : ys)*w + x]; }
     }
-    if (!reduceMotion && parts) {                           // cytoplasmic granules
-      ctx.fillStyle = 'rgba(255,238,205,0.85)';
-      const pe = parts.e, pu = parts.u;
-      ctx.beginPath();
-      for (let k = 0; k < pe.length; k++) {
-        const e = pe[k]; if (D[e] < 0.08) continue;
-        const u = pu[k], x = nx[ea[e]] + (nx[eb[e]] - nx[ea[e]])*u, y = ny[ea[e]] + (ny[eb[e]] - ny[ea[e]])*u;
-        ctx.moveTo(x + 1.3, y); ctx.arc(x, y, 1.3, 0, 6.2832);
+  }
+  const BINS = 26, paths = new Array(BINS);
+  const sm = (a, b, x) => { const t = x <= a ? 0 : x >= b ? 1 : (x - a)/(b - a); return t*t*(3 - 2*t); };
+  // anti-aliased round segment and disc, rasterized straight into the height buffer (no canvas readback)
+  function seg(ax, ay, bx, by, hw, a) {
+    const lo = hw + 1.5;
+    let x0 = Math.floor((ax < bx ? ax : bx) - lo), x1 = Math.ceil((ax > bx ? ax : bx) + lo), y0 = Math.floor((ay < by ? ay : by) - lo), y1 = Math.ceil((ay > by ? ay : by) + lo);
+    if (x0 < 1) x0 = 1; if (y0 < 1) y0 = 1; if (x1 > mw - 2) x1 = mw - 2; if (y1 > mh - 2) y1 = mh - 2;
+    const dx = bx - ax, dy = by - ay, L2 = dx*dx + dy*dy || 1e-6, r0 = hw + 0.5;
+    for (let y = y0; y <= y1; y++) {
+      const o = y*mw;
+      for (let x = x0; x <= x1; x++) {
+        let t = ((x - ax)*dx + (y - ay)*dy)/L2; t = t < 0 ? 0 : t > 1 ? 1 : t;
+        const ex = ax + t*dx - x, ey = ay + t*dy - y, d2 = ex*ex + ey*ey;
+        if (d2 >= r0*r0) continue;
+        let c = r0 - Math.sqrt(d2); if (c > 1) c = 1; c *= a;
+        if (c > A[o + x]) A[o + x] = c;
       }
-      ctx.fill();
     }
-    ctx.globalCompositeOperation = 'source-over';
+  }
+  function draw() {
+    A.fill(0);
+    const om = 2*Math.PI/M.WAVE_T, kw = 2*Math.PI/M.WAVE_L, ph = clock*om, breathe = 1 + 0.06*Math.sin(clock*2*Math.PI/7);
+    for (let e = 0; e < nE; e++) {
+      const r = Math.min(1.15, Math.pow(D[e], 0.25)); if (r < 0.2) continue;   // Poiseuille: radius ∝ D^¼
+      const a = ea[e], c = eb[e], ax = nx[a]*RS, ay = ny[a]*RS, bx = nx[c]*RS, by = ny[c]*RS;
+      const wave = reduceMotion ? 1 : (1 + 0.28*Math.sin(ph - kw*(emx[e]*0.8 + emy[e]*0.45)))*breathe;  // peristalsis
+      // width and opacity follow the tube's conductance continuously, so withering tubes thin out and fade
+      // instead of snapping off: the network stays connected while it refines
+      seg(ax, ay, bx, by, (0.5 + 8*r*r)*wave*RS*(W < 700 ? 0.7 : 1), sm(0.2, 0.46, r));   // slimmer on phones
+    }
+    if (!reduceMotion && parts) {                // lumps of cytoplasm carried by the flow
+      const pe = parts.e, pu = parts.u;
+      for (let q = 0; q < pe.length; q++) {
+        const e = pe[q]; if (D[e] < 0.28) continue;
+        const u = pu[q], x = (nx[ea[e]] + (nx[eb[e]] - nx[ea[e]])*u)*RS, y = (ny[ea[e]] + (ny[eb[e]] - ny[ea[e]])*u)*RS;
+        seg(x, y, x, y, (2 + 4.4*Math.pow(D[e], 0.75))*RS, 1);
+      }
+    }
+    const n = mw*mh;
+    const br = 2;
+    blur(A, Bf, mw, mh, br); blur(A, Bf, mw, mh, br);
+    // threshold and light it: smooth, glossy, translucent
+    const out = img.data, Lx = -0.42, Ly = -0.55, Lz = 0.72, Hx = Lx*0.5, Hy = Ly*0.5, Hz = (Lz + 1)*0.5, Hn = Math.hypot(Hx, Hy, Hz);
+    const glow = reduceMotion ? 1 : 0.92 + 0.08*Math.sin(ph);
+    for (let y = 0; y < mh; y++) {
+      const o = y*mw, edgeRow = y === 0 || y === mh - 1;
+      for (let x = 0; x < mw; x++) {
+        const i = o + x, h = A[i], j = 4*i;
+        if (h < 0.03 || edgeRow || x === 0 || x === mw - 1) { out[j + 3] = 0; continue; }
+        const gx = A[i + 1] - A[i - 1], gy = A[i + mw] - A[i - mw];
+        let nxv = -gx*7, nyv = -gy*7; const nl = 1/Math.sqrt(nxv*nxv + nyv*nyv + 1); nxv *= nl; nyv *= nl; const nz = nl;
+        let dif = nxv*Lx + nyv*Ly + nz*Lz; if (dif < 0) dif = 0;
+        let c = (nxv*Hx + nyv*Hy + nz*Hz)/Hn; if (c < 0) c = 0;
+        const c2 = c*c, c4 = c2*c2, c8 = c4*c4, c16 = c8*c8, sp = c16*c8*c4;      // ≈ c^28
+        const tb = h <= 0.13 ? 0 : h >= 0.34 ? 1 : (h - 0.13)/0.21, body = tb*tb*(3 - 2*tb);     // the gooey edge
+        const ts = h >= 0.17 ? 1 : (h - 0.03)/0.14, sheet = 0.13*ts*ts*(3 - 2*ts);              // the translucent sheet
+        const al = body > sheet ? body : sheet;
+        const tt = h <= 0.38 ? 0 : h >= 0.95 ? 1 : (h - 0.38)/0.57, t = tt*tt*(3 - 2*tt);      // thicker → deeper amber
+        const lit = (0.58 + 0.55*dif)*glow, spb = sp*body;
+        let rr = (255 - 25*t)*lit + 240*spb, gg = (218 - 70*t)*lit + 232*spb, bb = (80 - 58*t)*lit + 200*spb;
+        out[j] = rr > 255 ? 255 : rr; out[j + 1] = gg > 255 ? 255 : gg; out[j + 2] = bb > 255 ? 255 : bb; out[j + 3] = 255*al;
+      }
+    }
+    octx.putImageData(img, 0, 0);
+    ctx.clearRect(0, 0, W, H); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(ocv, 0, 0, W, H);
   }
 
   function loop(now) {
