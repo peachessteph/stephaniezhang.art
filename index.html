@@ -253,7 +253,7 @@ main{margin-left:var(--side);min-height:100vh}
       <span class="node-title">A Bestiary of Vanishings<span class="yr">, 2026</span></span>
     </a>
   </div>
-  <p class="field-note">A live model of <i>Physarum polycephalum</i>: cytoplasm streams between the works, and its tubes thicken where it flows and wither where it doesn&rsquo;t.<span class="on-hover"> Hover a work to feed it; it shrinks from your cursor, as from light.</span> <button class="text-button" type="button" id="sim-toggle">Pause</button></p>
+  <p class="field-note">A live model of <i>Physarum polycephalum</i>, growing between the works.<span class="on-hover"> Hover a work to feed it.</span> <button class="text-button" type="button" id="sim-toggle">Pause</button></p>
 </section>
 
 <!-- ═══════════ EMERGENT VESSELS ═══════════ -->
@@ -785,334 +785,192 @@ function filmTable(d0, d1) {                 // sRGB for films d0–d1 nm thick 
 }
 const FILM = filmTable(200, 440);
 
-/* Delaunator 5.0.1 (github.com/mapbox/delaunator), with robust-predicates. ISC License, Copyright (c) 2021, Mapbox.
-   Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted,
-   provided that the above copyright notice and this permission notice appear in all copies. */
-!function(t,i){"object"==typeof exports&&"undefined"!=typeof module?module.exports=i():"function"==typeof define&&define.amd?define(i):(t="undefined"!=typeof globalThis?globalThis:t||self).Delaunator=i()}(this,(function(){"use strict";const t=11102230246251565e-32,i=134217729,s=(3+8*t)*t;function e(t,i,s,e,n){let h,r,l,o,a=i[0],f=e[0],c=0,u=0;f>a==f>-a?(h=a,a=i[++c]):(h=f,f=e[++u]);let _=0;if(c<t&&u<s)for(f>a==f>-a?(r=a+h,l=h-(r-a),a=i[++c]):(r=f+h,l=h-(r-f),f=e[++u]),h=r,0!==l&&(n[_++]=l);c<t&&u<s;)f>a==f>-a?(r=h+a,o=r-h,l=h-(r-o)+(a-o),a=i[++c]):(r=h+f,o=r-h,l=h-(r-o)+(f-o),f=e[++u]),h=r,0!==l&&(n[_++]=l);for(;c<t;)r=h+a,o=r-h,l=h-(r-o)+(a-o),a=i[++c],h=r,0!==l&&(n[_++]=l);for(;u<s;)r=h+f,o=r-h,l=h-(r-o)+(f-o),f=e[++u],h=r,0!==l&&(n[_++]=l);return 0===h&&0!==_||(n[_++]=h),_}function n(t){return new Float64Array(t)}const h=22204460492503146e-32,r=11093356479670487e-47,l=n(4),o=n(8),a=n(12),f=n(16),c=n(4);function u(t,n,u,_,d,g){const y=(n-g)*(u-d),w=(t-d)*(_-g),b=y-w,A=Math.abs(y+w);return Math.abs(b)>=33306690738754716e-32*A?b:-function(t,n,u,_,d,g,y){let w,b,A,k,M,p,x,S,T,z,U,m,K,L,v,F,P,E;const H=t-d,I=u-d,N=n-g,j=_-g;L=H*j,p=i*H,x=p-(p-H),S=H-x,p=i*j,T=p-(p-j),z=j-T,v=S*z-(L-x*T-S*T-x*z),F=N*I,p=i*N,x=p-(p-N),S=N-x,p=i*I,T=p-(p-I),z=I-T,P=S*z-(F-x*T-S*T-x*z),U=v-P,M=v-U,l[0]=v-(U+M)+(M-P),m=L+U,M=m-L,K=L-(m-M)+(U-M),U=K-F,M=K-U,l[1]=K-(U+M)+(M-F),E=m+U,M=E-m,l[2]=m-(E-M)+(U-M),l[3]=E;let q=function(t,i){let s=i[0];for(let e=1;e<t;e++)s+=i[e];return s}(4,l),D=h*y;if(q>=D||-q>=D)return q;if(M=t-H,w=t-(H+M)+(M-d),M=u-I,A=u-(I+M)+(M-d),M=n-N,b=n-(N+M)+(M-g),M=_-j,k=_-(j+M)+(M-g),0===w&&0===b&&0===A&&0===k)return q;if(D=r*y+s*Math.abs(q),q+=H*k+j*w-(N*A+I*b),q>=D||-q>=D)return q;L=w*j,p=i*w,x=p-(p-w),S=w-x,p=i*j,T=p-(p-j),z=j-T,v=S*z-(L-x*T-S*T-x*z),F=b*I,p=i*b,x=p-(p-b),S=b-x,p=i*I,T=p-(p-I),z=I-T,P=S*z-(F-x*T-S*T-x*z),U=v-P,M=v-U,c[0]=v-(U+M)+(M-P),m=L+U,M=m-L,K=L-(m-M)+(U-M),U=K-F,M=K-U,c[1]=K-(U+M)+(M-F),E=m+U,M=E-m,c[2]=m-(E-M)+(U-M),c[3]=E;const B=e(4,l,4,c,o);L=H*k,p=i*H,x=p-(p-H),S=H-x,p=i*k,T=p-(p-k),z=k-T,v=S*z-(L-x*T-S*T-x*z),F=N*A,p=i*N,x=p-(p-N),S=N-x,p=i*A,T=p-(p-A),z=A-T,P=S*z-(F-x*T-S*T-x*z),U=v-P,M=v-U,c[0]=v-(U+M)+(M-P),m=L+U,M=m-L,K=L-(m-M)+(U-M),U=K-F,M=K-U,c[1]=K-(U+M)+(M-F),E=m+U,M=E-m,c[2]=m-(E-M)+(U-M),c[3]=E;const C=e(B,o,4,c,a);L=w*k,p=i*w,x=p-(p-w),S=w-x,p=i*k,T=p-(p-k),z=k-T,v=S*z-(L-x*T-S*T-x*z),F=b*A,p=i*b,x=p-(p-b),S=b-x,p=i*A,T=p-(p-A),z=A-T,P=S*z-(F-x*T-S*T-x*z),U=v-P,M=v-U,c[0]=v-(U+M)+(M-P),m=L+U,M=m-L,K=L-(m-M)+(U-M),U=K-F,M=K-U,c[1]=K-(U+M)+(M-F),E=m+U,M=E-m,c[2]=m-(E-M)+(U-M),c[3]=E;const G=e(C,a,4,c,f);return f[G-1]}(t,n,u,_,d,g,A)}const _=Math.pow(2,-52),d=new Uint32Array(512);class g{static from(t,i=M,s=p){const e=t.length,n=new Float64Array(2*e);for(let h=0;h<e;h++){const e=t[h];n[2*h]=i(e),n[2*h+1]=s(e)}return new g(n)}constructor(t){const i=t.length>>1;if(i>0&&"number"!=typeof t[0])throw new Error("Expected coords to contain numbers.");this.coords=t;const s=Math.max(2*i-5,0);this._triangles=new Uint32Array(3*s),this._halfedges=new Int32Array(3*s),this._hashSize=Math.ceil(Math.sqrt(i)),this._hullPrev=new Uint32Array(i),this._hullNext=new Uint32Array(i),this._hullTri=new Uint32Array(i),this._hullHash=new Int32Array(this._hashSize),this._ids=new Uint32Array(i),this._dists=new Float64Array(i),this.update()}update(){const{coords:t,_hullPrev:i,_hullNext:s,_hullTri:e,_hullHash:n}=this,h=t.length>>1;let r=1/0,l=1/0,o=-1/0,a=-1/0;for(let i=0;i<h;i++){const s=t[2*i],e=t[2*i+1];s<r&&(r=s),e<l&&(l=e),s>o&&(o=s),e>a&&(a=e),this._ids[i]=i}const f=(r+o)/2,c=(l+a)/2;let d,g,w;for(let i=0,s=1/0;i<h;i++){const e=y(f,c,t[2*i],t[2*i+1]);e<s&&(d=i,s=e)}const k=t[2*d],M=t[2*d+1];for(let i=0,s=1/0;i<h;i++){if(i===d)continue;const e=y(k,M,t[2*i],t[2*i+1]);e<s&&e>0&&(g=i,s=e)}let p=t[2*g],x=t[2*g+1],S=1/0;for(let i=0;i<h;i++){if(i===d||i===g)continue;const s=b(k,M,p,x,t[2*i],t[2*i+1]);s<S&&(w=i,S=s)}let T=t[2*w],z=t[2*w+1];if(S===1/0){for(let i=0;i<h;i++)this._dists[i]=t[2*i]-t[0]||t[2*i+1]-t[1];A(this._ids,this._dists,0,h-1);const i=new Uint32Array(h);let s=0;for(let t=0,e=-1/0;t<h;t++){const n=this._ids[t],h=this._dists[n];h>e&&(i[s++]=n,e=h)}return this.hull=i.subarray(0,s),this.triangles=new Uint32Array(0),void(this.halfedges=new Uint32Array(0))}if(u(k,M,p,x,T,z)<0){const t=g,i=p,s=x;g=w,p=T,x=z,w=t,T=i,z=s}const U=function(t,i,s,e,n,h){const r=s-t,l=e-i,o=n-t,a=h-i,f=r*r+l*l,c=o*o+a*a,u=.5/(r*a-l*o);return{x:t+(a*f-l*c)*u,y:i+(r*c-o*f)*u}}(k,M,p,x,T,z);this._cx=U.x,this._cy=U.y;for(let i=0;i<h;i++)this._dists[i]=y(t[2*i],t[2*i+1],U.x,U.y);A(this._ids,this._dists,0,h-1),this._hullStart=d;let m=3;s[d]=i[w]=g,s[g]=i[d]=w,s[w]=i[g]=d,e[d]=0,e[g]=1,e[w]=2,n.fill(-1),n[this._hashKey(k,M)]=d,n[this._hashKey(p,x)]=g,n[this._hashKey(T,z)]=w,this.trianglesLen=0,this._addTriangle(d,g,w,-1,-1,-1);for(let h,r,l=0;l<this._ids.length;l++){const o=this._ids[l],a=t[2*o],f=t[2*o+1];if(l>0&&Math.abs(a-h)<=_&&Math.abs(f-r)<=_)continue;if(h=a,r=f,o===d||o===g||o===w)continue;let c=0;for(let t=0,i=this._hashKey(a,f);t<this._hashSize&&(c=n[(i+t)%this._hashSize],-1===c||c===s[c]);t++);c=i[c];let y,b=c;for(;y=s[b],u(a,f,t[2*b],t[2*b+1],t[2*y],t[2*y+1])>=0;)if(b=y,b===c){b=-1;break}if(-1===b)continue;let A=this._addTriangle(b,o,s[b],-1,-1,e[b]);e[o]=this._legalize(A+2),e[b]=A,m++;let k=s[b];for(;y=s[k],u(a,f,t[2*k],t[2*k+1],t[2*y],t[2*y+1])<0;)A=this._addTriangle(k,o,y,e[o],-1,e[k]),e[o]=this._legalize(A+2),s[k]=k,m--,k=y;if(b===c)for(;y=i[b],u(a,f,t[2*y],t[2*y+1],t[2*b],t[2*b+1])<0;)A=this._addTriangle(y,o,b,-1,e[b],e[y]),this._legalize(A+2),e[y]=A,s[b]=b,m--,b=y;this._hullStart=i[o]=b,s[b]=i[k]=o,s[o]=k,n[this._hashKey(a,f)]=o,n[this._hashKey(t[2*b],t[2*b+1])]=b}this.hull=new Uint32Array(m);for(let t=0,i=this._hullStart;t<m;t++)this.hull[t]=i,i=s[i];this.triangles=this._triangles.subarray(0,this.trianglesLen),this.halfedges=this._halfedges.subarray(0,this.trianglesLen)}_hashKey(t,i){return Math.floor(function(t,i){const s=t/(Math.abs(t)+Math.abs(i));return(i>0?3-s:1+s)/4}(t-this._cx,i-this._cy)*this._hashSize)%this._hashSize}_legalize(t){const{_triangles:i,_halfedges:s,coords:e}=this;let n=0,h=0;for(;;){const r=s[t],l=t-t%3;if(h=l+(t+2)%3,-1===r){if(0===n)break;t=d[--n];continue}const o=r-r%3,a=l+(t+1)%3,f=o+(r+2)%3,c=i[h],u=i[t],_=i[a],g=i[f];if(w(e[2*c],e[2*c+1],e[2*u],e[2*u+1],e[2*_],e[2*_+1],e[2*g],e[2*g+1])){i[t]=g,i[r]=c;const e=s[f];if(-1===e){let i=this._hullStart;do{if(this._hullTri[i]===f){this._hullTri[i]=t;break}i=this._hullPrev[i]}while(i!==this._hullStart)}this._link(t,e),this._link(r,s[h]),this._link(h,f);const l=o+(r+1)%3;n<d.length&&(d[n++]=l)}else{if(0===n)break;t=d[--n]}}return h}_link(t,i){this._halfedges[t]=i,-1!==i&&(this._halfedges[i]=t)}_addTriangle(t,i,s,e,n,h){const r=this.trianglesLen;return this._triangles[r]=t,this._triangles[r+1]=i,this._triangles[r+2]=s,this._link(r,e),this._link(r+1,n),this._link(r+2,h),this.trianglesLen+=3,r}}function y(t,i,s,e){const n=t-s,h=i-e;return n*n+h*h}function w(t,i,s,e,n,h,r,l){const o=t-r,a=i-l,f=s-r,c=e-l,u=n-r,_=h-l,d=f*f+c*c,g=u*u+_*_;return o*(c*g-d*_)-a*(f*g-d*u)+(o*o+a*a)*(f*_-c*u)<0}function b(t,i,s,e,n,h){const r=s-t,l=e-i,o=n-t,a=h-i,f=r*r+l*l,c=o*o+a*a,u=.5/(r*a-l*o),_=(a*f-l*c)*u,d=(r*c-o*f)*u;return _*_+d*d}function A(t,i,s,e){if(e-s<=20)for(let n=s+1;n<=e;n++){const e=t[n],h=i[e];let r=n-1;for(;r>=s&&i[t[r]]>h;)t[r+1]=t[r--];t[r+1]=e}else{let n=s+1,h=e;k(t,s+e>>1,n),i[t[s]]>i[t[e]]&&k(t,s,e),i[t[n]]>i[t[e]]&&k(t,n,e),i[t[s]]>i[t[n]]&&k(t,s,n);const r=t[n],l=i[r];for(;;){do{n++}while(i[t[n]]<l);do{h--}while(i[t[h]]>l);if(h<n)break;k(t,n,h)}t[s+1]=t[h],t[h]=r,e-n+1>=h-s?(A(t,i,n,e),A(t,i,s,h-1)):(A(t,i,s,h-1),A(t,i,n,e))}}function k(t,i,s){const e=t[i];t[i]=t[s],t[s]=e}function M(t){return t[0]}function p(t){return t[1]}return g}));
-
-/* ───────────── Physarum: the flow–conductivity model ─────────────
-   A physical model of the slime mold's tube network, after Tero, Kobayashi & Nakagaki
-   (J. Theor. Biol. 2007) and Tero et al. (Science 2010).
-   · The organism is a mesh of tubes. Cytoplasm moves through them as Poiseuille flow, so a
-     tube's conductance D goes as the fourth power of its radius (D ∝ r⁴).
-   · At every junction flow is conserved (Kirchhoff), which fixes the pressures: a sparse
-     linear system, solved each frame by preconditioned conjugate gradients.
-   · The works are food. Flow enters at one and leaves at the others; which one drives it
-     switches every couple of seconds, as the real organism's shuttle streaming reverses.
-   · Each tube adapts to the flux Q it carries:  dD/dt = |Q|^μ/(1+|Q|^μ) − γD.
-     Busy tubes thicken, idle ones wither, and a uniform mesh refines into a transport network.
-   · Granules ride the computed flow; a peristaltic contraction wave crosses the network.
-   · Light makes tubes retract (it raises γ), so the network withdraws from the cursor. */
+/* ───────────── Physarum model ─────────────
+   Agent-based slime mold (after Jeff Jones, 2010). Agents sense a chemoattractant
+   trail ahead-left, ahead, and ahead-right, turn toward the strongest, step, and
+   deposit. The trail diffuses and decays. Each work in the field is a food source
+   that deposits along its edges; hovering a work feeds it more. The cursor is light,
+   which bleaches the trail around it, so the network avoids it. */
 const Sim = (() => {
   const field = document.getElementById('field');
   const canvas = field.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const toggle = document.getElementById('sim-toggle');
-  const M = { MU: 1.8, I0: 1.5, DT: 0.009, DMIN: 3e-4, D0: 0.03, SWITCH: 1.25, LIGHT_R: 80, LIGHT: 40, CG: 22,
-              WAVE_T: 3.2, WAVE_L: 720, FILM0: 298, FILM1: 372, NUTRIENTS: 12, NUTRIENT_W: 0.32 };
-  let W = 0, H = 0, nN = 0, nE = 0, nx, ny, ea, eb, eL, emx, emy, D, Q, P, B, Rr, Z, Dd, Ad, diag, g;
-  let adjS, adjE, food = [], fedWork = null, src = 0, srcT = 0, running = false, wanted = !reduceMotion, raf = 0;
-  let built = false, settled = false, last = 0, clock = 0, parts = null;
-  const light = { x: 0, y: 0, on: false };
+  let W = 0, H = 0, cell = 2, trail, tmp, image, px, N = 0, ax, ay, aa;
+  let food = [], fedWork = null, running = false, wanted = true, raf = 0, inited = false;
+  let lastW = 0, lastH = 0, steps = 0, foodScale = 1, gainScale = 1;
+  const light = { x: -1, y: -1, on: false };
+  const P = { SA: 1.0, RA: 0.5, SO: 14, SS: 1, DEP: 0.25, DECAY: 0.96, FOOD: 3.2, LIGHT: 11, DENS: 0.15, GAIN: 8, D0: 297, D1: 400, CURVE: 1.0, DRIFT: 12 };
 
-  /* ── the mesh: a jittered triangulated lattice around the works ── */
-  function build() {
+  const LUT = new Uint32Array(1024);
+  const ss = (a,b,x) => { const t = Math.min(1, Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); };
+  function buildLUT(drift) {
+    for (let i = 0; i < 1024; i++) {
+      const t = 1 - Math.exp(-(i/32) / 6);              // saturating response to trail density
+      const a = ss(0.02, 0.5, t) * 0.82;
+      const d = P.D0 + (P.D1 - P.D0)*Math.pow(t, P.CURVE) + drift;
+      const c = FILM[Math.max(0, Math.min(240, Math.round(d - 200)))];
+      LUT[i] = ((a*255)&255)<<24 | ((c[2]|0)&255)<<16 | ((c[1]|0)&255)<<8 | ((c[0]|0)&255);
+    }
+  }
+
+  function init() {
+    buildLUT(0);
     const r = field.getBoundingClientRect();
-    if (r.width < 50 || r.height < 50) return false;
-    W = r.width; H = r.height;
-    const dpr = Math.min(2, devicePixelRatio || 1);
-    canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const s = W < 700 ? 21 : 26;              // junction spacing (px)
-    const rects = [...field.querySelectorAll('.node img')].map(img => {
-      const b = img.getBoundingClientRect();
-      return { x0: b.left - r.left, y0: b.top - r.top, x1: b.right - r.left, y1: b.bottom - r.top, work: img.closest('.node').dataset.work };
-    });
-    const inRect = (x, y, pad) => rects.some(q => x > q.x0 - pad && x < q.x1 + pad && y > q.y0 - pad && y < q.y1 + pad);
-    // the titles under the works stay readable: the organism grows around them, as around the images
-    const labels = [...field.querySelectorAll('.node-title')].map(t => { const b = t.getBoundingClientRect(); return { x0: b.left - r.left, y0: b.top - r.top, x1: b.right - r.left, y1: b.bottom - r.top }; });
-    const inLabel = (x, y, pad) => labels.some(q => x > q.x0 - pad && x < q.x1 + pad && y > q.y0 - pad && y < q.y1 + pad);
-    // junctions: Poisson-disk sampling (Bridson), so the mesh has no preferred direction
-    const cell = s/Math.SQRT2, gw = Math.ceil(W/cell), gh = Math.ceil(H/cell), grid = new Int32Array(gw*gh).fill(-1);
-    const X = [], Y = [], active = [];
-    const put = (x, y) => { grid[((y/cell)|0)*gw + ((x/cell)|0)] = X.length; active.push(X.length); X.push(x); Y.push(y); };
-    put(W*Math.random(), H*Math.random());
-    while (active.length) {
-      const ai = (Math.random()*active.length)|0, a = active[ai]; let found = false;
-      for (let t = 0; t < 24 && !found; t++) {
-        const ang = Math.random()*6.2832, d = s*(1 + Math.random()), x = X[a] + Math.cos(ang)*d, y = Y[a] + Math.sin(ang)*d;
-        if (x < 0 || y < 0 || x >= W || y >= H) continue;
-        const gx = (x/cell)|0, gy = (y/cell)|0; let ok = true;
-        for (let yy = Math.max(0, gy - 2); yy <= Math.min(gh - 1, gy + 2) && ok; yy++)
-          for (let xx = Math.max(0, gx - 2); xx <= Math.min(gw - 1, gx + 2); xx++) { const j = grid[yy*gw + xx]; if (j >= 0 && (X[j] - x)**2 + (Y[j] - y)**2 < s*s) { ok = false; break; } }
-        if (ok) { put(x, y); found = true; }
-      }
-      if (!found) active.splice(ai, 1);
+    if (r.width < 10 || r.height < 10) return false;
+    cell = r.width < 700 ? 1.6 : 2;
+    foodScale = r.width < 700 ? 0.45 : 1;
+    gainScale = r.width < 700 ? 0.62 : 1;
+    W = Math.round(r.width / cell); H = Math.round(r.height / cell);
+    lastW = r.width; lastH = r.height;
+    canvas.width = W; canvas.height = H;
+    trail = new Float32Array(W*H); tmp = new Float32Array(W*H);
+    image = ctx.createImageData(W, H); px = new Uint32Array(image.data.buffer);
+    N = Math.min(40000, Math.round(W*H*P.DENS));
+    ax = new Float32Array(N); ay = new Float32Array(N); aa = new Float32Array(N);
+    // start as noise: agents scattered at random, so the network self-organizes on load
+    for (let i = 0; i < N; i++) {
+      ax[i] = 1 + Math.random()*(W-2); ay[i] = 1 + Math.random()*(H-2); aa[i] = Math.random()*Math.PI*2;
     }
-    const KX = [], KY = [];
-    for (let i = 0; i < X.length; i++) if (!inRect(X[i], Y[i], 3) && !inLabel(X[i], Y[i], 9)) { KX.push(X[i]); KY.push(Y[i]); }
-    nN = KX.length; nx = Float32Array.from(KX); ny = Float32Array.from(KY);
-    // tubes: the Delaunay triangulation of the junctions, minus anything that would cross a work
-    const pts = new Float64Array(2*nN); for (let i = 0; i < nN; i++) { pts[2*i] = nx[i]; pts[2*i + 1] = ny[i]; }
-    const dl = new Delaunator(pts), T = dl.triangles, HE = dl.halfedges, E = [];
-    for (let e = 0; e < T.length; e++) {
-      if (e < HE[e]) continue;
-      const a = T[e], b = T[e % 3 === 2 ? e - 2 : e + 1];
-      if (Math.hypot(nx[a] - nx[b], ny[a] - ny[b]) > 2.1*s) continue;
-      if (inRect((nx[a] + nx[b])/2, (ny[a] + ny[b])/2, 1) || inLabel((nx[a] + nx[b])/2, (ny[a] + ny[b])/2, 5)) continue;
-      E.push(a, b);
-    }
-    nE = E.length/2;
-    ea = new Int32Array(nE); eb = new Int32Array(nE); eL = new Float32Array(nE); emx = new Float32Array(nE); emy = new Float32Array(nE);
-    for (let e = 0; e < nE; e++) {
-      const a = E[2*e], b = E[2*e + 1]; ea[e] = a; eb[e] = b;
-      eL[e] = Math.hypot(nx[a] - nx[b], ny[a] - ny[b])/s; emx[e] = (nx[a] + nx[b])/2; emy[e] = (ny[a] + ny[b])/2;
-    }
-    // node → incident edges (compressed rows)
-    const deg = new Int32Array(nN + 1); for (let e = 0; e < nE; e++) { deg[ea[e] + 1]++; deg[eb[e] + 1]++; }
-    for (let i = 0; i < nN; i++) deg[i + 1] += deg[i];
-    adjS = deg; adjE = new Int32Array(2*nE); const fill = Int32Array.from(deg.subarray(0, nN));
-    for (let e = 0; e < nE; e++) { adjE[fill[ea[e]]++] = e; adjE[fill[eb[e]]++] = e; }
-    // a faint, uniform reticulum to begin with: the organism before it commits to routes
-    D = new Float32Array(nE); for (let e = 0; e < nE; e++) D[e] = M.D0*(0.6 + 0.8*Math.random());
-    Q = new Float32Array(nE); g = new Float64Array(nE);
-    P = new Float64Array(nN); B = new Float64Array(nN); Rr = new Float64Array(nN); Z = new Float64Array(nN);
-    Dd = new Float64Array(nN); Ad = new Float64Array(nN); diag = new Float64Array(nN);
-    // food. Each work feeds the network at a few attachment points around its edge (the organism
-    // envelops food at points, not along a seam); faint nutrient sites through the field, like oat
-    // flakes on agar, give the network the redundancy and loops of the real organism.
-    const nearest = (x, y) => { let bi = -1, bd = 1e9; for (let i = 0; i < nN; i++) { const d = (nx[i] - x)**2 + (ny[i] - y)**2; if (d < bd) { bd = d; bi = i; } } return bi; };
-    food = rects.map(q => {
-      const ns = new Set(), per = 2*((q.x1 - q.x0) + (q.y1 - q.y0)), k = 7;
-      for (let j = 0; j < k; j++) {
-        let d = ((j + 0.5)/k + (Math.random() - 0.5)*0.08)*per, x, y; const w = q.x1 - q.x0, h = q.y1 - q.y0, o = s*0.6;
-        if (d < w) { x = q.x0 + d; y = q.y0 - o; } else if ((d -= w) < h) { x = q.x1 + o; y = q.y0 + d; } else if ((d -= h) < w) { x = q.x1 - d; y = q.y1 + o; } else { d -= w; x = q.x0 - o; y = q.y1 - d; }
-        const n = nearest(x, y); if (n >= 0) ns.add(n);
-      }
-      return { work: q.work, weight: 1, nodes: Int32Array.from(ns) };
-    }).filter(f => f.nodes.length);
-    for (let k = 0, tries = 0; k < M.NUTRIENTS && tries < 400; tries++) {
-      const x = 30 + Math.random()*(W - 60), y = 30 + Math.random()*(H - 60);
-      if (inRect(x, y, 70) || food.some(f => f.weight < 1 && Math.hypot(nx[f.nodes[0]] - x, ny[f.nodes[0]] - y) < 110)) continue;
-      const n = nearest(x, y); if (n < 0) continue;
-      food.push({ work: null, weight: M.NUTRIENT_W, nodes: Int32Array.from([n]) }); k++;
-    }
-    // cytoplasmic granules
-    const nP = W < 700 ? 320 : 900;
-    parts = { e: new Int32Array(nP), u: new Float32Array(nP) };
-    for (let k = 0; k < nP; k++) { parts.e[k] = (Math.random()*nE)|0; parts.u[k] = Math.random(); }
-    setupRender();
-    built = true; settled = false; clock = 0; srcT = 0; src = 0;
+    mapFood(r);
+    steps = 0; inited = true;
     return true;
   }
 
-  /* ── one time step: Kirchhoff pressures, Poiseuille fluxes, tube adaptation ── */
-  function step(dt) {
-    if (food.length < 2) return;
-    srcT += dt;
-    const wt = f => f.weight*(fedWork && f.work === fedWork ? 3 : 1);
-    if (srcT > M.SWITCH) {                      // shuttle streaming: the driving source changes
-      srcT = 0;
-      let tot = 0; for (const f of food) tot += wt(f);
-      let k = src;
-      for (let tries = 0; tries < 6 && k === src; tries++) { let pick = Math.random()*tot; k = 0; while (k < food.length - 1 && (pick -= wt(food[k])) > 0) k++; }
-      src = k;
-    }
-    const S = food[src], I = M.I0*(fedWork && S.work === fedWork ? 1.6 : 1);   // constant driving flux, as in Tero's model
-    let sinkW = 0; for (let k = 0; k < food.length; k++) if (k !== src) sinkW += wt(food[k]);
-    B.fill(0);
-    for (const n of S.nodes) B[n] += I/S.nodes.length;
-    for (let k = 0; k < food.length; k++) if (k !== src) { const f = food[k], share = I*wt(f)/sinkW/f.nodes.length; for (const n of f.nodes) B[n] -= share; }
-    // conductances and the Jacobi preconditioner
-    diag.fill(1e-7);
-    for (let e = 0; e < nE; e++) { const c = D[e]/eL[e]; g[e] = c; diag[ea[e]] += c; diag[eb[e]] += c; }
-    // conjugate gradients on the weighted graph Laplacian, warm-started from the last pressures
-    const mul = (x, out) => {
-      for (let i = 0; i < nN; i++) out[i] = diag[i]*x[i];
-      for (let e = 0; e < nE; e++) { const a = ea[e], b = eb[e], c = g[e]; out[a] -= c*x[b]; out[b] -= c*x[a]; }
-    };
-    mul(P, Ad);
-    let rz = 0;
-    for (let i = 0; i < nN; i++) { Rr[i] = B[i] - Ad[i]; Z[i] = Rr[i]/diag[i]; Dd[i] = Z[i]; rz += Rr[i]*Z[i]; }
-    for (let it = 0; it < M.CG && rz > 1e-14; it++) {
-      mul(Dd, Ad);
-      let dAd = 0; for (let i = 0; i < nN; i++) dAd += Dd[i]*Ad[i];
-      const al = rz/dAd; let rz2 = 0;
-      for (let i = 0; i < nN; i++) { P[i] += al*Dd[i]; Rr[i] -= al*Ad[i]; Z[i] = Rr[i]/diag[i]; rz2 += Rr[i]*Z[i]; }
-      const be = rz2/rz; rz = rz2;
-      for (let i = 0; i < nN; i++) Dd[i] = Z[i] + be*Dd[i];
-    }
-    // fluxes, then adaptation: dD/dt = f(|Q|) − γD, with light raising γ
-    const R2 = M.LIGHT_R*M.LIGHT_R;
-    for (let e = 0; e < nE; e++) {
-      const q = g[e]*(P[ea[e]] - P[eb[e]]); Q[e] = q;
-      const aq = Math.pow(Math.abs(q)*3, M.MU), f = aq/(1 + aq);
-      let gam = 1;
-      if (light.on) { const dx = emx[e] - light.x, dy = emy[e] - light.y, d2 = dx*dx + dy*dy; if (d2 < 4*R2) gam += M.LIGHT*Math.exp(-d2/R2); }
-      let d = D[e] + dt*(f - gam*D[e]); if (d < M.DMIN) d = M.DMIN; D[e] = d;
-    }
-  }
-
-  /* ── granules carried by the flow ── */
-  function moveGranules(dt) {
-    const pe = parts.e, pu = parts.u, n = pe.length;
-    for (let k = 0; k < n; k++) {
-      let e = pe[k], u = pu[k];
-      const r2 = Math.sqrt(D[e]) + 1e-3;                     // cross-section ∝ r² ∝ √D
-      const v = Q[e]/r2*2.2;                                  // mean velocity = flux / area
-      u += Math.max(-0.5, Math.min(0.5, v*dt/eL[e]));
-      if (u > 1 || u < 0) {
-        const at = u > 1 ? eb[e] : ea[e];
-        // choose an outgoing tube at this junction, weighted by the flux leaving through it
-        let tot = 0;
-        for (let j = adjS[at]; j < adjS[at + 1]; j++) { const f = adjE[j], out = ea[f] === at ? Q[f] : -Q[f]; if (out > 0) tot += out; }
-        if (tot > 1e-9) {
-          let pick = Math.random()*tot;
-          for (let j = adjS[at]; j < adjS[at + 1]; j++) {
-            const f = adjE[j], out = ea[f] === at ? Q[f] : -Q[f];
-            if (out > 0 && (pick -= out) <= 0) { e = f; u = ea[f] === at ? 0 : 1; break; }
-          }
-        } else u = Math.min(1, Math.max(0, u));
+  function mapFood(r) {
+    r = r || field.getBoundingClientRect();
+    food = [];
+    field.querySelectorAll('.node img').forEach(img => {
+      const b = img.getBoundingClientRect();
+      const x0 = Math.max(1, Math.floor((b.left - r.left)/cell)), x1 = Math.min(W-2, Math.ceil((b.right - r.left)/cell));
+      const y0 = Math.max(1, Math.floor((b.top - r.top)/cell)),  y1 = Math.min(H-2, Math.ceil((b.bottom - r.top)/cell));
+      if (x1 <= x0 || y1 <= y0) return;
+      // a handful of attachment points around the edge, like oat flakes on agar
+      const cells = [], per = 2*((x1-x0)+(y1-y0)), pts = 8;
+      for (let k = 0; k < pts; k++) {
+        let d = ((k + 0.5 + (Math.random()-0.5)*0.6) / pts) * per, x, y;
+        if (d < x1-x0) { x = x0 + d; y = y0 - 1; }
+        else if ((d -= x1-x0) < y1-y0) { x = x1 + 1; y = y0 + d; }
+        else if ((d -= y1-y0) < x1-x0) { x = x1 - d; y = y1 + 1; }
+        else { d -= x1-x0; x = x0 - 1; y = y1 - d; }
+        x |= 0; y |= 0;
+        for (let oy = -1; oy <= 1; oy++) for (let ox = -1; ox <= 1; ox++) {
+          const X = x+ox, Y = y+oy;
+          if (X > 0 && X < W-1 && Y > 0 && Y < H-1) cells.push(Y*W+X);
+        }
       }
-      // granules stranded in withering tubes are reabsorbed and reappear in busy ones
-      if (D[e] < 0.06 && Math.random() < 0.02) { e = (Math.random()*nE)|0; u = Math.random(); }
-      pe[k] = e; pu[k] = u;
-    }
+      food.push({ work: img.closest('.node').dataset.work, cells: Int32Array.from(cells) });
+    });
   }
 
-  /* ── drawing: a gooey, pulsing body ──
-     Tubes are painted into a soft low-resolution mask (width from r = D^¼, swelling and
-     squeezing with a travelling peristaltic wave; cytoplasm lumps ride the flow inside them),
-     blurred so they run together like liquid, then thresholded and lit as a glossy, wet,
-     translucent yellow surface. The thin idle mesh reads as the plasmodium's sheet; busy
-     tubes become opaque veins. */
-  let RS = 0.42, mw = 0, mh = 0, mcv, mctx, ocv, octx, img, A, Bf;
-  function setupRender() {
-    RS = W < 700 ? 0.5 : 0.36;
-    mw = Math.ceil(W*RS); mh = Math.ceil(H*RS);
-    ocv = document.createElement('canvas'); ocv.width = mw; ocv.height = mh; octx = ocv.getContext('2d');
-    img = octx.createImageData(mw, mh); A = new Float32Array(mw*mh); Bf = new Float32Array(mw*mh);
-  }
-  function blur(src, tmp, w, h, r) {           // separable box blur with running sums (twice ≈ Gaussian)
-    const inv = 1/(2*r + 1);
+  function step() {
+    const { SA, RA, SO, SS, DEP } = P;
+    const w = W, h = H, t = trail;
+    for (let i = 0; i < N; i++) {
+      const x = ax[i], y = ay[i]; let a = aa[i];
+      const fl = sense(x, y, a - SA, SO, t, w, h), fc = sense(x, y, a, SO, t, w, h), fr = sense(x, y, a + SA, SO, t, w, h);
+      if (fc > fl && fc > fr) { /* keep heading */ }
+      else if (fc < fl && fc < fr) a += Math.random() < 0.5 ? -RA : RA;
+      else if (fl < fr) a += RA;
+      else if (fr < fl) a -= RA;
+      a += (Math.random() - 0.5) * 0.06;
+      let nx = x + Math.cos(a)*SS, ny = y + Math.sin(a)*SS;
+      if (nx < 1 || nx >= w-1 || ny < 1 || ny >= h-1) {
+        nx = Math.min(w-1.01, Math.max(1, nx)); ny = Math.min(h-1.01, Math.max(1, ny));
+        a = Math.random()*Math.PI*2;
+      }
+      ax[i] = nx; ay[i] = ny; aa[i] = a;
+      t[(ny|0)*w + (nx|0)] += DEP;
+    }
+    // food sources
+    for (const f of food) {
+      const amt = P.FOOD * foodScale * (fedWork ? (f.work === fedWork ? 2.4 : 0.35) : 1);
+      const c = f.cells;
+      for (let k = 0; k < c.length; k++) t[c[k]] += amt;
+    }
+    // light bleaches attractant around the cursor
+    if (light.on) {
+      const R = P.LIGHT, cx = light.x|0, cy = light.y|0;
+      for (let y = Math.max(1, cy-R); y < Math.min(h-1, cy+R); y++)
+        for (let x = Math.max(1, cx-R); x < Math.min(w-1, cx+R); x++) {
+          const dx = x-cx, dy = y-cy;
+          if (dx*dx+dy*dy < R*R) t[y*w+x] *= 0.15;
+        }
+    }
+    // diffuse (separable 3-tap mean) and decay
     for (let y = 0; y < h; y++) {
-      const o = y*w; let acc = 0;
-      for (let x = -r; x <= r; x++) acc += src[o + (x < 0 ? 0 : x >= w ? w - 1 : x)];
-      for (let x = 0; x < w; x++) { tmp[o + x] = acc*inv; const xa = x + r + 1, xs = x - r; acc += src[o + (xa >= w ? w - 1 : xa)] - src[o + (xs < 0 ? 0 : xs)]; }
+      const o = y*w;
+      tmp[o] = (t[o]*2 + t[o+1]) / 3;
+      for (let x = 1; x < w-1; x++) tmp[o+x] = (t[o+x-1] + t[o+x] + t[o+x+1]) / 3;
+      tmp[o+w-1] = (t[o+w-2] + t[o+w-1]*2) / 3;
     }
-    for (let x = 0; x < w; x++) {
-      let acc = 0;
-      for (let y = -r; y <= r; y++) acc += tmp[(y < 0 ? 0 : y >= h ? h - 1 : y)*w + x];
-      for (let y = 0; y < h; y++) { src[y*w + x] = acc*inv; const ya = y + r + 1, ys = y - r; acc += tmp[(ya >= h ? h - 1 : ya)*w + x] - tmp[(ys < 0 ? 0 : ys)*w + x]; }
-    }
+    const k = P.DECAY / 3;
+    for (let x = 0; x < w; x++) { t[x] = (tmp[x]*2 + tmp[x+w]) * k; t[(h-1)*w+x] = (tmp[(h-1)*w+x]*2 + tmp[(h-2)*w+x]) * k; }
+    for (let i = w; i < (h-1)*w; i++) t[i] = (tmp[i-w] + tmp[i] + tmp[i+w]) * k;
+    steps++;
   }
-  const BINS = 26, paths = new Array(BINS);
-  const sm = (a, b, x) => { const t = x <= a ? 0 : x >= b ? 1 : (x - a)/(b - a); return t*t*(3 - 2*t); };
-  // anti-aliased round segment and disc, rasterized straight into the height buffer (no canvas readback)
-  function seg(ax, ay, bx, by, hw, a) {
-    const lo = hw + 1.5;
-    let x0 = Math.floor((ax < bx ? ax : bx) - lo), x1 = Math.ceil((ax > bx ? ax : bx) + lo), y0 = Math.floor((ay < by ? ay : by) - lo), y1 = Math.ceil((ay > by ? ay : by) + lo);
-    if (x0 < 1) x0 = 1; if (y0 < 1) y0 = 1; if (x1 > mw - 2) x1 = mw - 2; if (y1 > mh - 2) y1 = mh - 2;
-    const dx = bx - ax, dy = by - ay, L2 = dx*dx + dy*dy || 1e-6, r0 = hw + 0.5;
-    for (let y = y0; y <= y1; y++) {
-      const o = y*mw;
-      for (let x = x0; x <= x1; x++) {
-        let t = ((x - ax)*dx + (y - ay)*dy)/L2; t = t < 0 ? 0 : t > 1 ? 1 : t;
-        const ex = ax + t*dx - x, ey = ay + t*dy - y, d2 = ex*ex + ey*ey;
-        if (d2 >= r0*r0) continue;
-        let c = r0 - Math.sqrt(d2); if (c > 1) c = 1; c *= a;
-        if (c > A[o + x]) A[o + x] = c;
-      }
-    }
+  function sense(x, y, a, so, t, w, h) {
+    const sx = (x + Math.cos(a)*so) | 0, sy = (y + Math.sin(a)*so) | 0;
+    if (sx < 0 || sx >= w || sy < 0 || sy >= h) return -1;
+    return t[sy*w + sx];
   }
   function draw() {
-    A.fill(0);
-    const om = 2*Math.PI/M.WAVE_T, kw = 2*Math.PI/M.WAVE_L, ph = clock*om, breathe = 1 + 0.06*Math.sin(clock*2*Math.PI/7);
-    for (let e = 0; e < nE; e++) {
-      const r = Math.min(1.15, Math.pow(D[e], 0.25)); if (r < 0.2) continue;   // Poiseuille: radius ∝ D^¼
-      const a = ea[e], c = eb[e], ax = nx[a]*RS, ay = ny[a]*RS, bx = nx[c]*RS, by = ny[c]*RS;
-      const wave = reduceMotion ? 1 : (1 + 0.28*Math.sin(ph - kw*(emx[e]*0.8 + emy[e]*0.45)))*breathe;  // peristalsis
-      // width and opacity follow the tube's conductance continuously, so withering tubes thin out and fade
-      // instead of snapping off: the network stays connected while it refines
-      seg(ax, ay, bx, by, (0.5 + 8*r*r)*wave*RS*(W < 700 ? 0.7 : 1), sm(0.2, 0.46, r));   // slimmer on phones
-    }
-    if (!reduceMotion && parts) {                // lumps of cytoplasm carried by the flow
-      const pe = parts.e, pu = parts.u;
-      for (let q = 0; q < pe.length; q++) {
-        const e = pe[q]; if (D[e] < 0.28) continue;
-        const u = pu[q], x = (nx[ea[e]] + (nx[eb[e]] - nx[ea[e]])*u)*RS, y = (ny[ea[e]] + (ny[eb[e]] - ny[ea[e]])*u)*RS;
-        seg(x, y, x, y, (2 + 4.4*Math.pow(D[e], 0.75))*RS, 1);
-      }
-    }
-    const n = mw*mh;
-    const br = 2;
-    blur(A, Bf, mw, mh, br); blur(A, Bf, mw, mh, br);
-    // threshold and light it: smooth, glossy, translucent
-    const out = img.data, Lx = -0.42, Ly = -0.55, Lz = 0.72, Hx = Lx*0.5, Hy = Ly*0.5, Hz = (Lz + 1)*0.5, Hn = Math.hypot(Hx, Hy, Hz);
-    const glow = reduceMotion ? 1 : 0.92 + 0.08*Math.sin(ph);
-    for (let y = 0; y < mh; y++) {
-      const o = y*mw, edgeRow = y === 0 || y === mh - 1;
-      for (let x = 0; x < mw; x++) {
-        const i = o + x, h = A[i], j = 4*i;
-        if (h < 0.03 || edgeRow || x === 0 || x === mw - 1) { out[j + 3] = 0; continue; }
-        const gx = A[i + 1] - A[i - 1], gy = A[i + mw] - A[i - mw];
-        let nxv = -gx*7, nyv = -gy*7; const nl = 1/Math.sqrt(nxv*nxv + nyv*nyv + 1); nxv *= nl; nyv *= nl; const nz = nl;
-        let dif = nxv*Lx + nyv*Ly + nz*Lz; if (dif < 0) dif = 0;
-        let c = (nxv*Hx + nyv*Hy + nz*Hz)/Hn; if (c < 0) c = 0;
-        const c2 = c*c, c4 = c2*c2, c8 = c4*c4, c16 = c8*c8, sp = c16*c8*c4;      // ≈ c^28
-        const tb = h <= 0.13 ? 0 : h >= 0.34 ? 1 : (h - 0.13)/0.21, body = tb*tb*(3 - 2*tb);     // the gooey edge
-        const ts = h >= 0.17 ? 1 : (h - 0.03)/0.14, sheet = 0.13*ts*ts*(3 - 2*ts);              // the translucent sheet
-        const al = body > sheet ? body : sheet;
-        const tt = h <= 0.38 ? 0 : h >= 0.95 ? 1 : (h - 0.38)/0.57, t = tt*tt*(3 - 2*tt);      // thicker → deeper amber
-        const lit = (0.58 + 0.55*dif)*glow, spb = sp*body;
-        let rr = (255 - 25*t)*lit + 240*spb, gg = (218 - 70*t)*lit + 232*spb, bb = (80 - 58*t)*lit + 200*spb;
-        out[j] = rr > 255 ? 255 : rr; out[j + 1] = gg > 255 ? 255 : gg; out[j + 2] = bb > 255 ? 255 : bb; out[j + 3] = 255*al;
-      }
-    }
-    octx.putImageData(img, 0, 0);
-    ctx.clearRect(0, 0, W, H); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
-    ctx.drawImage(ocv, 0, 0, W, H);
+    const t = trail, n = t.length, g = P.GAIN * gainScale;
+    for (let i = 0; i < n; i++) { let v = (t[i]*g)|0; if (v > 1023) v = 1023; px[i] = LUT[v]; }
+    ctx.putImageData(image, 0, 0);
   }
-
-  function loop(now) {
+  let frame = 0;
+  function loop() {
     if (!running) return;
-    const dt = Math.min(0.05, (now - (last || now))/1000); last = now; clock += dt;
-    step(M.DT); moveGranules(dt); draw();
+    if (++frame % 6 === 0) buildLUT(Math.sin(performance.now()/7000) * P.DRIFT);
+    step(); draw();
     raf = requestAnimationFrame(loop);
   }
-  function settle() {                                         // reduced motion: grow the network unseen, then show it still
-    let left = 2600;
-    (function chunk() { for (let i = 0; i < 60 && left > 0; i++, left--) step(M.DT); if (left > 0) requestAnimationFrame(chunk); else { settled = true; draw(); } })();
+  function settleThenStill() {
+    // reduced motion: grow the network without showing the motion, then show one still frame
+    let left = 520;
+    (function chunk(){
+      for (let i = 0; i < 26 && left > 0; i++, left--) step();
+      if (left > 0) requestAnimationFrame(chunk); else draw();
+    })();
   }
   function setLabel() { toggle.textContent = running ? 'Pause' : 'Play'; }
   function start() {
-    if (!built && !build()) return;
-    if (reduceMotion && !settled) { settle(); setLabel(); return; }
+    if (!inited && !init()) return;
+    if (reduceMotion && steps === 0) { settleThenStill(); wanted = false; setLabel(); return; }
     if (!wanted || running) { setLabel(); return; }
-    running = true; last = 0; setLabel(); raf = requestAnimationFrame(loop);
+    running = true; setLabel(); raf = requestAnimationFrame(loop);
   }
   function stop() { running = false; cancelAnimationFrame(raf); setLabel(); }
 
   toggle.addEventListener('click', () => { wanted = !running; wanted ? start() : stop(); });
-  field.addEventListener('pointermove', e => { const r = field.getBoundingClientRect(); light.x = e.clientX - r.left; light.y = e.clientY - r.top; light.on = true; });
+  field.addEventListener('pointermove', e => {
+    const r = field.getBoundingClientRect();
+    light.x = (e.clientX - r.left)/cell; light.y = (e.clientY - r.top)/cell; light.on = true;
+  });
   field.addEventListener('pointerleave', () => { light.on = false; });
+
   let rt = 0;
   addEventListener('resize', () => {
     clearTimeout(rt);
     rt = setTimeout(() => {
+      if (!inited) return;
       const r = field.getBoundingClientRect();
-      if (!built || (Math.abs(r.width - W) < W*0.08 && Math.abs(r.height - H) < H*0.12)) return;
-      const was = running; stop(); built = false;
-      if (document.body.dataset.route === 'home') { build(); if (was || reduceMotion) start(); }
+      if (Math.abs(r.width - lastW) > lastW*0.12 || Math.abs(r.height - lastH) > lastH*0.2) {
+        const was = running; stop(); inited = false;
+        if (document.body.dataset.route === 'home') { init(); if (was || reduceMotion) start(); }
+      } else mapFood(r);
     }, 250);
   });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(es => es.forEach(e => {
       if (document.body.dataset.route !== 'home') return;
-      if (e.isIntersecting) { if (wanted) start(); } else if (running) stop();
+      if (e.isIntersecting) { if (wanted) start(); } else if (running) { stop(); }
     })).observe(field);
   }
-  return { start, stop, feed(w) { fedWork = w; }, remap() { if (built && document.body.dataset.route === 'home') { const was = running; stop(); built = false; build(); if (was) start(); } } };
+  return { start, stop, feed(w){ fedWork = w; }, remap(){ if (inited) mapFood(); } };
 })();
+
 /* ───────────── feeding: hover a work in the index or the field ───────────── */
 const fieldEl = document.getElementById('field');
 function feed(work) {
