@@ -28,9 +28,9 @@
   --abyss:#000;        /* true black, so the UV photographs dissolve into the page */
   --pearl:#E9E6DF;     /* the Shen's nacre */
   --quiet:#8E8B84;
-  --hair:#2B2A27;
+  --hair:#3A3834;
   --lemon:#F2C230;     /* Physarum polycephalum */
-  --vein:#C79BD6;      /* second-order thin-film violet */
+  --vein:#D9708F;      /* thin-film rose, the network's thickest veins */
   --side:17.5rem;
   --measure:34rem;
 }
@@ -81,17 +81,17 @@ main{margin-left:var(--side);min-height:100vh}
 .js .view:not(.is-active){display:none}
 .view h1{outline:none}
 
-/* ——— the landing: a live field ——— */
+/* ——— the field ——— */
 #v-home{padding:0;position:relative}
-.field{position:relative;height:100vh;height:100svh;min-height:36rem;overflow:hidden;touch-action:pan-y}
+.field{position:relative;height:100vh;height:100svh;min-height:34rem;overflow:hidden;touch-action:pan-y}
 .field canvas{position:absolute;inset:0;width:100%;height:100%;display:block;-webkit-mask-image:linear-gradient(to right,transparent,#000 5%,#000 96%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 5%,#000 96%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);mask-composite:intersect}
-.node{position:absolute;left:var(--x);top:var(--y);width:var(--w);text-decoration:none;transition:opacity .5s ease}
+.node{position:absolute;left:var(--x);top:var(--y);width:var(--w,clamp(8.5rem,12.5vw,14.5rem));text-decoration:none;transition:opacity .4s ease}
 .node img{display:block;width:100%;height:auto}
-.node-title{display:block;margin-top:.7rem;font-size:1.0625rem;line-height:1.3;text-shadow:0 0 8px #000,0 0 16px #000}
+.node-title{display:block;margin-top:.15rem;font-size:1rem;line-height:1.25;text-shadow:0 0 6px #000,0 0 12px #000}
+.node.bleed .node-title{padding-left:9%}
 .node-title .yr{color:var(--quiet)}
-.node:hover .node-title,.node:focus-visible .node-title{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
-.field.is-feeding .node:not(.is-fed){opacity:.4}
-.field-note{position:absolute;right:clamp(1.5rem,4vw,4.5rem);bottom:1.6rem;margin:0;max-width:19rem;text-align:right;font-size:.875rem;line-height:1.45;color:var(--quiet);text-shadow:0 0 8px #000,0 0 16px #000}
+.field.is-feeding .node:not(.is-fed){opacity:.3}
+.field-note{position:absolute;right:clamp(1rem,2.5vw,2rem);bottom:1.25rem;margin:0;max-width:19rem;text-align:right;font-size:.9375rem;line-height:1.4;color:var(--quiet);text-shadow:0 0 6px #000,0 0 12px #000}
 .field-note .text-button{color:var(--pearl)}
 .no-js .field canvas,.no-js .field-note{display:none}
 @media (hover:none){.on-hover{display:none}}
@@ -100,44 +100,50 @@ main{margin-left:var(--side);min-height:100vh}
 .work-head h1,.page h1{font-weight:400;font-size:clamp(2.6rem,5.4vw,4.75rem);line-height:1;letter-spacing:-.018em;margin:0;max-width:14ch}
 .shen{font-weight:400;margin-left:.12em;letter-spacing:0}
 .work-date{margin:.55rem 0 0;font-style:italic;font-size:1.375rem;color:var(--quiet)}
-.hero{max-width:64rem;margin-top:3rem;display:flex;justify-content:flex-start}
-.hero-figure{margin:0;width:min(100%,var(--nw),calc(min(78vh,52rem)*var(--ar)))}
-.info{max-width:64rem;margin-top:4rem;display:grid;grid-template-columns:minmax(0,1fr);row-gap:2rem}
-@media (min-width:1180px){.info{grid-template-columns:minmax(0,16.5rem) minmax(0,34rem);column-gap:clamp(2.5rem,5vw,5.5rem)}}
-.label{margin:0;font-size:.9375rem;line-height:1.5;color:var(--quiet)}
+.label{margin:2.25rem 0 0;max-width:var(--measure);font-size:1.0625rem;line-height:1.42}
 .label p{margin:0}
-.label p+p{margin-top:.55rem}
-.label a,.label .text-button{color:var(--pearl)}
-.label i{color:var(--pearl)}
-.statement{max-width:var(--measure);line-height:1.6}
+.statement{margin-top:2rem;max-width:var(--measure);line-height:1.55}
 .statement p{margin:0;hyphens:auto}
 .statement p+p{text-indent:1.3em}
 .statement blockquote{margin:1.5rem 0 1.5rem 1.3em;font-style:italic}
 .statement blockquote p{text-indent:0}
 .statement blockquote+p{text-indent:0}
-.audio{max-width:34rem;margin:4rem 0 0}
-.audio figcaption{margin:0 0 .7rem;font-size:.9375rem;color:var(--quiet)}
-.audio audio{display:block;width:100%}
-.gallery{max-width:64rem;margin-top:6rem;display:flex;flex-direction:column;gap:3.5rem}
-.row{display:flex;gap:1.25rem;align-items:flex-start}
-.row>.plate{flex:var(--ar) 1 0;min-width:0}
+.plates{margin-top:4.5rem;display:flex;flex-direction:column;gap:5.5rem;max-width:66rem}
 .plate{margin:0}
+.plate--narrow{max-width:min(31rem,100%)}
+.plate--hero{margin-top:1.5rem;max-width:66rem}
+.plate--hero .plate-open{display:inline-block;width:auto;max-width:100%}
+.plate--hero img{width:auto;max-width:100%;max-height:86vh}
+.plate--mid{max-width:min(46rem,100%)}
+.plate-pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2vw,1.75rem);align-items:end}
 .plate-open{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
-.plate img,.plate video{display:block;width:100%;height:auto;background:#0a0a0a}
-.plate figcaption{margin-top:.7rem;max-width:34rem;font-size:.875rem;line-height:1.45;color:var(--quiet)}
-.plate figcaption a,.plate figcaption .text-button{color:var(--pearl)}
-[hidden]{display:none!important}
-.js .drive-fallback{display:none}
-.no-js [data-play],.no-js [data-play-target]{display:none}
-.drive-frame{display:block;max-width:100%;height:auto;border:0;background:#000}
-.cu-head{margin-top:3rem}
-.page .cu-title{margin:0;font-size:clamp(1.9rem,3.6vw,3rem);font-weight:400;line-height:1.08;letter-spacing:-.01em;max-width:24ch}
-.cu-label{margin-top:2rem}
-.cu-label .meta{margin-top:1.1rem}
+.plate img{display:block;width:100%;height:auto;background:#000}
+.bleed img{-webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);mask-composite:intersect}
+.bleed figcaption{padding-left:9%}
+.plate-pair .bleed figcaption{padding-left:7%}
+.plate--doc img{filter:brightness(.82) contrast(1.04)}
+.plate--right{align-self:flex-end}
+.plate--right figcaption{margin-left:auto}
+.plate figcaption{margin-top:.65rem;max-width:36rem;font-size:.9375rem;line-height:1.42;color:var(--quiet)}
+.plate figcaption a{color:var(--pearl)}
 .subhead{margin:0;font-weight:400;font-style:italic;font-size:1.375rem;color:var(--quiet)}
-.pager{margin-top:7rem;max-width:64rem;display:flex;justify-content:space-between;gap:2rem;padding-top:1.1rem;border-top:1px solid var(--hair);font-size:1.0625rem}
+.pager{margin-top:6rem;max-width:66rem;display:flex;justify-content:space-between;gap:2rem;padding-top:1rem;border-top:1px solid var(--hair);font-size:1.0625rem}
 .pager a{text-decoration:none}
 .pager a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+
+.plate--video video{display:block;width:100%;height:auto;background:#000;-webkit-mask-image:linear-gradient(to right,transparent,#000 1.5%,#000 98.5%,transparent),linear-gradient(to bottom,transparent,#000 2%,#000 98%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 1.5%,#000 98.5%,transparent),linear-gradient(to bottom,transparent,#000 2%,#000 98%,transparent);mask-composite:intersect}
+.plate--video figcaption .text-button{color:var(--pearl)}
+.plate--portrait{max-width:min(24rem,100%)}
+.bleed video{-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),linear-gradient(to bottom,transparent,#000 8%,#000 92%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),linear-gradient(to bottom,transparent,#000 8%,#000 92%,transparent);mask-composite:intersect}
+.plate--hero-video{margin-top:1.5rem;max-width:66rem}
+.plate--hero-wide{max-width:66rem}
+.plate--audio{max-width:36rem}
+.plate--audio figcaption{margin:0 0 .6rem;color:var(--quiet)}
+.plate--audio audio{display:block;width:100%}
+.page .cu-title{margin:0;font-size:clamp(1.9rem,3.6vw,3rem);font-weight:400;line-height:1.08;letter-spacing:-.01em;max-width:24ch}
+.plate--video video{display:block;width:100%;height:auto;background:#000}
+.plate--hero-video{max-width:min(48.75rem,100%)}
+.plate--audio{margin-bottom:-1rem}
 
 /* ——— info, exhibitions, research, notebook ——— */
 .page .lede{margin:2rem 0 0;max-width:var(--measure);line-height:1.55}
@@ -182,15 +188,12 @@ main{margin-left:var(--side);min-height:100vh}
   .contact{margin-top:.5rem}
   main{margin-left:0}
   .view{padding:1.25rem 1.25rem 5rem}
-  main{min-height:0}
   .field{height:auto;min-height:0;aspect-ratio:10/17}
-  .node{left:var(--mx);top:var(--my);width:var(--mw)}
-  .node-title{font-size:.9375rem;margin-top:.45rem}
+  .node{left:var(--mx);top:var(--my);width:var(--mw,31vw)}
+  .node-title{font-size:.9375rem}
   .field-note{position:static;padding:1rem 1.25rem 2.5rem;text-align:left;max-width:none}
-  .row{flex-direction:column;gap:2.5rem}
-  .row>.plate{flex:none;width:min(100%,var(--nw))}
-  .hero{margin-top:2rem}
-  .gallery{margin-top:4rem;gap:2.5rem}
+  main{min-height:0}
+  .plate-pair{grid-template-columns:1fr}
   .cv-row{grid-template-columns:1fr;row-gap:.25rem}
   .lb-bar{flex-direction:column;gap:.6rem}
 }
@@ -237,23 +240,35 @@ main{margin-left:var(--side);min-height:100vh}
 <main id="main">
 
 <!-- ═══════════ INDEX ═══════════ -->
-<section class="view is-active" id="v-home" aria-label="Selected works">
+<section class="view is-active" id="v-home" aria-label="Index of works">
   <div class="field" id="field">
     <canvas aria-hidden="true"></canvas>
-    <a class="node" data-work="ev" href="#emergent-vessels" style="--x:7%;--y:12%;--w:21%;--mx:5%;--my:2%;--mw:43%">
-      <img src="images/omsy-08.jpg" width="1600" height="2000" alt="A clear cube glowing magenta under ultraviolet light, a pale two-lobed network inside." decoding="async">
-      <span class="node-title">Emergent Vessels<span class="yr">, 2025–</span></span>
+
+    <a class="node bleed" data-work="ev" href="#emergent-vessels" style="--x:8%;--y:8%;--mx:5%;--my:3%">
+      <img src="images/ev-cube-pink-s.jpg" width="1365" height="1365" alt="">
+      <span class="node-title">Emergent Vessels, <span class="yr">2025–</span></span>
     </a>
-    <a class="node" data-work="sc" href="#synthetic-cesia" style="--x:71%;--y:8%;--w:19%;--mx:54%;--my:9%;--mw:41%">
-      <img src="images/omsy-03.jpg" width="960" height="1386" alt="Synthetic Cesia in the gallery: a flowering branch in a bronze bowl on a white plinth, with an amber bottle beside it." decoding="async">
-      <span class="node-title">Synthetic Cesia<span class="yr">, 2025–</span></span>
+    <a class="node bleed" data-work="sc" href="#synthetic-cesia" style="--x:64%;--y:5%;--mx:57%;--my:6%;--w:clamp(7rem,10vw,11.5rem);--mw:28vw">
+      <img src="images/sc-120710-installation-s.jpg" width="664" height="960" alt="">
+      <span class="node-title">Synthetic Cesia, <span class="yr">2025–</span></span>
     </a>
-    <a class="node" data-work="bv" href="#bestiary-of-vanishings" style="--x:33%;--y:50%;--w:36%;--mx:7%;--my:56%;--mw:86%">
-      <img src="images/bv-cuttlefish-side.jpg" width="1808" height="1236" alt="A cuttlefish form printed in pale blue gel, with orange branching networks running through its body, glowing in a dark tank." decoding="async">
-      <span class="node-title">A Bestiary of Vanishings<span class="yr">, 2026</span></span>
+    <a class="node bleed" data-work="bv" href="#bestiary-of-vanishings" style="--x:34%;--y:37%;--mx:28%;--my:38%;--w:clamp(11rem,17vw,19rem);--mw:44vw">
+      <img src="images/bv-cuttlefish-side-s.jpg" width="1808" height="1236" alt="">
+      <span class="node-title">A Bestiary of Vanishings, <span class="yr">2026</span></span>
     </a>
+    <a class="node bleed" data-work="ev" href="#emergent-vessels" tabindex="-1" aria-hidden="true" style="--x:78%;--y:47%;--mx:62%;--my:62%">
+      <img src="images/ev-500-vessel-s.jpg" width="686" height="606" alt="">
+    </a>
+    <a class="node bleed" data-work="sc" href="#synthetic-cesia" tabindex="-1" aria-hidden="true" style="--x:10%;--y:62%;--mx:6%;--my:66%">
+      <img src="images/sc-skin-camouflage-s.jpg" width="1984" height="1356" alt="">
+    </a>
+    <a class="node bleed" data-work="bv" href="#bestiary-of-vanishings" tabindex="-1" aria-hidden="true" style="--x:55%;--y:71%;--mx:44%;--my:80%">
+      <img src="images/bv-deity-s.jpg" width="1746" height="1286" alt="">
+    </a>
+
+
   </div>
-  <p class="field-note">A live model of <i>Physarum polycephalum</i>, growing between the works.<span class="on-hover"> Hover a work to feed it.</span> <button class="text-button" type="button" id="sim-toggle">Pause</button></p>
+  <p class="field-note">A live model of <i>Physarum polycephalum</i> growing between the works.<span class="on-hover"> Hover a work to feed it.</span> <button class="text-button" type="button" id="sim-toggle">Pause</button></p>
 </section>
 
 <!-- ═══════════ EMERGENT VESSELS ═══════════ -->
@@ -262,67 +277,62 @@ main{margin-left:var(--side);min-height:100vh}
     <h1 id="h-ev" tabindex="-1">Emergent Vessels</h1>
     <p class="work-date">2025–ongoing</p>
   </header>
-  <div class="hero">
-    <figure class="plate hero-figure" style="--ar:0.8000;--nw:1600px">
-      <button class="plate-open" type="button"><img src="images/omsy-08.jpg" width="1600" height="2000" loading="lazy" decoding="async" alt="A clear cube glowing magenta under ultraviolet light, a pale two-lobed network inside."></button>
+  <figure class="plate plate--hero bleed">
+      <button class="plate-open" type="button"><img src="images/omsy-08.jpg" width="1600" height="2000" decoding="async" alt="A clear cube glowing magenta under ultraviolet light, a pale two-lobed network inside."></button>
       <figcaption>Emergent Vessels, 2025–. A bioprinted living network in its support bath, under ultraviolet light.</figcaption>
-    </figure>
-  </div>
-  <div class="info">
-    <div class="label">
+  </figure>
+  <div class="label">
     <p>Living sculpture, embedded 3D bioprinting (FRESH)</p>
     <p><i>Neurospora crassa</i> and <i>Physarum polycephalum</i> bioinks, carbopol support bath, acrylic</p>
     <p>Made in the Skylar-Scott Lab and Prakash Lab, Stanford</p>
     <p>Related research: Sexton et al., <a href="https://www.science.org/doi/10.1126/science.adj6152" target="_blank" rel="noopener"><i>Science</i>, 2025</a></p>
-    </div>
-    <div class="statement">
+  </div>
+  <div class="statement">
     <p>Emergent Vessels starts from bioinks of <i>Neurospora crassa</i> fungi and <i>Physarum polycephalum</i> slime mold, printed into a temporary support bath. The printed geometry is only a set of initial conditions. The organisms colonize it, branch through it, and reorganize it without intervention, and over days and weeks capillary-like vascular networks emerge.</p>
     <p>This is order arising from chaos, governed by the same dissipative thermodynamics that pattern rivers, lungs, and root systems. The sculptures are not representations of life but living processes, and each is different when a viewer returns.</p>
     <p>The work proceeds as research: systematic studies of emergent vascularization across increasing orders of geometric complexity. Bioprinter designs, bioink protocols, and morphological datasets will be published open-access for other artists and researchers. Current work scales the prints toward six feet on a custom-built bioprinter, and carries <i>Neurospora</i> bioprinting into the culinary arts with the Hill-Maini Lab.</p>
-    </div>
   </div>
-  <div class="gallery">
-    <div class="row">
-      <figure class="plate plate--video" style="--ar:1.7778;--nw:640px">
+
+  <div class="plates">
+    <div class="plate-pair">
+      <figure class="plate plate--video bleed">
         <video poster="video/ev-printing-poster.jpg" width="640" height="360" muted loop playsinline preload="none" aria-label="Time-lapse, front and side views: a nozzle prints a red vascular network into a clear support bath, layer by layer, until it forms a closed ellipsoid."><source src="video/ev-printing.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/ev-printing.webm" type='video/webm; codecs="vp9"'></video>
         <figcaption>Embedded 3D printing of a vascular network into its support bath, front and side views, at 900× speed. From Sexton et al., <i>Science</i>, 2025, movie S3. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
       </figure>
-      <figure class="plate plate--video" style="--ar:1.7778;--nw:1920px">
+      <figure class="plate plate--video">
         <video poster="video/ev-bioprinter-poster.jpg" width="1920" height="1080" muted loop playsinline preload="none" aria-label="A bioreactor glowing violet beside a bank of syringe pumps and wiring, while a gantry printer deposits a heart shape into a gel-filled box."><source src="video/ev-bioprinter.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/ev-bioprinter.webm" type='video/webm; codecs="vp9"'></video>
         <figcaption>Custom-built bioprinter and bioreactor printing a heart model. Video: Yi Yi Du. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
       </figure>
     </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.5000;--nw:1800px">
-        <button class="plate-open" type="button"><img src="images/ev-grayarea-installation.jpg" width="1800" height="1200" loading="lazy" decoding="async" alt="A dark gallery crowded with visitors; three white plinths with small cubes and a bioprinter stand before a large projection of a golden network."></button>
-        <figcaption>Installation view, Gray Area Festival, San Francisco, 2025. Photo: Barak Shrama.</figcaption>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.0000;--nw:2000px">
+    <figure class="plate bleed">
+      <button class="plate-open" type="button"><img src="images/ev-grayarea-installation.jpg" width="1800" height="1200" loading="lazy" decoding="async" alt="A dark gallery crowded with visitors; three white plinths with small cubes and a bioprinter stand before a large projection of a golden network."></button>
+      <figcaption>Installation view, Gray Area Festival, San Francisco, 2025. Photo: Barak Shrama.</figcaption>
+    </figure>
+    <div class="plate-pair">
+      <figure class="plate bleed">
         <button class="plate-open" type="button"><img src="images/omsy-09.jpg" width="2000" height="2000" loading="lazy" decoding="async" alt="A clear cube glowing green under ultraviolet light, a dense network inside."></button>
         <figcaption>Under ultraviolet light.</figcaption>
       </figure>
-      <figure class="plate" style="--ar:1.0000;--nw:1365px">
+      <figure class="plate bleed">
         <button class="plate-open" type="button"><img src="images/ev-cube-pink.jpg" width="1365" height="1365" loading="lazy" decoding="async" alt="A cube glowing violet and pink seen from above, with a tangled spherical network inside."></button>
       </figure>
     </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.6842;--nw:960px">
+    <div class="plate-pair">
+      <figure class="plate plate--doc">
         <button class="plate-open" type="button"><img src="images/ev-sexton-fresh.jpg" width="960" height="570" loading="lazy" decoding="async" alt="A grid of images of red vascular networks that self-assembled from printed ellipsoid, ring, and box shapes."></button>
         <figcaption>Embedded 3D printing (FRESH): printed structures self-assemble into vascular networks. From Sexton et al., <i>Science</i>, 2025.</figcaption>
       </figure>
-      <figure class="plate plate--video" style="--ar:1.7778;--nw:1920px">
+      <figure class="plate plate--video">
         <video poster="video/ev-sexton-flow-poster.jpg" width="1920" height="1080" muted loop playsinline preload="none" aria-label="Four renderings of branching vascular trees shaded by pressure, beside a graph of pulsing inflow over six seconds."><source src="video/ev-sexton-flow.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/ev-sexton-flow.webm" type='video/webm; codecs="vp9"'></video>
         <figcaption>Pulsatile flow simulated through generated vascular trees, shaded by normalized pressure. From Sexton et al., <i>Science</i>, 2025. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
       </figure>
     </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.5000;--nw:1800px">
+    <div class="plate-pair">
+      <figure class="plate bleed">
         <button class="plate-open" type="button"><img src="images/ev-grayarea-pedestal.jpg" width="1800" height="1200" loading="lazy" decoding="async" alt="A small clear cube holding a pink vessel network on a white plinth, lit against a dark room."></button>
         <figcaption>Installation view, Gray Area Festival, San Francisco, 2025. Photo: Barak Shrama.</figcaption>
       </figure>
-      <figure class="plate" style="--ar:1.5004;--nw:2048px">
+      <figure class="plate">
         <button class="plate-open" type="button"><img src="images/ev-printessa.jpg" width="2048" height="1365" loading="lazy" decoding="async" alt="A compact black A-frame bioprinter on a white plinth printing into a small cube, with orange light blurred behind it."></button>
         <figcaption>Printessa, live bioprinting at Gray Area Festival, San Francisco, 2025. Photo: Barak Shrama.</figcaption>
       </figure>
@@ -341,59 +351,52 @@ main{margin-left:var(--side);min-height:100vh}
     <h1 id="h-sc" tabindex="-1">Synthetic Cesia</h1>
     <p class="work-date">2025–ongoing</p>
   </header>
-  <div class="hero">
-    <figure class="plate hero-figure" style="--ar:0.6926;--nw:960px">
-      <button class="plate-open" type="button"><img src="images/omsy-03.jpg" width="960" height="1386" loading="lazy" decoding="async" alt="Synthetic Cesia in the gallery: a flowering branch in a bronze bowl on a white plinth, with an amber bottle beside it."></button>
+  <figure class="plate plate--hero bleed">
+      <button class="plate-open" type="button"><img src="images/omsy-03.jpg" width="960" height="1386" decoding="async" alt="Synthetic Cesia in the gallery: a flowering branch in a bronze bowl on a white plinth, with an amber bottle beside it."></button>
       <figcaption>Synthetic Cesia, first sculptural instantiation, 120710 Gallery, March 2026. Photonic films on gold foil, natural branch, humidity mister.</figcaption>
-    </figure>
-  </div>
-  <div class="info">
-    <div class="label">
+  </figure>
+  <div class="label">
     <p>Dynamic sculpture</p>
     <p>Soft photonic skins (PEDOT:PSS between gold films), gold foil, natural branch, humidity mister</p>
     <p>In collaboration with Siddharth Doshi, with the Melosh, Brongersma, and Hong Labs, Stanford</p>
     <p>Sound: <i>foyer</i>, by kk.Shucko</p>
     <p>Related research: Doshi et al., <a href="https://doi.org/10.1038/s41586-025-09948-2" target="_blank" rel="noopener"><i>Nature</i>, January 2026</a></p>
-    </div>
-    <div class="statement">
+  </div>
+  <div class="statement">
     <p>A cuttlefish changes color without pigment, by changing the structure of its skin. Synthetic Cesia borrows that logic. Its soft photonic skins are Fabry–Pérot optical cavities: a layer of the conducting polymer PEDOT:PSS held between thin films of gold. Electron-beam irradiation encodes different swelling behaviors across the film, so when moisture reaches it, regions swell by different amounts and the reflected color shifts in programmable ways.</p>
     <p>In the first sculptural instantiation, shown at 120710 Gallery in March 2026, photonic films on gold foil were set into a flowering branch, with a mister that sends color cycling across the visible spectrum. Seeing becomes witnessing a physical event rather than reading a fixed surface.</p>
     <p>The series is building toward architectural-scale installation: scaling the skins from laboratory samples to large-format sheets, and developing heat-based patterning alongside electron-beam patterning so the method is more widely accessible. An ongoing conversation with Iris van Herpen explores photonic skins in couture.</p>
-    </div>
   </div>
-  <figure class="audio">
-    <figcaption><i>foyer</i>, by kk.Shucko. A track inspired by the cuttlefish photonic skins, 7 min 20 s.</figcaption>
-    <audio controls preload="none" src="audio/foyer-kkshucko.mp3">Your browser can&rsquo;t play this audio.</audio>
-  </figure>
-  <div class="gallery">
-    <div class="row">
-      <figure class="plate plate--video" style="--ar:1.7778;--nw:1920px">
-        <video poster="video/sc-installation-poster.jpg" width="1920" height="1080" muted loop playsinline preload="none" aria-label="Video of Synthetic Cesia: iridescent photonic films on a flowering redbud branch at 120710 Gallery, the camera moving slowly along the branch."><source src="video/sc-installation.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/sc-installation.webm" type='video/webm; codecs="vp9"'></video>
-        <figcaption>Synthetic Cesia, 120710 Gallery, March 2026. Photonic films on a flowering redbud branch, shifting colour with the humidity. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate plate--video" style="--ar:1.3333;--nw:1280px">
+
+  <div class="plates">
+    <figure class="plate plate--audio">
+      <figcaption><i>foyer</i>, by kk.Shucko. A track inspired by the cuttlefish photonic skins, 7 min 20 s.</figcaption>
+      <audio controls preload="none" src="audio/foyer-kkshucko.mp3">Your browser can&rsquo;t play this audio.</audio>
+    </figure>
+    <figure class="plate plate--video">
+      <video poster="video/sc-installation-poster.jpg" width="1920" height="1080" muted loop playsinline preload="none" aria-label="Video of Synthetic Cesia: iridescent photonic films on a flowering redbud branch at 120710 Gallery, the camera moving slowly along the branch."><source src="video/sc-installation.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/sc-installation.webm" type='video/webm; codecs="vp9"'></video>
+      <figcaption>Synthetic Cesia, 120710 Gallery, March 2026. Photonic films on a flowering redbud branch, shifting colour with the humidity. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
+    </figure>
+    <div class="plate-pair">
+      <figure class="plate plate--video">
         <video poster="video/sc-skin-camouflage-poster.jpg" width="1280" height="960" muted loop playsinline preload="none" aria-label="Under magnification, a photonic film mottled with blue and green spots inside a yellow border shifts to a uniform orange-red as it swells."><source src="video/sc-skin-camouflage.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/sc-skin-camouflage.webm" type='video/webm; codecs="vp9"'></video>
         <figcaption>Cuttlefish-inspired photonic skin camouflaging, then shifting colour as it swells. From Doshi et al., <i>Nature</i>, 2026. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
       </figure>
-      <figure class="plate plate--video" style="--ar:0.7811;--nw:742px">
+      <figure class="plate plate--video">
         <video poster="video/sc-skin-ground-poster.jpg" width="742" height="950" muted loop playsinline preload="none" aria-label="A small square of photonic film beside a ruler, lying on a printed ground of coloured dots, changes colour to echo the dots around it."><source src="video/sc-skin-ground.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/sc-skin-ground.webm" type='video/webm; codecs="vp9"'></video>
         <figcaption>Photonic skin camouflaging against a patterned ground. Video: Siddharth Doshi. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
       </figure>
     </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.3333;--nw:1800px">
-        <button class="plate-open" type="button"><img src="images/sc-branch-detail.jpg" width="1800" height="1350" loading="lazy" decoding="async" alt="Close-up of a dark branch with magenta blossoms and a small triangular film shimmering gold, pink, and green."></button>
-        <figcaption>Detail of a photonic film on the flowering branch.</figcaption>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate" style="--ar:0.6662;--nw:966px">
+    <figure class="plate plate--mid plate--right">
+      <button class="plate-open" type="button"><img src="images/sc-branch-detail.jpg" width="1800" height="1350" loading="lazy" decoding="async" alt="Close-up of a dark branch with magenta blossoms and a small triangular film shimmering gold, pink, and green."></button>
+      <figcaption>Detail of a photonic film on the flowering branch.</figcaption>
+    </figure>
+    <div class="plate-pair">
+      <figure class="plate">
         <button class="plate-open" type="button"><img src="images/omsy-05.jpg" width="966" height="1450" loading="lazy" decoding="async" alt="A visitor beside Synthetic Cesia on its plinth, in front of a large projection of blue, cloudlike forms."></button>
         <figcaption>Synthetic Cesia at 120710 Gallery, March 2026.</figcaption>
       </figure>
-      <figure class="plate" style="--ar:1.5140;--nw:2000px">
+      <figure class="plate">
         <button class="plate-open" type="button"><img src="images/omsy-04.jpg" width="2000" height="1321" loading="lazy" decoding="async" alt="A visitor stands behind the bronze bowl and branch of Synthetic Cesia, other visitors around a projection behind."></button>
         <figcaption>At the opening.</figcaption>
       </figure>
@@ -412,60 +415,53 @@ main{margin-left:var(--side);min-height:100vh}
     <h1 id="h-bv" tabindex="-1">A Bestiary of Vanishings<span class="shen" lang="zh-Hans"> 蜃</span></h1>
     <p class="work-date">2026</p>
   </header>
-  <div class="hero">
-    <figure class="plate plate--video hero-figure" style="--ar:1.4286;--nw:780px">
+  <figure class="plate plate--video plate--hero-video bleed">
       <video poster="video/bv-deity-render-poster.jpg" width="960" height="672" muted loop playsinline preload="none" aria-label="A rendered mollusk deity with a pearly, iridescent skin shifting violet and green, drifting and turning against black."><source src="video/bv-deity-render.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-deity-render.webm" type='video/webm; codecs="vp9"'></video>
       <figcaption>Simulated iridescent slime mold on the cuttlefish deity&rsquo;s photonic skin. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
-    </figure>
-  </div>
-  <div class="info">
-    <div class="label">
+  </figure>
+  <div class="label">
     <p>Browser-based art game, simulation, and bioprinted living sculpture</p>
     <p>With Andrew Thomas Huang</p>
     <p>Made for Rhizome 7×7, New Museum, New York, 2026</p>
     <p><a href="https://bestiaryofvanishings.com/" target="_blank" rel="noopener">Play the game</a>, <button class="text-button" type="button" data-play-target="bv-gameplay">watch gameplay</button>, or <a href="https://rhizome.org/editorial/2026/jun/12/Andrew-Thomas-Huang-Stephanie-Zhang/" target="_blank" rel="noopener">read about it on Rhizome</a></p>
-    </div>
-    <div class="statement">
+  </div>
+  <div class="statement">
     <p>The Shen (<span lang="zh-Hans">蜃</span>) is a creature of Chinese myth whose breath creates mirages. Here it is a mollusk deity with a cuttlefish’s photonic skin, and its memories live in a distributed slime mold intelligence. Players uncover its memoirs by feeding the organism. The game grows out of Emergent Vessels and Synthetic Cesia, and was made with Andrew Thomas Huang for Rhizome 7×7 2026 at the New Museum.</p>
     <blockquote>
       <p>The Shen speaks from 500 million years in the future. It has outlived every civilization it ever breathed into being. It is contacting you through a Distributed Intelligence Technology—a slime mold network it spent three thousand years engineering, a syncytium of millions of nuclei whose memory is not stored but embodied. The organism is its memories. The Shen does not narrate linearly, but in spirals. Each click activates a node in the network, redirecting cytoplasmic flow, and the story that emerges is shaped by the topology of the telling.</p>
     </blockquote>
     <p>A living cuttlefish sculpture, bioprinted with custom <i>Physarum polycephalum</i> bioinks, accompanies the game at Gray Area in San Francisco, opening December 2026. A custom bioprinter will keep printing the evolving sculpture live in the gallery.</p>
-    </div>
   </div>
-  <div class="gallery">
-    <div class="row">
-      <figure class="plate plate--video" style="--ar:1.6000;--nw:1920px">
-        <video poster="video/bv-gameplay-poster.jpg" width="1920" height="1200" muted loop playsinline preload="none" aria-label="Screen recording of the game: the iridescent mollusk deity drifting in darkness, lines of its memoir appearing beside it as glowing nodes are activated."><source src="video/bv-gameplay.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-gameplay.webm" type='video/webm; codecs="vp9"'></video>
-        <figcaption>A Bestiary of Vanishings, gameplay recording, 2026. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate plate--video" style="--ar:1.5920;--nw:1920px">
+
+  <div class="plates">
+    <figure class="plate plate--video" id="bv-gameplay">
+      <video poster="video/bv-gameplay-poster.jpg" width="1920" height="1200" muted loop playsinline preload="none" aria-label="Screen recording of the game: the iridescent mollusk deity drifting in darkness, lines of its memoir appearing beside it as glowing nodes are activated."><source src="video/bv-gameplay.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-gameplay.webm" type='video/webm; codecs="vp9"'></video>
+      <figcaption>A Bestiary of Vanishings, gameplay recording, 2026. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
+    </figure>
+    <div class="plate-pair">
+      <figure class="plate plate--video bleed">
         <video poster="video/bv-physarum-sim-poster.jpg" width="1920" height="1206" muted loop playsinline preload="none" aria-label="A glowing yellow simulated slime mold spreading and retracting in looping tendrils."><source src="video/bv-physarum-sim.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-physarum-sim.webm" type='video/webm; codecs="vp9"'></video>
         <figcaption>Simulated slime mold. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
       </figure>
-      <figure class="plate plate--video" style="--ar:1.5920;--nw:1920px">
+      <figure class="plate plate--video">
         <video poster="video/bv-photonic-sim-poster.jpg" width="1920" height="1206" muted loop playsinline preload="none" aria-label="A simulator interface: a disc of mottled iridescent colour shifts as a thickness slider moves, above plotted colour curves."><source src="video/bv-photonic-sim.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-photonic-sim.webm" type='video/webm; codecs="vp9"'></video>
         <figcaption>Simulated cuttlefish-inspired photonic skin. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
       </figure>
     </div>
-    <div class="row">
-      <figure class="plate plate--video" style="--ar:0.5625;--nw:720px">
-        <video poster="video/bv-cuttlefish-tank-poster.jpg" width="720" height="1280" muted loop playsinline preload="none" aria-label="Handheld video circling the bioprinted cuttlefish in its acrylic tank under ultraviolet light: a pale blue gel body with orange veins, arms curling around it."><source src="video/bv-cuttlefish-tank.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-cuttlefish-tank.webm" type='video/webm; codecs="vp9"'></video>
-        <figcaption>The living cuttlefish in its tank under ultraviolet light, 2026. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
-      </figure>
-      <figure class="plate" style="--ar:1.4628;--nw:1808px">
-        <button class="plate-open" type="button"><img src="images/bv-cuttlefish-side.jpg" width="1808" height="1236" loading="lazy" decoding="async" alt="A cuttlefish form printed in pale blue gel, with orange branching networks running through its body, glowing in a dark tank."></button>
-        <figcaption>Bioprinted cuttlefish with <i>Physarum polycephalum</i> bioink, under ultraviolet light.</figcaption>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.1419;--nw:1320px">
+    <figure class="plate plate--video plate--portrait plate--right">
+      <video poster="video/bv-cuttlefish-tank-poster.jpg" width="720" height="1280" muted loop playsinline preload="none" aria-label="Handheld video circling the bioprinted cuttlefish in its acrylic tank under ultraviolet light: a pale blue gel body with orange veins, arms curling around it."><source src="video/bv-cuttlefish-tank.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-cuttlefish-tank.webm" type='video/webm; codecs="vp9"'></video>
+      <figcaption>The living cuttlefish in its tank under ultraviolet light, 2026. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
+    </figure>
+    <figure class="plate bleed">
+      <button class="plate-open" type="button"><img src="images/bv-cuttlefish-side.jpg" width="1808" height="1236" loading="lazy" decoding="async" alt="A cuttlefish form printed in pale blue gel, with orange branching networks running through its body, glowing in a dark tank."></button>
+      <figcaption>Bioprinted cuttlefish with <i>Physarum polycephalum</i> bioink, under ultraviolet light.</figcaption>
+    </figure>
+    <div class="plate-pair">
+      <figure class="plate bleed">
         <button class="plate-open" type="button"><img src="images/bv-cuttlefish-tank.jpg" width="1320" height="1156" loading="lazy" decoding="async" alt="The cuttlefish print seen from the other side through the walls of its tank, under violet light."></button>
         <figcaption>The cuttlefish in its support bath.</figcaption>
       </figure>
-      <figure class="plate" style="--ar:1.5004;--nw:2048px">
+      <figure class="plate bleed">
         <button class="plate-open" type="button"><img src="images/bv-cuttlefish-front.jpg" width="2048" height="1365" loading="lazy" decoding="async" alt="The cuttlefish print seen head-on, arms curling outward around a glowing orange core."></button>
         <figcaption>Front view.</figcaption>
       </figure>
@@ -557,91 +553,93 @@ main{margin-left:var(--side);min-height:100vh}
 <!-- ═══════════ CURATORIAL ═══════════ -->
 <article class="view page" id="v-curatorial" aria-labelledby="h-cu">
   <h1 id="h-cu" tabindex="-1">curatorial</h1>
-  <header class="work-head cu-head">
+  <header class="work-head" style="margin-top:2.5rem">
     <h2 class="cu-title"><i>One Molecule Said Yes to Another (And Life Was Born)</i></h2>
     <p class="work-date">March 2026</p>
   </header>
-  <div class="label cu-label">
+  <div class="label">
     <p>Group exhibition of fifteen artists, curated by Stephanie Zhang</p>
     <p>120710 Gallery</p>
     <p><a href="https://120710.art/show/25/" target="_blank" rel="noopener">The exhibition on 120710.art</a></p>
-    <p class="meta">Installation views, March 2026.</p>
   </div>
-  <div class="gallery">
-    <div class="row">
-      <figure class="plate" style="--ar:1.4981;--nw:2000px">
-        <button class="plate-open" type="button"><img src="images/omsy-01.jpg" width="2000" height="1335" loading="lazy" decoding="async" alt="A dark gallery with glowing, rock-like amber lamps hanging and resting on the floor among visitors, a blue projection at the far wall."></button>
-      </figure>
+  <div class="plates">
+    <figure class="plate plate--hero-wide">
+      <button class="plate-open" type="button"><img src="images/omsy-01.jpg" width="2000" height="1335" loading="lazy" decoding="async" alt="A dark gallery with glowing, rock-like amber lamps hanging and resting on the floor among visitors, a blue projection at the far wall."></button>
+      <figcaption>Installation view, <i>One Molecule Said Yes to Another (And Life Was Born)</i>, 120710 Gallery, March 2026.</figcaption>
+    </figure>
+    <div class="plate-pair">
+      <figure class="plate">
+      <button class="plate-open" type="button"><img src="images/omsy-15.jpg" width="1356" height="892" loading="lazy" decoding="async" alt="Hanging amber, rock-like lamps glowing above visitors in the dark."></button>
+      <figcaption>Installation view.</figcaption>
+    </figure>
+      <figure class="plate">
+      <button class="plate-open" type="button"><img src="images/omsy-02.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="A tall hanging sculpture of fine translucent strands lit with small points of light, visitors beyond it in the dark."></button>
+      <figcaption>Installation view.</figcaption>
+    </figure>
     </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.5202;--nw:1356px">
-        <button class="plate-open" type="button"><img src="images/omsy-15.jpg" width="1356" height="892" loading="lazy" decoding="async" alt="Hanging amber, rock-like lamps glowing above visitors in the dark."></button>
-      </figure>
-      <figure class="plate" style="--ar:1.5004;--nw:2000px">
-        <button class="plate-open" type="button"><img src="images/omsy-02.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="A tall hanging sculpture of fine translucent strands lit with small points of light, visitors beyond it in the dark."></button>
-      </figure>
+    <figure class="plate">
+      <button class="plate-open" type="button"><img src="images/omsy-10.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="A wide view of the gallery in near darkness, small glowing works on the floor and visitors throughout."></button>
+      <figcaption>Installation view.</figcaption>
+    </figure>
+    <div class="plate-pair">
+      <figure class="plate">
+      <button class="plate-open" type="button"><img src="images/omsy-12.jpg" width="1384" height="896" loading="lazy" decoding="async" alt="A visitor kneels beside glowing, fibrous orb-like lamps on the floor."></button>
+      <figcaption>Installation view.</figcaption>
+    </figure>
+      <figure class="plate bleed">
+      <button class="plate-open" type="button"><img src="images/omsy-14.jpg" width="1328" height="906" loading="lazy" decoding="async" alt="Close view of a glowing amber orb wrapped in fine, hair-like fibres."></button>
+      <figcaption>Detail.</figcaption>
+    </figure>
     </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.5004;--nw:2000px">
-        <button class="plate-open" type="button"><img src="images/omsy-10.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="A wide view of the gallery in near darkness, small glowing works on the floor and visitors throughout."></button>
-      </figure>
+    <figure class="plate plate--mid plate--right">
+      <button class="plate-open" type="button"><img src="images/omsy-13.jpg" width="1456" height="900" loading="lazy" decoding="async" alt="An amber lamp hanging in front of a projection, two visitors silhouetted, a row of small framed images on the wall."></button>
+      <figcaption>Installation view.</figcaption>
+    </figure>
+    <figure class="plate">
+      <button class="plate-open" type="button"><img src="images/omsy-16.jpg" width="1382" height="880" loading="lazy" decoding="async" alt="A long view of the gallery: projections on two walls, a row of small framed images, a lamp on the floor."></button>
+      <figcaption>Installation view.</figcaption>
+    </figure>
+    <figure class="plate plate--mid">
+      <button class="plate-open" type="button"><img src="images/omsy-17.jpg" width="1372" height="904" loading="lazy" decoding="async" alt="Two visitors silhouetted against a large projection of a pale, airy landscape."></button>
+      <figcaption>Installation view.</figcaption>
+    </figure>
+    <div class="plate-pair">
+      <figure class="plate">
+      <button class="plate-open" type="button"><img src="images/omsy-03.jpg" width="960" height="1386" loading="lazy" decoding="async" alt="Synthetic Cesia in the gallery: a flowering branch in a bronze bowl on a white plinth, with an amber bottle beside it."></button>
+      <figcaption>Synthetic Cesia in the exhibition.</figcaption>
+    </figure>
+      <figure class="plate">
+      <button class="plate-open" type="button"><img src="images/omsy-05.jpg" width="966" height="1450" loading="lazy" decoding="async" alt="A visitor beside Synthetic Cesia on its plinth, in front of a large projection of blue, cloudlike forms."></button>
+      <figcaption>Installation view.</figcaption>
+    </figure>
     </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.5446;--nw:1384px">
-        <button class="plate-open" type="button"><img src="images/omsy-12.jpg" width="1384" height="896" loading="lazy" decoding="async" alt="A visitor kneels beside glowing, fibrous orb-like lamps on the floor."></button>
-      </figure>
-      <figure class="plate" style="--ar:1.4658;--nw:1328px">
-        <button class="plate-open" type="button"><img src="images/omsy-14.jpg" width="1328" height="906" loading="lazy" decoding="async" alt="Close view of a glowing amber orb wrapped in fine, hair-like fibres."></button>
-      </figure>
+    <div class="plate-pair">
+      <figure class="plate">
+      <button class="plate-open" type="button"><img src="images/omsy-04.jpg" width="2000" height="1321" loading="lazy" decoding="async" alt="A visitor stands behind the bronze bowl and branch of Synthetic Cesia, other visitors around a projection behind."></button>
+      <figcaption>At the opening.</figcaption>
+    </figure>
+      <figure class="plate">
+      <button class="plate-open" type="button"><img src="images/omsy-06.jpg" width="2000" height="1324" loading="lazy" decoding="async" alt="Two people smiling on either side of Synthetic Cesia on its plinth."></button>
+      <figcaption>At the opening.</figcaption>
+    </figure>
     </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.6178;--nw:1456px">
-        <button class="plate-open" type="button"><img src="images/omsy-13.jpg" width="1456" height="900" loading="lazy" decoding="async" alt="An amber lamp hanging in front of a projection, two visitors silhouetted, a row of small framed images on the wall."></button>
-      </figure>
-      <figure class="plate" style="--ar:1.5177;--nw:1372px">
-        <button class="plate-open" type="button"><img src="images/omsy-17.jpg" width="1372" height="904" loading="lazy" decoding="async" alt="Two visitors silhouetted against a large projection of a pale, airy landscape."></button>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.5705;--nw:1382px">
-        <button class="plate-open" type="button"><img src="images/omsy-16.jpg" width="1382" height="880" loading="lazy" decoding="async" alt="A long view of the gallery: projections on two walls, a row of small framed images, a lamp on the floor."></button>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate" style="--ar:0.6926;--nw:960px">
-        <button class="plate-open" type="button"><img src="images/omsy-03.jpg" width="960" height="1386" loading="lazy" decoding="async" alt="Synthetic Cesia in the gallery: a flowering branch in a bronze bowl on a white plinth, with an amber bottle beside it."></button>
-        <figcaption>Synthetic Cesia.</figcaption>
-      </figure>
-      <figure class="plate" style="--ar:0.6662;--nw:966px">
-        <button class="plate-open" type="button"><img src="images/omsy-05.jpg" width="966" height="1450" loading="lazy" decoding="async" alt="A visitor beside Synthetic Cesia on its plinth, in front of a large projection of blue, cloudlike forms."></button>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.5140;--nw:2000px">
-        <button class="plate-open" type="button"><img src="images/omsy-04.jpg" width="2000" height="1321" loading="lazy" decoding="async" alt="A visitor stands behind the bronze bowl and branch of Synthetic Cesia, other visitors around a projection behind."></button>
-        <figcaption>At the opening.</figcaption>
-      </figure>
-      <figure class="plate" style="--ar:1.5106;--nw:2000px">
-        <button class="plate-open" type="button"><img src="images/omsy-06.jpg" width="2000" height="1324" loading="lazy" decoding="async" alt="Two people smiling on either side of Synthetic Cesia on its plinth."></button>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate" style="--ar:1.5004;--nw:2000px">
-        <button class="plate-open" type="button"><img src="images/omsy-07.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="Visitors gathered closely around a work in the dim gallery."></button>
-      </figure>
-      <figure class="plate" style="--ar:1.5004;--nw:2000px">
-        <button class="plate-open" type="button"><img src="images/omsy-11.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="A performer at a mixing desk beside a lit table lamp and a small flame, in the dark gallery."></button>
-        <figcaption>Sound at the opening.</figcaption>
-      </figure>
-    </div>
-    <div class="row">
-      <figure class="plate" style="--ar:0.8000;--nw:1600px">
-        <button class="plate-open" type="button"><img src="images/omsy-08.jpg" width="1600" height="2000" loading="lazy" decoding="async" alt="A clear cube glowing magenta under ultraviolet light, a pale two-lobed network inside."></button>
-        <figcaption>Emergent Vessels.</figcaption>
-      </figure>
-      <figure class="plate" style="--ar:1.0000;--nw:2000px">
-        <button class="plate-open" type="button"><img src="images/omsy-09.jpg" width="2000" height="2000" loading="lazy" decoding="async" alt="A clear cube glowing green under ultraviolet light, a dense network inside."></button>
-      </figure>
+    <figure class="plate plate--mid">
+      <button class="plate-open" type="button"><img src="images/omsy-07.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="Visitors gathered closely around a work in the dim gallery."></button>
+      <figcaption>At the opening.</figcaption>
+    </figure>
+    <figure class="plate plate--mid plate--right">
+      <button class="plate-open" type="button"><img src="images/omsy-11.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="A performer at a mixing desk beside a lit table lamp and a small flame, in the dark gallery."></button>
+      <figcaption>Sound at the opening.</figcaption>
+    </figure>
+    <div class="plate-pair">
+      <figure class="plate bleed">
+      <button class="plate-open" type="button"><img src="images/omsy-08.jpg" width="1600" height="2000" loading="lazy" decoding="async" alt="A clear cube glowing magenta under ultraviolet light, a pale two-lobed network inside."></button>
+      <figcaption>Emergent Vessels, shown in the exhibition.</figcaption>
+    </figure>
+      <figure class="plate bleed">
+      <button class="plate-open" type="button"><img src="images/omsy-09.jpg" width="2000" height="2000" loading="lazy" decoding="async" alt="A clear cube glowing green under ultraviolet light, a dense network inside."></button>
+      <figcaption>Emergent Vessels, shown in the exhibition.</figcaption>
+    </figure>
     </div>
   </div>
 </article>
@@ -764,27 +762,6 @@ main{margin-left:var(--side);min-height:100vh}
 'use strict';
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function filmTable(d0, d1) {                 // sRGB for films d0–d1 nm thick (n = 1.45), 1 nm steps
-  const g = (x,m,a,b) => { const t = (x-m)/(x<m?a:b); return Math.exp(-0.5*t*t); };
-  const out = [];
-  for (let d = d0; d <= d1; d++) {
-    let X = 0, Y = 0, Z = 0, Yn = 0;
-    for (let l = 380; l <= 780; l += 5) {
-      const R = 0.5 - 0.5*Math.cos(4*Math.PI*1.45*d/l);
-      const x = 1.056*g(l,599.8,37.9,31.0) + 0.362*g(l,442.0,16.0,26.7) - 0.065*g(l,501.1,20.4,26.2);
-      const y = 0.821*g(l,568.8,46.9,40.5) + 0.286*g(l,530.9,16.3,31.1);
-      const z = 1.217*g(l,437.0,11.8,36.0) + 0.681*g(l,459.0,26.0,13.8);
-      X += x*R; Y += y*R; Z += z*R; Yn += y;
-    }
-    X /= Yn; Y /= Yn; Z /= Yn;
-    const c = [3.2406*X-1.5372*Y-0.4986*Z, -0.9689*X+1.8758*Y+0.0415*Z, 0.0557*X-0.2040*Y+1.0570*Z].map(v => Math.max(0, v));
-    const m = Math.max(c[0], c[1], c[2]) || 1;
-    out.push(c.map(v => { v /= m; return 255*(v <= 0.0031308 ? 12.92*v : 1.055*Math.pow(v, 1/2.4) - 0.055); }));
-  }
-  return out;
-}
-const FILM = filmTable(200, 440);
-
 /* ───────────── Physarum model ─────────────
    Agent-based slime mold (after Jeff Jones, 2010). Agents sense a chemoattractant
    trail ahead-left, ahead, and ahead-right, turn toward the strongest, step, and
@@ -800,14 +777,37 @@ const Sim = (() => {
   let food = [], fedWork = null, running = false, wanted = true, raf = 0, inited = false;
   let lastW = 0, lastH = 0, steps = 0, foodScale = 1, gainScale = 1;
   const light = { x: -1, y: -1, on: false };
-  const P = { SA: 1.0, RA: 0.5, SO: 14, SS: 1, DEP: 0.25, DECAY: 0.96, FOOD: 3.2, LIGHT: 11, DENS: 0.15, GAIN: 8, D0: 297, D1: 400, CURVE: 1.0, DRIFT: 12 };
+  const P = { SA: 1.0, RA: 0.5, SO: 14, SS: 1, DEP: 0.25, DECAY: 0.96, FOOD: 5, LIGHT: 11, DENS: 0.15, GAIN: 8, D0: 302, D1: 362, CURVE: 1.35, DRIFT: 12 };
 
+  // Colour is thin-film interference, as in the photonic skins: a film's reflected colour
+  // depends on its thickness, so the thicker the vein, the further along Newton's colour
+  // sequence it sits. Physarum gold in the fine mesh, magenta and violet in the main veins.
+  // A slow drift in thickness, like humidity swelling the film, keeps the colour alive.
+  const FILM = (() => {                       // sRGB for films 200–440 nm thick (n = 1.45)
+    const g = (x,m,a,b) => { const t = (x-m)/(x<m?a:b); return Math.exp(-0.5*t*t); };
+    const out = [];
+    for (let d = 200; d <= 440; d++) {
+      let X = 0, Y = 0, Z = 0, Yn = 0;
+      for (let l = 380; l <= 780; l += 5) {
+        const R = 0.5 - 0.5*Math.cos(4*Math.PI*1.45*d/l);
+        const x = 1.056*g(l,599.8,37.9,31.0) + 0.362*g(l,442.0,16.0,26.7) - 0.065*g(l,501.1,20.4,26.2);
+        const y = 0.821*g(l,568.8,46.9,40.5) + 0.286*g(l,530.9,16.3,31.1);
+        const z = 1.217*g(l,437.0,11.8,36.0) + 0.681*g(l,459.0,26.0,13.8);
+        X += x*R; Y += y*R; Z += z*R; Yn += y;
+      }
+      X /= Yn; Y /= Yn; Z /= Yn;
+      const c = [3.2406*X-1.5372*Y-0.4986*Z, -0.9689*X+1.8758*Y+0.0415*Z, 0.0557*X-0.2040*Y+1.0570*Z].map(v => Math.max(0, v));
+      const m = Math.max(c[0], c[1], c[2]) || 1;
+      out.push(c.map(v => { v /= m; return 255*(v <= 0.0031308 ? 12.92*v : 1.055*Math.pow(v, 1/2.4) - 0.055); }));
+    }
+    return out;
+  })();
   const LUT = new Uint32Array(1024);
   const ss = (a,b,x) => { const t = Math.min(1, Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); };
   function buildLUT(drift) {
     for (let i = 0; i < 1024; i++) {
       const t = 1 - Math.exp(-(i/32) / 6);              // saturating response to trail density
-      const a = ss(0.02, 0.5, t) * 0.82;
+      const a = ss(0.02, 0.5, t) * 0.84;
       const d = P.D0 + (P.D1 - P.D0)*Math.pow(t, P.CURVE) + drift;
       const c = FILM[Math.max(0, Math.min(240, Math.round(d - 200)))];
       LUT[i] = ((a*255)&255)<<24 | ((c[2]|0)&255)<<16 | ((c[1]|0)&255)<<8 | ((c[0]|0)&255);
@@ -846,7 +846,7 @@ const Sim = (() => {
       const y0 = Math.max(1, Math.floor((b.top - r.top)/cell)),  y1 = Math.min(H-2, Math.ceil((b.bottom - r.top)/cell));
       if (x1 <= x0 || y1 <= y0) return;
       // a handful of attachment points around the edge, like oat flakes on agar
-      const cells = [], per = 2*((x1-x0)+(y1-y0)), pts = 8;
+      const cells = [], per = 2*((x1-x0)+(y1-y0)), pts = 7;
       for (let k = 0; k < pts; k++) {
         let d = ((k + 0.5 + (Math.random()-0.5)*0.6) / pts) * per, x, y;
         if (d < x1-x0) { x = x0 + d; y = y0 - 1; }
@@ -985,7 +985,6 @@ document.querySelectorAll('[data-work]').forEach(el => {
   el.addEventListener('focusin', () => feed(el.dataset.work));
   el.addEventListener('focusout', () => feed(null));
 });
-addEventListener('load', () => Sim.remap());
 
 /* ───────────── routing ───────────── */
 const ROUTES = {
@@ -1008,6 +1007,7 @@ function route() {
   if (!(key in ROUTES)) key = '';
   const id = 'v-' + (key || 'home');
   views.forEach(v => v.classList.toggle('is-active', v.id === id));
+  document.querySelectorAll('.plate--video video').forEach(v => { if (!v.closest('.view.is-active')) v.pause(); });
   document.body.dataset.route = key || 'home';
   document.title = ROUTES[key];
   document.querySelectorAll('.side nav li').forEach(li => {
@@ -1017,9 +1017,7 @@ function route() {
   });
   setMenu(false);
   feed(null);
-  document.querySelectorAll('.plate--video video').forEach(v => { if (!v.closest('.view.is-active')) v.pause(); });
-  document.querySelectorAll('figure[data-drive]').forEach(f => { if (!f.closest('.view.is-active') && f.closeVideo) f.closeVideo(); });
-  if (key === '') requestAnimationFrame(() => Sim.start()); else Sim.stop();
+  if (key === '') { requestAnimationFrame(() => Sim.start()); } else Sim.stop();
   if (!firstRoute) {
     window.scrollTo(0, 0);
     const h = document.querySelector('#' + id + ' h1');
@@ -1036,6 +1034,7 @@ menuBtn.addEventListener('click', () => setMenu(!side.classList.contains('is-ope
 addEventListener('keydown', e => { if (e.key === 'Escape' && side.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); } });
 addEventListener('hashchange', route);
 route();
+addEventListener('load', () => Sim.remap());
 
 /* ───────────── videos: play while on screen, never for reduced motion ───────────── */
 document.querySelectorAll('.plate--video').forEach(fig => {
@@ -1051,55 +1050,10 @@ document.querySelectorAll('.plate--video').forEach(fig => {
   label();
 });
 
-/* ───────────── Drive videos: play in place, on request ───────────── */
-document.querySelectorAll('figure[data-drive]').forEach(fig => {
-  const id = fig.dataset.drive, media = fig.querySelector('.plate-open, .video-facade');
-  const btn = fig.querySelector('figcaption [data-play]'), img = media.querySelector('img');
-  const ratio = img ? img.getAttribute('width') + ' / ' + img.getAttribute('height') : '16 / 9';
-  const out = document.createElement('a');
-  out.href = 'https://drive.google.com/file/d/' + id + '/view'; out.target = '_blank'; out.rel = 'noopener';
-  out.textContent = 'Open in Drive'; out.hidden = true;
-  btn.after(document.createTextNode(' '), out);
-  // First try Drive's direct file address in the browser's own player: it starts at once, no second click.
-  // If Drive refuses (a private, very large, or unplayable file), fall back to Drive's embedded player.
-  const place = el => {
-    el.classList.add('drive-frame'); el.style.aspectRatio = ratio;
-    el.style.width = Math.round(media.getBoundingClientRect().width) + 'px';   // the size of the still it replaces
-    media.hidden = true; media.after(el);
-    btn.textContent = 'Close video'; out.hidden = false;
-  };
-  const embed = () => {
-    const f = document.createElement('iframe');
-    f.src = 'https://drive.google.com/file/d/' + id + '/preview';
-    f.allow = 'autoplay; fullscreen; picture-in-picture'; f.allowFullscreen = true;
-    f.title = 'Video: ' + (img ? img.alt : 'A Bestiary of Vanishings, gameplay recording');
-    place(f);
-  };
-  fig.openVideo = () => {
-    if (fig.querySelector('.drive-frame')) return;
-    const v = document.createElement('video');
-    v.controls = true; v.playsInline = true; v.preload = 'auto';
-    if (img) v.poster = img.currentSrc || img.src;
-    v.setAttribute('aria-label', img ? img.alt : 'Video');
-    let started = false;
-    const fail = () => { if (started || !v.isConnected) return; v.remove(); media.hidden = false; embed(); };
-    v.addEventListener('playing', () => { started = true; }, { once: true });
-    v.addEventListener('error', fail, { once: true });
-    v.src = 'https://drive.google.com/uc?export=download&id=' + id;
-    place(v);
-    v.play().catch(err => { if (err && err.name !== 'AbortError') fail(); });
-    setTimeout(() => { if (!started && v.readyState < 2) fail(); }, 9000);
-  };
-  fig.closeVideo = () => {
-    const f = fig.querySelector('.drive-frame'); if (!f) return;
-    if (f.tagName === 'VIDEO') { f.pause(); f.removeAttribute('src'); f.load(); }
-    f.remove(); media.hidden = false; btn.textContent = 'Play video'; out.hidden = true;
-  };
-  fig.querySelectorAll('[data-play]').forEach(b => b.addEventListener('click', () => fig.querySelector('.drive-frame') ? fig.closeVideo() : fig.openVideo()));
-});
 document.querySelectorAll('[data-play-target]').forEach(b => b.addEventListener('click', () => {
   const fig = document.getElementById(b.dataset.playTarget);
-  (fig.playNow || fig.openVideo)(); fig.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+  if (fig && fig.playNow) fig.playNow();
+  if (fig) fig.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
 }));
 
 /* ───────────── lightbox ───────────── */
@@ -1118,7 +1072,7 @@ document.querySelectorAll('.plate-open').forEach(btn => {
   const img = btn.querySelector('img');
   btn.setAttribute('aria-label', 'Enlarge image: ' + img.alt);
   btn.addEventListener('click', () => {
-    lbList = [...btn.closest('.view').querySelectorAll('.plate:not(.plate--video)')];
+    lbList = [...btn.closest('.view').querySelectorAll('.plate:not(.plate--video):not(.plate--audio)')];
     lbReturn = btn;
     lbShow(lbList.indexOf(btn.closest('.plate')));
     lb.showModal();
