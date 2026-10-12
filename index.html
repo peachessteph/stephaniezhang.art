@@ -755,10 +755,11 @@ const Sim = (() => {
   const dens = document.createElement('canvas'), dctx = dens.getContext('2d');   // slime density, offscreen
   const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
   const ctx = gl ? null : canvas.getContext('2d');
-  // the petri-dish model's version D parameters, unchanged; OAT_R is its oat-flake radius
-  const P = { spacing: 1, linkR: 1.75, D0: .35, A: 40, epoch: 20, wf: .45, I0: 1, eps: 1e-4, iters: 35,
+  // the petri-dish model's version D parameters, except that flows re-pair every 60 steps
+  // rather than 20, so the veins settle instead of flickering; OAT_R is its oat-flake radius
+  const P = { spacing: 1, linkR: 1.75, D0: .35, A: 40, epoch: 60, wf: .45, I0: 1, eps: 1e-4, iters: 35,
               q0: .03, mu: 2.2, dt: .012, Dmin: .004, supRef: 1.5, chemoR: 18, chemoW: 1.5, drawMin: .012,
-              budget: 2, budgetPerOat: .4, supMin: .05, pairI: .5, wMax: 1.3, spd: 2, OAT_R: 3.3 };
+              budget: 2, budgetPerOat: .4, supMin: .05, pairI: .5, wMax: 1.3, OAT_R: 3.3 };
   const DISH_UNIT = 5.2;      // CSS px per mesh unit in the petri dish; tube widths keep that scale
   const DS = .5;              // density field resolution, per CSS px; it is smoothed anyway
   let S = null, unit = 7, dpr = 1, rdpr = 1, lastW = 0, lastH = 0;
@@ -1041,6 +1042,8 @@ const Sim = (() => {
     let seed = null, bd = Infinity;
     for (const o of S.oats) { if (!o.work) continue; const d = (o.x - Mx/2)**2 + (o.y - My/2)**2; if (d < bd) { bd = d; seed = o; } }
     seed ? S.inoculate(seed.x, seed.y) : S.inoculate(Mx/2, My/2);
+    if (!reduceMotion) { const t0 = performance.now(); while (S.frame < 120 && performance.now() - t0 < 250) S.step(); }
+    accFresh = true;
     return true;
   }
 
@@ -1084,13 +1087,18 @@ const Sim = (() => {
   const VS = 'attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
   const HEAD = '#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n'
     + 'varying vec2 v;uniform sampler2D t;float val(vec2 q){vec4 c=texture2D(t,q);return c.r+c.g/255.;}\n';
+  // easing: the shown slime moves a share of the way to the newest density each frame,
+  // so it flows like a thick liquid instead of stepping
+  const EASE = HEAD + `uniform sampler2D prev;uniform float k;
+void main(){vec4 q=texture2D(prev,v);float s=mix(q.r+q.g/255.,val(v),k);
+gl_FragColor=vec4(floor(s*255.)/255.,fract(s*255.),0.,1.);}`;
   const BLUR = HEAD + `uniform vec2 dir;uniform float w[5];uniform float raw;
 float at(vec2 q){vec4 c=texture2D(t,q);return raw>.5?c.r:c.r+c.g/255.;}
 void main(){float s=at(v)*w[0];for(int i=1;i<5;i++){vec2 o=dir*float(i);s+=(at(v+o)+at(v-o))*w[i];}
 s=clamp(s,0.,1.);gl_FragColor=vec4(floor(s*255.)/255.,fract(s*255.),0.,1.);}`;
   // The slime in the game is a dark, smoky, translucent film: lilac grey at low light, with
   // its colour carried by small sharp thin-film glints and a few white hot spots on the slopes.
-  const SHADE = HEAD + `uniform vec2 px;uniform float foodScale,bump;uniform vec3 L[7];
+  const SHADE = HEAD + `uniform vec2 px;uniform float foodScale,bump,time,aspect;uniform vec3 L[7];
 const vec3 V=vec3(0.,0.,1.);
 const vec3 TINT=vec3(.68,.66,.72);
 // nacre: interference in a thin film (n = 1.36), d nm thick, seen at acos(nv) from the normal
@@ -1102,7 +1110,9 @@ float ggx(float nh,float r){float a2=r*r*r*r,q=nh*nh*(a2-1.)+1.;return a2/(3.141
 void main(){
   float c=val(v),hx=val(v+vec2(px.x,0.))-val(v-vec2(px.x,0.)),hy=val(v+vec2(0.,px.y))-val(v-vec2(0.,px.y));
   vec3 N=normalize(vec3(-hx*bump,-hy*bump,1.));
-  float food=c*foodScale,fv=1.-exp(-food*2.4),trail=pow(fv,.68),core=fv*fv;
+  vec2 q=v*vec2(aspect,1.);
+  float breath=1.+.14*sin(dot(q,vec2(4.,2.6))-time*.85)+.08*sin(dot(q,vec2(-2.2,5.))-time*.55);
+  float food=c*foodScale*breath,fv=1.-exp(-food*2.4),trail=pow(fv,.68),core=fv*fv;
   float pres=smoothstep(.006,.08,food),nv=max(N.z,.001);
   float x=clamp(food,0.,.5),d=mix(385.,435.,(1.-exp(-4.*x))/(1.-exp(-2.)));
   vec3 film=mix(nacre(nv,d),vec3(1.),.15);
@@ -1139,34 +1149,51 @@ void main(){
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
     gl.disable(gl.BLEND); gl.activeTexture(gl.TEXTURE0);
-    return { blur: prog(BLUR, ['t', 'dir', 'w', 'raw']), shade: prog(SHADE, ['t', 'px', 'foodScale', 'bump', 'L']),
-             src: tex(), a: tex(), b: tex(), fa: gl.createFramebuffer(), fb: gl.createFramebuffer(), w: 0, h: 0 };
+    return { blur: prog(BLUR, ['t', 'dir', 'w', 'raw']), ease: prog(EASE, ['t', 'prev', 'k']),
+             shade: prog(SHADE, ['t', 'px', 'foodScale', 'bump', 'time', 'aspect', 'L']),
+             src: tex(), a: tex(), b: tex(), fa: gl.createFramebuffer(), fb: gl.createFramebuffer(),
+             c: [tex(), tex()], fc: [gl.createFramebuffer(), gl.createFramebuffer()], w: 0, h: 0 };
   }
-  function shadeGL() {
+  const EASE_T = .6;           // seconds for the shown slime to catch up most of the way
+  let accI = 0, accFresh = true;
+  function blurGL() {
     if (!glr) glr = glInit();
     const w = dens.width, h = dens.height;
     if (glr.w !== w || glr.h !== h) {
-      for (const [t, f] of [[glr.a, glr.fa], [glr.b, glr.fb]]) {
+      for (const [t, f] of [[glr.a, glr.fa], [glr.b, glr.fb], [glr.c[0], glr.fc[0]], [glr.c[1], glr.fc[1]]]) {
         gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
         gl.bindFramebuffer(gl.FRAMEBUFFER, f); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0);
       }
-      glr.w = w; glr.h = h;
+      glr.w = w; glr.h = h; accFresh = true;
     }
+    gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, glr.src); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, dens);
     const B = glr.blur; gl.useProgram(B.o); gl.uniform1i(B.u.t, 0); gl.uniform1fv(B.u.w, BLURW); gl.viewport(0, 0, w, h);
     gl.bindFramebuffer(gl.FRAMEBUFFER, glr.fa); gl.uniform2f(B.u.dir, 1/w, 0); gl.uniform1f(B.u.raw, 1); gl.drawArrays(gl.TRIANGLES, 0, 3);
     gl.bindTexture(gl.TEXTURE_2D, glr.a);
     gl.bindFramebuffer(gl.FRAMEBUFFER, glr.fb); gl.uniform2f(B.u.dir, 0, 1/h); gl.uniform1f(B.u.raw, 0); gl.drawArrays(gl.TRIANGLES, 0, 3);
-    const Sh = glr.shade; gl.useProgram(Sh.o); gl.bindTexture(gl.TEXTURE_2D, glr.b);
+  }
+  function shadeGL(dt, time) {
+    const w = glr.w, h = glr.h;
+    // ease the shown slime toward the newest density
+    const E = glr.ease; gl.useProgram(E.o); gl.viewport(0, 0, w, h);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, glr.c[accI]);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, glr.b);
+    gl.uniform1i(E.u.t, 0); gl.uniform1i(E.u.prev, 1); gl.uniform1f(E.u.k, accFresh ? 1 : 1 - Math.exp(-dt/EASE_T));
+    gl.bindFramebuffer(gl.FRAMEBUFFER, glr.fc[1 - accI]); gl.drawArrays(gl.TRIANGLES, 0, 3);
+    accI = 1 - accI; accFresh = false;
+    // and shade it
+    const Sh = glr.shade; gl.useProgram(Sh.o); gl.bindTexture(gl.TEXTURE_2D, glr.c[accI]);
     gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height);
     gl.uniform1i(Sh.u.t, 0); gl.uniform2f(Sh.u.px, 1/w, 1/h);
-    gl.uniform1f(Sh.u.foodScale, LOOK.food); gl.uniform1f(Sh.u.bump, LOOK.bump); gl.uniform3fv(Sh.u.L, LIGHTS);
+    gl.uniform1f(Sh.u.foodScale, LOOK.food); gl.uniform1f(Sh.u.bump, LOOK.bump);
+    gl.uniform1f(Sh.u.time, time); gl.uniform1f(Sh.u.aspect, w/h); gl.uniform3fv(Sh.u.L, LIGHTS);
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
   if (gl) {
     canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); glr = null; });
-    canvas.addEventListener('webglcontextrestored', () => { glr = null; if (S) draw(); });
+    canvas.addEventListener('webglcontextrestored', () => { glr = null; if (S) draw(true, 10); });
   }
 
   // the food glows as warm points of light; the work being fed glows along its edges
@@ -1193,26 +1220,35 @@ void main(){
     gctx.globalCompositeOperation = 'source-over';
   }
 
-  function draw() {
+  function draw(moved = true, dt = 10) {
+    const time = reduceMotion ? 0 : performance.now()/1000;
     if (gl) {
       if (gl.isContextLost()) return;
-      dctx.globalCompositeOperation = 'source-over'; dctx.fillStyle = '#000'; dctx.fillRect(0, 0, dens.width, dens.height);
-      dctx.globalCompositeOperation = 'lighter';
-      paintSlime(dctx, DS, '255,255,255', LOOK.widen, LOOK.sheet);
-      shadeGL();
-    } else {
+      if (moved || !glr) {
+        dctx.globalCompositeOperation = 'source-over'; dctx.fillStyle = '#000'; dctx.fillRect(0, 0, dens.width, dens.height);
+        dctx.globalCompositeOperation = 'lighter';
+        paintSlime(dctx, DS, '255,255,255', LOOK.widen, LOOK.sheet);
+        blurGL();
+      }
+      shadeGL(dt, time);
+    } else if (moved) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       paintSlime(ctx, rdpr, '138,136,158', 1, 1.3);
     }
     drawGlow();
   }
 
-  function loop() {
+  // The model runs on a slow, steady clock (the dish ran two steps every frame); the shown
+  // slime eases between steps and breathes, so it churns slowly, as the slime in the game does.
+  const RATE = 24;             // model steps per second
+  let last = 0, owed = 0;
+  function loop(now) {
     if (!running) return;
-    // two model steps a frame, as in the dish; one on devices too slow for two
-    const t0 = performance.now();
-    for (let i = 0; i < P.spd; i++) { S.step(); if (performance.now() - t0 > 9) break; }
-    draw();
+    const dt = last ? Math.min(.1, (now - last)/1000) : 0; last = now;
+    owed = Math.min(owed + dt*RATE, 2);
+    let moved = false;
+    while (owed >= 1) { S.step(); owed--; moved = true; }
+    draw(moved, dt);
     raf = requestAnimationFrame(loop);
   }
   function settleThenStill() {
@@ -1220,14 +1256,14 @@ void main(){
     let left = 1500;
     (function chunk() {
       for (let i = 0; i < 6 && left > 0; i++, left--) S.step();
-      if (left > 0 && (S.young > 0 || S.frame < 300)) requestAnimationFrame(chunk); else draw();
+      if (left > 0 && (S.young > 0 || S.frame < 300)) requestAnimationFrame(chunk); else draw(true, 10);
     })();
   }
   function start() {
     if (!S && !init()) return;
     if (reduceMotion && S.frame === 0) { settleThenStill(); wanted = false; return; }
     if (!wanted || running) return;
-    running = true; raf = requestAnimationFrame(loop);
+    running = true; last = 0; raf = requestAnimationFrame(loop);
   }
   function stop() { running = false; cancelAnimationFrame(raf); }
   function restart() {
