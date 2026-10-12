@@ -86,7 +86,7 @@ main{margin-left:var(--side);min-height:100vh}
 .field{position:relative;height:100vh;height:100svh;min-height:36rem;overflow:hidden;touch-action:pan-y}
 .field canvas{position:absolute;inset:0;width:100%;height:100%;display:block;-webkit-mask-image:linear-gradient(to right,transparent,#000 5%,#000 96%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 5%,#000 96%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);mask-composite:intersect}
 .node{position:absolute;left:var(--x);top:var(--y);width:var(--w);text-decoration:none;transition:opacity .5s ease}
-.node img{display:block;width:100%;height:auto}
+.node img{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);mask-composite:intersect}
 .node-title{display:block;margin-top:.7rem;font-size:1.0625rem;line-height:1.3;text-shadow:0 0 8px #000,0 0 16px #000}
 .node-title .yr{color:var(--quiet)}
 .node:hover .node-title,.node:focus-visible .node-title{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
@@ -750,9 +750,6 @@ const Sim = (() => {
   const field = document.getElementById('field');
   const canvas = field.querySelector('canvas');
   // the slime is shaded in WebGL; the food glows on a canvas above it
-  const glowCanvas = document.createElement('canvas');
-  glowCanvas.setAttribute('aria-hidden', 'true'); canvas.after(glowCanvas);
-  const gctx = glowCanvas.getContext('2d');
   const dens = document.createElement('canvas'), dctx = dens.getContext('2d');   // slime density, offscreen
   const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
   const ctx = gl ? null : canvas.getContext('2d');
@@ -766,7 +763,7 @@ const Sim = (() => {
   let S = null, unit = 7, dpr = 1, rdpr = 1, lastW = 0, lastH = 0;
   let fedWork = null, running = false, wanted = true, raf = 0;
 
-  function createSim(Mx, My, holes, works) {
+  function createSim(Mx, My, holes, cover) {
     // --- Poisson-disk nodes over the field, around the captions (Bridson) ---
     const r = P.spacing, cell = r/Math.SQRT2, gw = Math.ceil(Mx/cell), gh = Math.ceil(My/cell);
     const grid = new Int32Array(gw*gh).fill(-1);
@@ -794,9 +791,10 @@ const Sim = (() => {
       if (!ok) { active[ai] = active[active.length-1]; active.pop(); }
     }
     const N = xs.length, X = Float32Array.from(xs), Y = Float32Array.from(ys);
-    // nodes under a work are hidden by it: the slime feeds there, out of sight
+    // nodes under the solid middle of a work are hidden by it: the slime feeds there, out of
+    // sight; under its fading edge the slime shows through
     const hidden = new Uint8Array(N);
-    for (let k = 0; k < N; k++) for (const w of works) if (inRect(X[k], Y[k], w)) hidden[k] = 1;
+    for (let k = 0; k < N; k++) for (const w of cover) if (inRect(X[k], Y[k], w)) hidden[k] = 1;
     // --- tubes: every pair of nodes closer than linkR, with Poiseuille conductance D/L ---
     const ea = [], eb = [], el = [], lr = P.linkR*r, R = Math.ceil(lr/cell);
     for (let i = 0; i < N; i++) {
@@ -1015,17 +1013,18 @@ const Sim = (() => {
     const Mx = r.width/unit, My = r.height/unit;
     rdpr = gl ? Math.min(1.5, dpr) : dpr;
     canvas.width = Math.round(r.width*rdpr); canvas.height = Math.round(r.height*rdpr);
-    glowCanvas.width = Math.round(r.width*dpr); glowCanvas.height = Math.round(r.height*dpr);
     dens.width = Math.max(2, Math.round(r.width*DS)); dens.height = Math.max(2, Math.round(r.height*DS));
     const toRect =(b, pad) => ({ x0: (b.left - r.left)/unit - pad, x1: (b.right - r.left)/unit + pad, y0: (b.top - r.top)/unit - pad, y1: (b.bottom - r.top)/unit + pad });
     // the slime keeps clear of the captions
     const holes = [...field.querySelectorAll('.node-title')].map(t => toRect(t.getBoundingClientRect(), .6));
     // the works are the food
-    const foods = [], works = [];
+    const foods = [], works = [], cover = [];
     field.querySelectorAll('.node img').forEach(img => {
       const rect = toRect(img.getBoundingClientRect(), 0);
       if (rect.x1 - rect.x0 < 2 || rect.y1 - rect.y0 < 2) return;
       works.push(rect);
+      const ix = (rect.x1 - rect.x0)*.09, iy = (rect.y1 - rect.y0)*.09;
+      cover.push({ x0: rect.x0 + ix, x1: rect.x1 - ix, y0: rect.y0 + iy, y1: rect.y1 - iy });
       foods.push({ work: img.closest('.node').dataset.work, rect, x: (rect.x0 + rect.x1)/2, y: (rect.y0 + rect.y1)/2 });
     });
     // and a few oat flakes on the open agar between them
@@ -1037,7 +1036,7 @@ const Sim = (() => {
       const x = 7 + Math.random()*(Mx - 14), y = 7 + Math.random()*(My - 14);
       if (clear(x, y, 8) && flakes.every(f => Math.hypot(f.x - x, f.y - y) > 24)) flakes.push({ x, y, r: P.OAT_R, s: Math.random()*6 });
     }
-    S = createSim(Mx, My, holes, works);
+    S = createSim(Mx, My, holes, cover);
     S.setOats([...foods, ...flakes]);
     // inoculate under the work nearest the middle of the field
     let seed = null, bd = Infinity;
@@ -1197,21 +1196,6 @@ void main(){
     canvas.addEventListener('webglcontextrestored', () => { glr = null; if (S) draw(true, 10); });
   }
 
-  // the work being fed glows along its edges (the oat flakes are food the slime finds, unmarked)
-  function drawGlow() {
-    const sc = unit*dpr;
-    gctx.clearRect(0, 0, glowCanvas.width, glowCanvas.height);
-    for (const o of S.oats) {
-      if (!o.rect || !o.reached || o.work !== fedWork) continue;
-      const q = o.rect, l = .8*sc;           // the stroke itself sits under the image; only its glow shows
-      gctx.save();
-      gctx.shadowColor = 'rgba(255,235,36,.6)'; gctx.shadowBlur = 3*sc;
-      gctx.strokeStyle = 'rgba(255,235,36,.6)'; gctx.lineWidth = l;
-      gctx.strokeRect(q.x0*sc + l, q.y0*sc + l, (q.x1 - q.x0)*sc - 2*l, (q.y1 - q.y0)*sc - 2*l);
-      gctx.restore();
-    }
-  }
-
   function draw(moved = true, dt = 10) {
     const time = reduceMotion ? 0 : performance.now()/1000;
     if (gl) {
@@ -1227,7 +1211,6 @@ void main(){
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       paintSlime(ctx, rdpr, '138,136,158', 1, 1.3);
     }
-    drawGlow();
   }
 
   // The model runs on a slow, steady clock (the dish ran two steps every frame); the shown
