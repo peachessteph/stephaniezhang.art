@@ -742,9 +742,10 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
    The food is the works themselves, with a few oat flakes on the open agar between them.
    The slime starts under the work nearest the middle and forages out to find the rest.
    Hovering a work feeds it: cytoplasm is drawn through it, so the veins to it thicken.
-   It is drawn as the slime in A Bestiary of Vanishings is: a smooth field shaded as a pearly
-   body under a nacre thin film (370–600 nm, thicker where the slime is thicker) with a
-   clear glossy coat, and the food as warm points of light. */
+   It is drawn to look and move like the slime in A Bestiary of Vanishings: a smooth field
+   shaded as a smoky, translucent lilac-grey film whose colour sits in small thin-film
+   glints (a nacre film of 385–435 nm, thicker where the slime is thicker), easing slowly
+   between model steps and breathing. */
 const Sim = (() => {
   const field = document.getElementById('field');
   const canvas = field.querySelector('canvas');
@@ -1083,7 +1084,7 @@ const Sim = (() => {
 
   // WebGL: smooth the density in two blur passes, then shade it. Density travels in two
   // 8-bit channels (value, remainder) so its slopes, and so the lighting, stay smooth.
-  const LOOK = { food: 1, bump: 5.5, sigma: 2.4, widen: 2.2, sheet: 2.2, oatGlow: 4.5 };
+  const LOOK = { food: 1, bump: 5.5, sigma: 2.4, widen: 2.2, sheet: 2.2 };
   const VS = 'attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
   const HEAD = '#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n'
     + 'varying vec2 v;uniform sampler2D t;float val(vec2 q){vec4 c=texture2D(t,q);return c.r+c.g/255.;}\n';
@@ -1196,7 +1197,7 @@ void main(){
     canvas.addEventListener('webglcontextrestored', () => { glr = null; if (S) draw(true, 10); });
   }
 
-  // the food glows as warm points of light; the work being fed glows along its edges
+  // the work being fed glows along its edges (the oat flakes are food the slime finds, unmarked)
   function drawGlow() {
     const sc = unit*dpr;
     gctx.clearRect(0, 0, glowCanvas.width, glowCanvas.height);
@@ -1209,15 +1210,6 @@ void main(){
       gctx.strokeRect(q.x0*sc + l, q.y0*sc + l, (q.x1 - q.x0)*sc - 2*l, (q.y1 - q.y0)*sc - 2*l);
       gctx.restore();
     }
-    gctx.globalCompositeOperation = 'lighter';
-    for (const o of S.oats) {
-      if (o.rect) continue;
-      const gx = o.x*sc, gy = o.y*sc, gr = LOOK.oatGlow*sc, g = gctx.createRadialGradient(gx, gy, 0, gx, gy, gr);
-      g.addColorStop(0, 'rgba(255,255,120,1)'); g.addColorStop(.2, 'rgba(255,235,36,.5)');
-      g.addColorStop(.52, 'rgba(255,210,0,.14)'); g.addColorStop(1, 'rgba(255,210,0,0)');
-      gctx.fillStyle = g; gctx.beginPath(); gctx.arc(gx, gy, gr, 0, 6.283); gctx.fill();
-    }
-    gctx.globalCompositeOperation = 'source-over';
   }
 
   function draw(moved = true, dt = 10) {
