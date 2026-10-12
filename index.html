@@ -83,15 +83,15 @@ main{margin-left:var(--side);min-height:100vh}
 
 /* ——— the field ——— */
 #v-home{padding:0;position:relative}
-.field{position:relative;height:100vh;height:100svh;min-height:34rem;overflow:hidden;touch-action:pan-y}
+.field{position:relative;height:100vh;height:100svh;min-height:36rem;overflow:hidden;touch-action:pan-y}
 .field canvas{position:absolute;inset:0;width:100%;height:100%;display:block;-webkit-mask-image:linear-gradient(to right,transparent,#000 5%,#000 96%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 5%,#000 96%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);mask-composite:intersect}
-.node{position:absolute;left:var(--x);top:var(--y);width:var(--w,clamp(8.5rem,12.5vw,14.5rem));text-decoration:none;transition:opacity .4s ease}
+.node{position:absolute;left:var(--x);top:var(--y);width:var(--w);text-decoration:none;transition:opacity .5s ease}
 .node img{display:block;width:100%;height:auto}
-.node-title{display:block;margin-top:.15rem;font-size:1rem;line-height:1.25;text-shadow:0 0 6px #000,0 0 12px #000}
-.node.bleed .node-title{padding-left:9%}
+.node-title{display:block;margin-top:.7rem;font-size:1.0625rem;line-height:1.3;text-shadow:0 0 8px #000,0 0 16px #000}
 .node-title .yr{color:var(--quiet)}
-.field.is-feeding .node:not(.is-fed){opacity:.3}
-.field-note{position:absolute;right:clamp(1rem,2.5vw,2rem);bottom:1.25rem;margin:0;max-width:19rem;text-align:right;font-size:.9375rem;line-height:1.4;color:var(--quiet);text-shadow:0 0 6px #000,0 0 12px #000}
+.node:hover .node-title,.node:focus-visible .node-title{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.field.is-feeding .node:not(.is-fed){opacity:.4}
+.field-note{position:absolute;right:clamp(1.5rem,4vw,4.5rem);bottom:1.6rem;margin:0;max-width:19rem;text-align:right;font-size:.875rem;line-height:1.45;color:var(--quiet);text-shadow:0 0 8px #000,0 0 16px #000}
 .field-note .text-button{color:var(--pearl)}
 .no-js .field canvas,.no-js .field-note{display:none}
 @media (hover:none){.on-hover{display:none}}
@@ -189,8 +189,8 @@ main{margin-left:var(--side);min-height:100vh}
   main{margin-left:0}
   .view{padding:1.25rem 1.25rem 5rem}
   .field{height:auto;min-height:0;aspect-ratio:10/17}
-  .node{left:var(--mx);top:var(--my);width:var(--mw,31vw)}
-  .node-title{font-size:.9375rem}
+  .node{left:var(--mx);top:var(--my);width:var(--mw)}
+  .node-title{font-size:.9375rem;margin-top:.45rem}
   .field-note{position:static;padding:1rem 1.25rem 2.5rem;text-align:left;max-width:none}
   main{min-height:0}
   .plate-pair{grid-template-columns:1fr}
@@ -240,35 +240,23 @@ main{margin-left:var(--side);min-height:100vh}
 <main id="main">
 
 <!-- ═══════════ INDEX ═══════════ -->
-<section class="view is-active" id="v-home" aria-label="Index of works">
+<section class="view is-active" id="v-home" aria-label="Selected works">
   <div class="field" id="field">
     <canvas aria-hidden="true"></canvas>
-
-    <a class="node bleed" data-work="ev" href="#emergent-vessels" style="--x:8%;--y:8%;--mx:5%;--my:3%">
-      <img src="images/ev-cube-pink-s.jpg" width="1365" height="1365" alt="">
-      <span class="node-title">Emergent Vessels, <span class="yr">2025–</span></span>
+    <a class="node" data-work="ev" href="#emergent-vessels" style="--x:7%;--y:12%;--w:21%;--mx:5%;--my:2%;--mw:43%">
+      <img src="images/omsy-08.jpg" width="1600" height="2000" alt="A clear cube glowing magenta under ultraviolet light, a pale two-lobed network inside." decoding="async">
+      <span class="node-title">Emergent Vessels<span class="yr">, 2025–</span></span>
     </a>
-    <a class="node bleed" data-work="sc" href="#synthetic-cesia" style="--x:64%;--y:5%;--mx:57%;--my:6%;--w:clamp(7rem,10vw,11.5rem);--mw:28vw">
-      <img src="images/sc-120710-installation-s.jpg" width="664" height="960" alt="">
-      <span class="node-title">Synthetic Cesia, <span class="yr">2025–</span></span>
+    <a class="node" data-work="sc" href="#synthetic-cesia" style="--x:71%;--y:8%;--w:19%;--mx:54%;--my:9%;--mw:41%">
+      <img src="images/omsy-03.jpg" width="960" height="1386" alt="Synthetic Cesia in the gallery: a flowering branch in a bronze bowl on a white plinth, with an amber bottle beside it." decoding="async">
+      <span class="node-title">Synthetic Cesia<span class="yr">, 2025–</span></span>
     </a>
-    <a class="node bleed" data-work="bv" href="#bestiary-of-vanishings" style="--x:34%;--y:37%;--mx:28%;--my:38%;--w:clamp(11rem,17vw,19rem);--mw:44vw">
-      <img src="images/bv-cuttlefish-side-s.jpg" width="1808" height="1236" alt="">
-      <span class="node-title">A Bestiary of Vanishings, <span class="yr">2026</span></span>
+    <a class="node" data-work="bv" href="#bestiary-of-vanishings" style="--x:33%;--y:50%;--w:36%;--mx:7%;--my:56%;--mw:86%">
+      <img src="images/bv-cuttlefish-side.jpg" width="1808" height="1236" alt="A cuttlefish form printed in pale blue gel, with orange branching networks running through its body, glowing in a dark tank." decoding="async">
+      <span class="node-title">A Bestiary of Vanishings<span class="yr">, 2026</span></span>
     </a>
-    <a class="node bleed" data-work="ev" href="#emergent-vessels" tabindex="-1" aria-hidden="true" style="--x:78%;--y:47%;--mx:62%;--my:62%">
-      <img src="images/ev-500-vessel-s.jpg" width="686" height="606" alt="">
-    </a>
-    <a class="node bleed" data-work="sc" href="#synthetic-cesia" tabindex="-1" aria-hidden="true" style="--x:10%;--y:62%;--mx:6%;--my:66%">
-      <img src="images/sc-skin-camouflage-s.jpg" width="1984" height="1356" alt="">
-    </a>
-    <a class="node bleed" data-work="bv" href="#bestiary-of-vanishings" tabindex="-1" aria-hidden="true" style="--x:55%;--y:71%;--mx:44%;--my:80%">
-      <img src="images/bv-deity-s.jpg" width="1746" height="1286" alt="">
-    </a>
-
-
   </div>
-  <p class="field-note">A live model of <i>Physarum polycephalum</i> growing between the works.<span class="on-hover"> Hover a work to feed it.</span> <button class="text-button" type="button" id="sim-toggle">Pause</button></p>
+  <p class="field-note">A live model of <i>Physarum polycephalum</i>, growing between the works.<span class="on-hover"> Hover a work to feed it.</span> <button class="text-button" type="button" id="sim-toggle">Pause</button></p>
 </section>
 
 <!-- ═══════════ EMERGENT VESSELS ═══════════ -->
@@ -479,7 +467,9 @@ main{margin-left:var(--side);min-height:100vh}
 <article class="view page" id="v-info" aria-labelledby="h-info">
   <h1 id="h-info" tabindex="-1">info</h1>
   <div class="lede">
-    <p>Stephanie Zhang (<span lang="zh-Hans">张雯嘉</span>) is an artist, scientist, and researcher who works with life as a medium. Her practice deconstructs material reality to its substrates — electrons and cells — and witnesses what emerges when these are broken apart, reconfigured, and born anew. In her hybrid lab-studio, she 3D-bioprints self-assembling living sculptures from novel bioinks composed of fungal and cellular matter, and engineers dynamic sculptures with cuttlefish-inspired photonic skins that shift in color and texture on demand. Her work becomes a ritual of transfiguration: cracking open phenomena to let something other assemble through it.</p>
+    <p>Stephanie Zhang is an artist and bioengineer who works with life as a medium. She bioprints sculptures from fungi and slime mold that grow and reorganize on their own, and builds sculptures from cuttlefish-inspired photonic skins that change color with the humidity of a room. Her practice lives inside research labs at Stanford, across bioprinting, materials science, and optogenetics, and returns to one question: what is the basic unit of aliveness?</p>
+    <p>Zhang graduated from Stanford in 2026 with an individually designed B.S. in Bio-Architectural Design and Engineering, Honors in the Interdisciplinary Arts, and the Robert M. Golden Medal for Excellence in the Humanities and Creative Arts. She has shown work at the New Museum through Rhizome 7×7, at Gray Area Festival, 120710 Gallery, and Et Al. Gallery, and curated the fifteen-artist exhibition <i>One Molecule Said Yes to Another (And Life Was Born)</i> at 120710 Gallery.</p>
+    <p>Earlier, she published six scientific papers beginning at age fourteen, founded the Y Combinator–backed machine-learning biotech company Moonbear, researched deep learning for cancer diagnosis with Andrew Ng at the Stanford AI Lab, and designed biomaterials for Iris van Herpen’s haute couture at Paris Fashion Week F/W 2024.</p>
   </div>
 
   <h2>Contact</h2>
@@ -508,6 +498,8 @@ main{margin-left:var(--side);min-height:100vh}
     <li>Human Capital Delta Fellowship <span class="meta">($50,000)</span></li>
     <li>Backend Capital Hacker Fellowship <span class="meta">($25,000)</span></li>
     <li>Interact Fellowship</li>
+    <li>Congressional App Challenge, winner for CA-45, presented to the U.S. Congress</li>
+    <li>Op-ed published in the <i>New York Times</i>, runner-up, Student Editorial Contest</li>
   </ul>
 
   <h2>Advisors</h2>
@@ -768,7 +760,7 @@ const Sim = (() => {
   let food = [], fedWork = null, running = false, wanted = true, raf = 0, inited = false;
   let lastW = 0, lastH = 0, steps = 0, foodScale = 1, gainScale = 1;
   const light = { x: -1, y: -1, on: false };
-  const P = { SA: 1.0, RA: 0.5, SO: 14, SS: 1, DEP: 0.25, DECAY: 0.96, FOOD: 5, LIGHT: 11, DENS: 0.15, GAIN: 8, D0: 302, D1: 362, CURVE: 1.35, DRIFT: 12 };
+  const P = { SA: 1.0, RA: 0.5, SO: 14, SS: 1, DEP: 0.25, DECAY: 0.96, FOOD: 3.2, LIGHT: 11, DENS: 0.15, GAIN: 8, D0: 297, D1: 400, CURVE: 1.0, DRIFT: 12 };
 
   // Colour is thin-film interference, as in the photonic skins: a film's reflected colour
   // depends on its thickness, so the thicker the vein, the further along Newton's colour
@@ -798,7 +790,7 @@ const Sim = (() => {
   function buildLUT(drift) {
     for (let i = 0; i < 1024; i++) {
       const t = 1 - Math.exp(-(i/32) / 6);              // saturating response to trail density
-      const a = ss(0.02, 0.5, t) * 0.84;
+      const a = ss(0.02, 0.5, t) * 0.82;
       const d = P.D0 + (P.D1 - P.D0)*Math.pow(t, P.CURVE) + drift;
       const c = FILM[Math.max(0, Math.min(240, Math.round(d - 200)))];
       LUT[i] = ((a*255)&255)<<24 | ((c[2]|0)&255)<<16 | ((c[1]|0)&255)<<8 | ((c[0]|0)&255);
@@ -837,7 +829,7 @@ const Sim = (() => {
       const y0 = Math.max(1, Math.floor((b.top - r.top)/cell)),  y1 = Math.min(H-2, Math.ceil((b.bottom - r.top)/cell));
       if (x1 <= x0 || y1 <= y0) return;
       // a handful of attachment points around the edge, like oat flakes on agar
-      const cells = [], per = 2*((x1-x0)+(y1-y0)), pts = 7;
+      const cells = [], per = 2*((x1-x0)+(y1-y0)), pts = 8;
       for (let k = 0; k < pts; k++) {
         let d = ((k + 0.5 + (Math.random()-0.5)*0.6) / pts) * per, x, y;
         if (d < x1-x0) { x = x0 + d; y = y0 - 1; }
