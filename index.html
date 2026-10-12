@@ -44,7 +44,7 @@ body{
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
 a{color:inherit}
-p a,li a,figcaption a,.label a,.field-note a{text-decoration-thickness:1px;text-underline-offset:.18em}
+p a,li a,figcaption a,.label a{text-decoration-thickness:1px;text-underline-offset:.18em}
 a:hover{text-decoration-color:var(--lemon)}
 :focus-visible{outline:2px solid var(--pearl);outline-offset:3px}
 i,em{font-style:italic}
@@ -91,10 +91,7 @@ main{margin-left:var(--side);min-height:100vh}
 .node-title .yr{color:var(--quiet)}
 .node:hover .node-title,.node:focus-visible .node-title{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
 .field.is-feeding .node:not(.is-fed){opacity:.4}
-.field-note{position:absolute;right:clamp(1.5rem,4vw,4.5rem);bottom:1.6rem;margin:0;max-width:19rem;text-align:right;font-size:.875rem;line-height:1.45;color:var(--quiet);text-shadow:0 0 8px #000,0 0 16px #000}
-.field-note .text-button{color:var(--pearl)}
-.no-js .field canvas,.no-js .field-note{display:none}
-@media (hover:none){.on-hover{display:none}}
+.no-js .field canvas{display:none}
 
 /* ——— works ——— */
 .work-head h1,.page h1{font-weight:400;font-size:clamp(2.6rem,5.4vw,4.75rem);line-height:1;letter-spacing:-.018em;margin:0;max-width:14ch}
@@ -127,7 +124,7 @@ main{margin-left:var(--side);min-height:100vh}
 .plate figcaption{margin-top:.65rem;max-width:36rem;font-size:.9375rem;line-height:1.42;color:var(--quiet)}
 .plate figcaption a{color:var(--pearl)}
 .subhead{margin:0;font-weight:400;font-style:italic;font-size:1.375rem;color:var(--quiet)}
-.pager{margin-top:6rem;max-width:66rem;display:flex;justify-content:space-between;gap:2rem;padding-top:1rem;border-top:1px solid var(--hair);font-size:1.0625rem}
+.pager{margin-top:6rem;max-width:66rem;display:flex;justify-content:space-between;gap:2rem;font-size:1.0625rem}
 .pager a{text-decoration:none}
 .pager a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
 
@@ -191,7 +188,6 @@ main{margin-left:var(--side);min-height:100vh}
   .field{height:auto;min-height:0;aspect-ratio:10/17}
   .node{left:var(--mx);top:var(--my);width:var(--mw)}
   .node-title{font-size:.9375rem;margin-top:.45rem}
-  .field-note{position:static;padding:1rem 1.25rem 2.5rem;text-align:left;max-width:none}
   main{min-height:0}
   .plate-pair{grid-template-columns:1fr}
   .cv-row{grid-template-columns:1fr;row-gap:.25rem}
@@ -228,7 +224,7 @@ main{margin-left:var(--side);min-height:100vh}
         <li><a href="#notebook">notebook</a></li>
       </ul>
     </nav>
-    <p class="now">Opening December 2026 at Gray Area, San Francisco: <a href="#bestiary-of-vanishings">a living cuttlefish</a>, bioprinted in the gallery while it is on view.</p>
+    <p class="now">Opening December 2026 at Gray Area, San Francisco: <a href="#bestiary-of-vanishings">a cuttlefish deity sculpture</a>, bioprinted in the gallery while it is on view.</p>
     <p class="contact">
       <a href="mailto:stephaniezhang@stanford.edu">stephaniezhang@stanford.edu</a><br>
       <a href="https://www.instagram.com/emergentvessels/" rel="noopener" target="_blank">Instagram</a><br>
@@ -256,7 +252,6 @@ main{margin-left:var(--side);min-height:100vh}
       <span class="node-title">A Bestiary of Vanishings<span class="yr">, 2026</span></span>
     </a>
   </div>
-  <p class="field-note">A live model of <i>Physarum polycephalum</i>, growing between the works.<span class="on-hover"> Hover a work to feed it.</span> <button class="text-button" type="button" id="sim-toggle">Pause</button></p>
 </section>
 
 <!-- ═══════════ EMERGENT VESSELS ═══════════ -->
@@ -405,7 +400,7 @@ main{margin-left:var(--side);min-height:100vh}
   </header>
   <figure class="plate plate--video plate--hero-video bleed">
       <video poster="video/bv-deity-render-poster.jpg" width="960" height="672" muted loop playsinline preload="none" aria-label="A rendered mollusk deity with a pearly, iridescent skin shifting violet and green, drifting and turning against black."><source src="video/bv-deity-render.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-deity-render.webm" type='video/webm; codecs="vp9"'></video>
-      <figcaption>Simulated iridescent slime mold on the cuttlefish deity&rsquo;s photonic skin. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
+      <figcaption>Simulated iridescent slime mold on the cuttlefish deity&rsquo;s photonic skin. Simulation: Sebastien Zany. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
   </figure>
   <div class="label">
     <p>Browser-based art game, simulation, and bioprinted living sculpture</p>
@@ -419,7 +414,7 @@ main{margin-left:var(--side);min-height:100vh}
     <blockquote>
       <p>The Shen speaks from 500 million years in the future. It has outlived every civilization it ever breathed into being. It is contacting you through a Distributed Intelligence Technology—a slime mold network it spent three thousand years engineering, a syncytium of millions of nuclei whose memory is not stored but embodied. The organism is its memories. The Shen does not narrate linearly, but in spirals. Each click activates a node in the network, redirecting cytoplasmic flow, and the story that emerges is shaped by the topology of the telling.</p>
     </blockquote>
-    <p>A living cuttlefish sculpture, bioprinted with custom <i>Physarum polycephalum</i> bioinks, accompanies the game at Gray Area in San Francisco, opening December 2026. A custom bioprinter will keep printing the evolving sculpture live in the gallery.</p>
+    <p>A cuttlefish deity sculpture, bioprinted with custom <i>Physarum polycephalum</i> bioinks, accompanies the game at Gray Area in San Francisco, opening December 2026. A custom bioprinter will keep printing the evolving sculpture live in the gallery.</p>
   </div>
 
   <div class="plates">
@@ -430,16 +425,16 @@ main{margin-left:var(--side);min-height:100vh}
     <div class="plate-pair">
       <figure class="plate plate--video bleed">
         <video poster="video/bv-physarum-sim-poster.jpg" width="1920" height="1206" muted loop playsinline preload="none" aria-label="A glowing yellow simulated slime mold spreading and retracting in looping tendrils."><source src="video/bv-physarum-sim.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-physarum-sim.webm" type='video/webm; codecs="vp9"'></video>
-        <figcaption>Simulated slime mold. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
+        <figcaption>Simulated slime mold. Simulation: Sebastien Zany. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
       </figure>
       <figure class="plate plate--video">
         <video poster="video/bv-photonic-sim-poster.jpg" width="1920" height="1206" muted loop playsinline preload="none" aria-label="A simulator interface: a disc of mottled iridescent colour shifts as a thickness slider moves, above plotted colour curves."><source src="video/bv-photonic-sim.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-photonic-sim.webm" type='video/webm; codecs="vp9"'></video>
-        <figcaption>Simulated cuttlefish-inspired photonic skin. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
+        <figcaption>Simulated cuttlefish-inspired photonic skin. Simulation: Sebastien Zany. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
       </figure>
     </div>
     <figure class="plate plate--video plate--portrait plate--right">
       <video poster="video/bv-cuttlefish-tank-poster.jpg" width="720" height="1280" muted loop playsinline preload="none" aria-label="Handheld video circling the bioprinted cuttlefish in its acrylic tank under ultraviolet light: a pale blue gel body with orange veins, arms curling around it."><source src="video/bv-cuttlefish-tank.mp4" type='video/mp4; codecs="avc1.640028"'><source src="video/bv-cuttlefish-tank.webm" type='video/webm; codecs="vp9"'></video>
-      <figcaption>The living cuttlefish in its tank under ultraviolet light, 2026. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
+      <figcaption>The cuttlefish deity sculpture in its tank under ultraviolet light, 2026. <button class="text-button" type="button" data-video-toggle>Pause</button></figcaption>
     </figure>
     <figure class="plate bleed">
       <button class="plate-open" type="button"><img src="images/bv-cuttlefish-side.jpg" width="1808" height="1236" loading="lazy" decoding="async" alt="A cuttlefish form printed in pale blue gel, with orange branching networks running through its body, glowing in a dark tank."></button>
@@ -512,7 +507,7 @@ main{margin-left:var(--side);min-height:100vh}
 
   <div class="cv" style="margin-top:2.75rem">
     <div class="cv-row"><h3>Upcoming</h3><ul>
-      <li>Gray Area, San Francisco, <span class="meta">December 2026</span><br><span class="meta">A living cuttlefish sculpture, bioprinted live in the gallery, with <a href="#bestiary-of-vanishings">A Bestiary of Vanishings</a></span></li>
+      <li>Gray Area, San Francisco, <span class="meta">December 2026</span><br><span class="meta">A cuttlefish deity sculpture, bioprinted live in the gallery, with <a href="#bestiary-of-vanishings">A Bestiary of Vanishings</a></span></li>
     </ul></div>
     <div class="cv-row"><h3>2026</h3><ul>
       <li>Rhizome 7×7, New Museum, New York<br><span class="meta">A Bestiary of Vanishings, with Andrew Thomas Huang. Technologist and artist.</span></li>
@@ -558,26 +553,22 @@ main{margin-left:var(--side);min-height:100vh}
   <div class="plates">
     <figure class="plate plate--hero-wide">
       <button class="plate-open" type="button"><img src="images/omsy-01.jpg" width="2000" height="1335" loading="lazy" decoding="async" alt="A dark gallery with glowing, rock-like amber lamps hanging and resting on the floor among visitors, a blue projection at the far wall."></button>
-      <figcaption>Installation view, <i>One Molecule Said Yes to Another (And Life Was Born)</i>, 120710 Gallery, March 2026.</figcaption>
+      <figcaption><i>One Molecule Said Yes to Another (And Life Was Born)</i>, 120710 Gallery, March 2026.</figcaption>
     </figure>
     <div class="plate-pair">
       <figure class="plate">
       <button class="plate-open" type="button"><img src="images/omsy-15.jpg" width="1356" height="892" loading="lazy" decoding="async" alt="Hanging amber, rock-like lamps glowing above visitors in the dark."></button>
-      <figcaption>Installation view.</figcaption>
     </figure>
       <figure class="plate">
       <button class="plate-open" type="button"><img src="images/omsy-02.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="A tall hanging sculpture of fine translucent strands lit with small points of light, visitors beyond it in the dark."></button>
-      <figcaption>Installation view.</figcaption>
     </figure>
     </div>
     <figure class="plate">
       <button class="plate-open" type="button"><img src="images/omsy-10.jpg" width="2000" height="1333" loading="lazy" decoding="async" alt="A wide view of the gallery in near darkness, small glowing works on the floor and visitors throughout."></button>
-      <figcaption>Installation view.</figcaption>
     </figure>
     <div class="plate-pair">
       <figure class="plate">
       <button class="plate-open" type="button"><img src="images/omsy-12.jpg" width="1384" height="896" loading="lazy" decoding="async" alt="A visitor kneels beside glowing, fibrous orb-like lamps on the floor."></button>
-      <figcaption>Installation view.</figcaption>
     </figure>
       <figure class="plate bleed">
       <button class="plate-open" type="button"><img src="images/omsy-14.jpg" width="1328" height="906" loading="lazy" decoding="async" alt="Close view of a glowing amber orb wrapped in fine, hair-like fibres."></button>
@@ -586,15 +577,12 @@ main{margin-left:var(--side);min-height:100vh}
     </div>
     <figure class="plate plate--mid plate--right">
       <button class="plate-open" type="button"><img src="images/omsy-13.jpg" width="1456" height="900" loading="lazy" decoding="async" alt="An amber lamp hanging in front of a projection, two visitors silhouetted, a row of small framed images on the wall."></button>
-      <figcaption>Installation view.</figcaption>
     </figure>
     <figure class="plate">
       <button class="plate-open" type="button"><img src="images/omsy-16.jpg" width="1382" height="880" loading="lazy" decoding="async" alt="A long view of the gallery: projections on two walls, a row of small framed images, a lamp on the floor."></button>
-      <figcaption>Installation view.</figcaption>
     </figure>
     <figure class="plate plate--mid">
       <button class="plate-open" type="button"><img src="images/omsy-17.jpg" width="1372" height="904" loading="lazy" decoding="async" alt="Two visitors silhouetted against a large projection of a pale, airy landscape."></button>
-      <figcaption>Installation view.</figcaption>
     </figure>
     <div class="plate-pair">
       <figure class="plate">
@@ -603,7 +591,7 @@ main{margin-left:var(--side);min-height:100vh}
     </figure>
       <figure class="plate">
       <button class="plate-open" type="button"><img src="images/omsy-05.jpg" width="966" height="1450" loading="lazy" decoding="async" alt="A visitor beside Synthetic Cesia on its plinth, in front of a large projection of blue, cloudlike forms."></button>
-      <figcaption>Installation view. Photo: Sebastien Zany.</figcaption>
+      <figcaption>Photo: Sebastien Zany.</figcaption>
     </figure>
     </div>
     <div class="plate-pair">
@@ -674,7 +662,7 @@ main{margin-left:var(--side);min-height:100vh}
   <section class="entry">
     <h2>updated october 2026</h2>
     <ul>
-      <li>in the studio: a living cuttlefish for gray area, opening december 2026. <i>physarum</i> bioinks, and a custom bioprinter that keeps printing the sculpture while it is on view.</li>
+      <li>in the studio: a cuttlefish deity sculpture for gray area, opening december 2026. <i>physarum</i> bioinks, and a custom bioprinter that keeps printing the sculpture while it is on view.</li>
       <li>scaling emergent vessels toward six feet on a custom-built bioprinter.</li>
       <li>scaling synthetic cesia from lab samples to large-format photonic sheets, patterned with electron beams and with heat.</li>
       <li>publishing everything open-access: bioprinter designs, bioink protocols, morphological datasets.</li>
@@ -746,203 +734,516 @@ main{margin-left:var(--side);min-height:100vh}
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ───────────── Physarum model ─────────────
-   Agent-based slime mold (after Jeff Jones, 2010). Agents sense a chemoattractant
-   trail ahead-left, ahead, and ahead-right, turn toward the strongest, step, and
-   deposit. The trail diffuses and decays. Each work in the field is a food source
-   that deposits along its edges; hovering a work feeds it more. The cursor is light,
-   which bleaches the trail around it, so the network avoids it. */
+   A flow-adaptive model of the plasmodium (after Tero et al., 2007), on an irregular
+   Poisson-disk mesh so no grid shows. Cytoplasm is pumped from the food the slime has
+   found out to its foraging edge, and shuttled between pairs of food sources. Tubes that
+   carry more flow thicken and idle ones wither (dD/dt = f(|Q|) − D), so the sheet at the
+   foraging edge resolves into a branching vein network behind it.
+   The food is the works themselves, with a few oat flakes on the open agar between them.
+   The slime starts under the work nearest the middle and forages out to find the rest.
+   Hovering a work feeds it: cytoplasm is drawn through it, so the veins to it thicken.
+   It is drawn as the slime in A Bestiary of Vanishings is: a smooth field shaded as a pearly
+   body under a nacre thin film (370–600 nm, thicker where the slime is thicker) with a
+   clear glossy coat, and the food as warm points of light. */
 const Sim = (() => {
   const field = document.getElementById('field');
   const canvas = field.querySelector('canvas');
-  const ctx = canvas.getContext('2d');
-  const toggle = document.getElementById('sim-toggle');
-  let W = 0, H = 0, cell = 2, trail, tmp, image, px, N = 0, ax, ay, aa;
-  let food = [], fedWork = null, running = false, wanted = true, raf = 0, inited = false;
-  let lastW = 0, lastH = 0, steps = 0, foodScale = 1, gainScale = 1;
-  const light = { x: -1, y: -1, on: false };
-  const P = { SA: 1.0, RA: 0.5, SO: 14, SS: 1, DEP: 0.25, DECAY: 0.96, FOOD: 3.2, LIGHT: 11, DENS: 0.15, GAIN: 8, D0: 297, D1: 400, CURVE: 1.0, DRIFT: 12 };
+  // the slime is shaded in WebGL; the food glows on a canvas above it
+  const glowCanvas = document.createElement('canvas');
+  glowCanvas.setAttribute('aria-hidden', 'true'); canvas.after(glowCanvas);
+  const gctx = glowCanvas.getContext('2d');
+  const dens = document.createElement('canvas'), dctx = dens.getContext('2d');   // slime density, offscreen
+  const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
+  const ctx = gl ? null : canvas.getContext('2d');
+  // the petri-dish model's version D parameters, unchanged; OAT_R is its oat-flake radius
+  const P = { spacing: 1, linkR: 1.75, D0: .35, A: 40, epoch: 20, wf: .45, I0: 1, eps: 1e-4, iters: 35,
+              q0: .03, mu: 2.2, dt: .012, Dmin: .004, supRef: 1.5, chemoR: 18, chemoW: 1.5, drawMin: .012,
+              budget: 2, budgetPerOat: .4, supMin: .05, pairI: .5, wMax: 1.3, spd: 2, OAT_R: 3.3 };
+  const DISH_UNIT = 5.2;      // CSS px per mesh unit in the petri dish; tube widths keep that scale
+  const DS = .5;              // density field resolution, per CSS px; it is smoothed anyway
+  let S = null, unit = 7, dpr = 1, rdpr = 1, lastW = 0, lastH = 0;
+  let fedWork = null, running = false, wanted = true, raf = 0;
 
-  // Colour is thin-film interference, as in the photonic skins: a film's reflected colour
-  // depends on its thickness, so the thicker the vein, the further along Newton's colour
-  // sequence it sits. Physarum gold in the fine mesh, magenta and violet in the main veins.
-  // A slow drift in thickness, like humidity swelling the film, keeps the colour alive.
-  const FILM = (() => {                       // sRGB for films 200–440 nm thick (n = 1.45)
-    const g = (x,m,a,b) => { const t = (x-m)/(x<m?a:b); return Math.exp(-0.5*t*t); };
-    const out = [];
-    for (let d = 200; d <= 440; d++) {
-      let X = 0, Y = 0, Z = 0, Yn = 0;
-      for (let l = 380; l <= 780; l += 5) {
-        const R = 0.5 - 0.5*Math.cos(4*Math.PI*1.45*d/l);
-        const x = 1.056*g(l,599.8,37.9,31.0) + 0.362*g(l,442.0,16.0,26.7) - 0.065*g(l,501.1,20.4,26.2);
-        const y = 0.821*g(l,568.8,46.9,40.5) + 0.286*g(l,530.9,16.3,31.1);
-        const z = 1.217*g(l,437.0,11.8,36.0) + 0.681*g(l,459.0,26.0,13.8);
-        X += x*R; Y += y*R; Z += z*R; Yn += y;
+  function createSim(Mx, My, holes, works) {
+    // --- Poisson-disk nodes over the field, around the captions (Bridson) ---
+    const r = P.spacing, cell = r/Math.SQRT2, gw = Math.ceil(Mx/cell), gh = Math.ceil(My/cell);
+    const grid = new Int32Array(gw*gh).fill(-1);
+    const xs = [], ys = [], active = [];
+    const inRect = (x, y, h) => x > h.x0 && x < h.x1 && y > h.y0 && y < h.y1;
+    const inField = (x, y) => {
+      if (x < 1 || y < 1 || x > Mx-2 || y > My-2) return false;
+      for (const h of holes) if (inRect(x, y, h)) return false;
+      return true;
+    };
+    function put(x, y) { const i = xs.length; xs.push(x); ys.push(y); grid[((y/cell)|0)*gw + ((x/cell)|0)] = i; active.push(i); }
+    for (let t = 0; t < 2000; t++) { const x = 1 + Math.random()*(Mx-3), y = 1 + Math.random()*(My-3); if (inField(x, y)) { put(x, y); break; } }
+    while (active.length) {
+      const ai = (Math.random()*active.length)|0, i = active[ai]; let ok = false;
+      for (let t = 0; t < 20; t++) {
+        const a = Math.random()*6.283, d = r*(1 + Math.random()), x = xs[i] + Math.cos(a)*d, y = ys[i] + Math.sin(a)*d;
+        if (!inField(x, y)) continue;
+        const gx = (x/cell)|0, gy = (y/cell)|0; let far = true;
+        for (let yy = Math.max(0, gy-2); yy <= Math.min(gh-1, gy+2) && far; yy++)
+          for (let xx = Math.max(0, gx-2); xx <= Math.min(gw-1, gx+2); xx++) {
+            const j = grid[yy*gw + xx]; if (j >= 0 && (xs[j]-x)**2 + (ys[j]-y)**2 < r*r) { far = false; break; }
+          }
+        if (far) { put(x, y); ok = true; break; }
       }
-      X /= Yn; Y /= Yn; Z /= Yn;
-      const c = [3.2406*X-1.5372*Y-0.4986*Z, -0.9689*X+1.8758*Y+0.0415*Z, 0.0557*X-0.2040*Y+1.0570*Z].map(v => Math.max(0, v));
-      const m = Math.max(c[0], c[1], c[2]) || 1;
-      out.push(c.map(v => { v /= m; return 255*(v <= 0.0031308 ? 12.92*v : 1.055*Math.pow(v, 1/2.4) - 0.055); }));
+      if (!ok) { active[ai] = active[active.length-1]; active.pop(); }
     }
-    return out;
-  })();
-  const LUT = new Uint32Array(1024);
-  const ss = (a,b,x) => { const t = Math.min(1, Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); };
-  function buildLUT(drift) {
-    for (let i = 0; i < 1024; i++) {
-      const t = 1 - Math.exp(-(i/32) / 6);              // saturating response to trail density
-      const a = ss(0.02, 0.5, t) * 0.82;
-      const d = P.D0 + (P.D1 - P.D0)*Math.pow(t, P.CURVE) + drift;
-      const c = FILM[Math.max(0, Math.min(240, Math.round(d - 200)))];
-      LUT[i] = ((a*255)&255)<<24 | ((c[2]|0)&255)<<16 | ((c[1]|0)&255)<<8 | ((c[0]|0)&255);
+    const N = xs.length, X = Float32Array.from(xs), Y = Float32Array.from(ys);
+    // nodes under a work are hidden by it: the slime feeds there, out of sight
+    const hidden = new Uint8Array(N);
+    for (let k = 0; k < N; k++) for (const w of works) if (inRect(X[k], Y[k], w)) hidden[k] = 1;
+    // --- tubes: every pair of nodes closer than linkR, with Poiseuille conductance D/L ---
+    const ea = [], eb = [], el = [], lr = P.linkR*r, R = Math.ceil(lr/cell);
+    for (let i = 0; i < N; i++) {
+      const gx = (X[i]/cell)|0, gy = (Y[i]/cell)|0;
+      for (let yy = Math.max(0, gy-R); yy <= Math.min(gh-1, gy+R); yy++)
+        for (let xx = Math.max(0, gx-R); xx <= Math.min(gw-1, gx+R); xx++) {
+          const j = grid[yy*gw + xx];
+          if (j > i) { const d = Math.hypot(X[j]-X[i], Y[j]-Y[i]); if (d < lr) { ea.push(i); eb.push(j); el.push(d); } }
+        }
     }
+    const E = ea.length, EA = Int32Array.from(ea), EB = Int32Array.from(eb), IL = Float32Array.from(el.map(d => r/d));
+    const deg = new Int32Array(N+1); for (let e = 0; e < E; e++) { deg[EA[e]+1]++; deg[EB[e]+1]++; }
+    for (let i = 0; i < N; i++) deg[i+1] += deg[i];
+    const adjN = new Int32Array(2*E), adjE = new Int32Array(2*E), fill = deg.slice(0, N);
+    for (let e = 0; e < E; e++) { const a = EA[e], b = EB[e]; adjN[fill[a]] = b; adjE[fill[a]++] = e; adjN[fill[b]] = a; adjE[fill[b]++] = e; }
+
+    const st = new Uint8Array(N), age = new Float32Array(N), p = new Float32Array(N), s = new Float32Array(N);
+    const chemo = new Float32Array(N), oatOf = new Int16Array(N).fill(-1), dsum = new Float32Array(N), D = new Float32Array(E);
+    const G = new Float32Array(2*E);            // conductance of each tube end, refreshed once per step
+    const comp = new Int32Array(N), queue = new Int32Array(N), mark = new Uint8Array(N);   // for regrowth, below
+    const S = { N, E, X, Y, EA, EB, D, st, age, hidden, oats: [], chemoWork: {}, frame: 0, young: 0, pair: null, pairFed: null, seed: { x: Mx/2, y: My/2 },
+                target: null, joined: false, reviving: 0 };
+    function explore(k) {
+      if (st[k]) return; st[k] = 1; age[k] = 0;
+      for (let j = deg[k]; j < deg[k+1]; j++) if (st[adjN[j]]) {
+        if (D[adjE[j]] < P.D0) D[adjE[j]] = P.D0;
+        if (S.target && mark[adjN[j]]) S.joined = true;
+      }
+      if (S.target && mark[k]) S.joined = true;
+      const oi = oatOf[k]; if (oi >= 0 && !S.oats[oi].reached) { S.oats[oi].reached = true; engulf(S.oats[oi]); }
+    }
+    function engulf(o) {
+      for (const k of o.nodes) explore(k);
+      for (const k of o.nodes) for (let j = deg[k]; j < deg[k+1]; j++) if (oatOf[adjN[j]] === oatOf[k]) D[adjE[j]] = Math.max(D[adjE[j]], 1);
+    }
+    // food: a work covers its rectangle, an oat flake a small disc
+    const distTo = (o, x, y) => o.rect
+      ? Math.hypot(Math.max(o.rect.x0 - x, 0, x - o.rect.x1), Math.max(o.rect.y0 - y, 0, y - o.rect.y1))
+      : Math.hypot(x - o.x, y - o.y);
+    S.setOats = function(list) {
+      oatOf.fill(-1); S.oats = [];
+      for (const o of list) {
+        const nodes = [];
+        for (let k = 0; k < N; k++) if (oatOf[k] < 0 && (o.rect ? inRect(X[k], Y[k], o.rect) : (X[k]-o.x)**2 + (Y[k]-o.y)**2 <= o.r*o.r)) nodes.push(k);
+        if (!nodes.length) continue;
+        const i = S.oats.length; for (const k of nodes) oatOf[k] = i;
+        S.oats.push({ ...o, nodes, reached: false });
+      }
+      // chemoattractant: one field for all the food, and one per work for feeding
+      S.chemoWork = {}; for (const o of S.oats) if (o.work) S.chemoWork[o.work] = new Float32Array(N);
+      for (let k = 0; k < N; k++) {
+        let c = 0;
+        for (const o of S.oats) {
+          const v = Math.exp(-distTo(o, X[k], Y[k])/P.chemoR); if (v > c) c = v;
+          if (o.work && v > S.chemoWork[o.work][k]) S.chemoWork[o.work][k] = v;
+        }
+        chemo[k] = c;
+      }
+      for (const o of S.oats) if (o.nodes.some(k => st[k])) { o.reached = true; engulf(o); }
+      S.pair = null;
+    };
+    S.inoculate = function(x, y) {
+      st.fill(0); age.fill(0); p.fill(0); D.fill(0); S.frame = 0; S.pair = null;
+      for (const o of S.oats) o.reached = false;
+      for (let k = 0; k < N; k++) if ((X[k]-x)**2 + (Y[k]-y)**2 <= 16) explore(k);
+      S.seed = { x, y }; S.target = null;
+    };
+    // regrowth: once the slime has settled, food that has lost touch with the main network
+    // (or was never found) draws a new foraging front from the nearest part of it. Ground
+    // the plasmodium has abandoned is open agar again; living veins are never cleared.
+    const liveAt = k => { for (let j = deg[k]; j < deg[k+1]; j++) if (D[adjE[j]] > 0) return true; return false; };
+    S.regrow = function() {
+      comp.fill(-1); let nc = 0;
+      for (let k0 = 0; k0 < N; k0++) {
+        if (!st[k0] || comp[k0] >= 0 || !liveAt(k0)) continue;
+        let qh = 0, qt = 0; queue[qt++] = k0; comp[k0] = nc;
+        while (qh < qt) {
+          const k = queue[qh++];
+          for (let j = deg[k]; j < deg[k+1]; j++) { const n = adjN[j]; if (comp[n] < 0 && D[adjE[j]] > 0) { comp[n] = nc; queue[qt++] = n; } }
+        }
+        nc++;
+      }
+      // the network each food belongs to (-1: none); the main one holds the most food
+      const fc = S.oats.map(o => { for (const k of o.nodes) if (comp[k] >= 0) return comp[k]; return -1; });
+      const count = new Map(); for (const c of fc) if (c >= 0) count.set(c, (count.get(c) || 0) + 1);
+      let main = -1, most = 0; for (const [c, n] of count) if (n > most) { most = n; main = c; }
+      if (main < 0 || most === S.oats.length) return;
+      for (let k = 0; k < N; k++) if (st[k] && comp[k] < 0) { st[k] = 0; age[k] = 0; p[k] = 0; }
+      S.oats.forEach((o, i) => { if (fc[i] < 0) o.reached = false; });
+      // reconnect the work being fed first, otherwise the food nearest the main network
+      const lost = S.oats.filter((o, i) => fc[i] !== main);
+      const fedLost = lost.filter(o => o.work && o.work === fedWork), cands = fedLost.length ? fedLost : lost;
+      let target = null, from = -1, bd = Infinity;
+      for (let k = 0; k < N; k++) {
+        if (comp[k] !== main) continue;
+        for (const o of cands) { const d = distTo(o, X[k], Y[k]); if (d < bd) { bd = d; from = k; target = o; } }
+      }
+      // the front has found it once it touches the food, or any network the food is part of
+      mark.fill(0); const tc = fc[S.oats.indexOf(target)];
+      for (const k of target.nodes) mark[k] = 1;
+      if (tc >= 0) for (let k = 0; k < N; k++) if (comp[k] === tc) mark[k] = 1;
+      // wake the plasmodium nearest it: a young patch there starts foraging again
+      for (let k = 0; k < N; k++) if (comp[k] === main && (X[k]-X[from])**2 + (Y[k]-Y[from])**2 <= 9) age[k] = 0;
+      S.target = target; S.joined = false; S.reviving = 0;
+    };
+    // pressures: solve (L(D) + eps) p = s with warm-started conjugate gradient, over the
+    // live plasmodium only (nodes whose tubes have all withered carry no flow)
+    const rr = new Float32Array(N), dd = new Float32Array(N), Ad = new Float32Array(N), act = new Int32Array(N);
+    let na = 0;
+    function matvec(v, out) {
+      for (let i = 0; i < na; i++) {
+        const k = act[i], vk = v[k]; let acc = P.eps*vk;
+        for (let j = deg[k], je = deg[k+1]; j < je; j++) { const g = G[j]; if (g > 0) acc += g*(vk - v[adjN[j]]); }
+        out[k] = acc;
+      }
+    }
+    function solve() {
+      na = 0;
+      for (let k = 0; k < N; k++) {
+        let live = false;
+        if (st[k]) for (let j = deg[k], je = deg[k+1]; j < je; j++) { const e = adjE[j], g = D[e]*IL[e]; G[j] = g; if (g > 0) live = true; }
+        if (live) act[na++] = k; else p[k] = 0;
+      }
+      matvec(p, Ad); let r2 = 0;
+      for (let i = 0; i < na; i++) { const k = act[i]; rr[k] = s[k] - Ad[k]; dd[k] = rr[k]; r2 += rr[k]*rr[k]; }
+      for (let it = 0; it < P.iters && r2 > 1e-14; it++) {
+        matvec(dd, Ad); let dAd = 0; for (let i = 0; i < na; i++) { const k = act[i]; dAd += dd[k]*Ad[k]; } if (dAd <= 0) break;
+        const al = r2/dAd; let rn = 0;
+        for (let i = 0; i < na; i++) { const k = act[i]; p[k] += al*dd[k]; rr[k] -= al*Ad[k]; rn += rr[k]*rr[k]; }
+        const be = rn/r2; r2 = rn; for (let i = 0; i < na; i++) { const k = act[i]; dd[k] = rr[k] + be*dd[k]; }
+      }
+    }
+    S.step = function() {
+      S.frame++;
+      s.fill(0);
+      const reached = S.oats.filter(o => o.reached);
+      const fed = fedWork ? reached.filter(o => o.work === fedWork) : [];
+      let ny = 0; for (let k = 0; k < N; k++) if (st[k] && age[k] < P.A) ny++;
+      S.young = ny;
+      // shuttle streaming between pairs of food sources, re-paired every epoch;
+      // while a work is fed, every source exchanges cytoplasm with it
+      if (S.frame % P.epoch === 1 || !S.pair || S.pair.length !== reached.length || S.pairFed !== fedWork) {
+        S.pair = null; S.pairFed = fedWork;
+        if (reached.length >= 2) {
+          const others = reached.filter(o => o.work !== fedWork);
+          S.pair = reached.map(a => {
+            const pool = fed.length ? (a.work === fedWork ? (others.length ? others : reached) : fed) : reached;
+            let b, t = 0; do { b = pool[(Math.random()*pool.length)|0]; } while (b === a && ++t < 20);
+            return b === a ? null : [a, b];
+          }).filter(Boolean);
+          if (!S.pair.length) S.pair = null;
+        }
+      }
+      // the foraging edge is fed from the food found so far (or from the work being fed)
+      const wf = ny > 0 ? (S.pair ? P.wf : 1) : 0, I0 = P.I0;
+      if (wf > 0) {
+        const src = fed.length ? fed : reached;
+        if (src.length) { for (const o of src) for (const k of o.nodes) s[k] += I0*wf/src.length/o.nodes.length; }
+        else {
+          let best = -1, bd = 1e9;
+          for (let k = 0; k < N; k++) { const d = (X[k]-S.seed.x)**2 + (Y[k]-S.seed.y)**2; if (st[k] && d < bd) { bd = d; best = k; } }
+          if (best >= 0) s[best] += I0*wf;
+        }
+        for (let k = 0; k < N; k++) if (st[k] && age[k] < P.A) s[k] -= I0*wf/ny;
+      }
+      if (S.pair && wf < 1) {
+        const I = I0*(1-wf)*P.pairI;
+        for (const [a, b] of S.pair) { for (const k of a.nodes) s[k] += I/a.nodes.length; for (const k of b.nodes) s[k] -= I/b.nodes.length; }
+      }
+      solve();
+      // tube adaptation: dD/dt = f(|Q|) - D
+      dsum.fill(0);
+      for (let e = 0; e < E; e++) {
+        const d = D[e]; if (d <= 0) continue; const a = EA[e], b = EB[e];
+        const Q = Math.abs(d*IL[e]*(p[a]-p[b])), q = Math.pow(Q/P.q0, P.mu);
+        let nd = d + P.dt*(q/(1+q) - d);
+        if (age[a] < P.A && age[b] < P.A) nd = Math.max(nd, P.D0*(1 - Math.max(age[a], age[b])/P.A));
+        if (nd < P.Dmin) nd = 0; D[e] = nd; dsum[a] += nd; dsum[b] += nd;
+      }
+      // foraging budget spent on unexplored neighbours of young plasmodium
+      if (ny > 0) {
+        const cand = [], w = [], cf = fedWork ? S.chemoWork[fedWork] : null; let tot = 0;
+        for (let k = 0; k < N; k++) {
+          if (!st[k] || age[k] >= P.A) continue; const sup = Math.min(1, dsum[k]/P.supRef);
+          for (let j = deg[k]; j < deg[k+1]; j++) {
+            const n = adjN[j]; if (st[n]) continue;
+            tot += (P.supMin + sup*sup)*(0.3 + P.chemoW*(chemo[n] + (cf ? cf[n] : 0))); cand.push(n); w.push(tot);
+          }
+        }
+        let B = P.budget*(1 + reached.length*P.budgetPerOat); B = Math.floor(B) + (Math.random() < B % 1 ? 1 : 0);
+        for (let j = 0; j < B && cand.length; j++) {
+          const x = Math.random()*tot; let lo = 0, hi = w.length-1;
+          while (lo < hi) { const m = (lo+hi) >> 1; if (w[m] < x) lo = m+1; else hi = m; }
+          explore(cand[lo]);
+        }
+      }
+      if (S.target) {
+        // a regrowth front settles once it finds its food (or, failing that, after a while);
+        // the sources re-pair at once, so cytoplasm starts flowing over the new link
+        if (S.joined || ++S.reviving > 900) {
+          for (let k = 0; k < N; k++) if (st[k] && age[k] < P.A) age[k] = P.A;
+          S.target = null; S.pair = null;
+        }
+      } else if (ny === 0 && S.frame % P.epoch === 0) S.regrow();
+      for (let k = 0; k < N; k++) if (st[k]) age[k]++;
+    };
+    return S;
   }
 
   function init() {
-    buildLUT(0);
     const r = field.getBoundingClientRect();
     if (r.width < 10 || r.height < 10) return false;
-    cell = r.width < 700 ? 1.6 : 2;
-    foodScale = r.width < 700 ? 0.45 : 1;
-    gainScale = r.width < 700 ? 0.62 : 1;
-    W = Math.round(r.width / cell); H = Math.round(r.height / cell);
     lastW = r.width; lastH = r.height;
-    canvas.width = W; canvas.height = H;
-    trail = new Float32Array(W*H); tmp = new Float32Array(W*H);
-    image = ctx.createImageData(W, H); px = new Uint32Array(image.data.buffer);
-    N = Math.min(40000, Math.round(W*H*P.DENS));
-    ax = new Float32Array(N); ay = new Float32Array(N); aa = new Float32Array(N);
-    // start as noise: agents scattered at random, so the network self-organizes on load
-    for (let i = 0; i < N; i++) {
-      ax[i] = 1 + Math.random()*(W-2); ay[i] = 1 + Math.random()*(H-2); aa[i] = Math.random()*Math.PI*2;
+    dpr = Math.min(2, devicePixelRatio || 1);
+    unit = Math.sqrt(r.width*r.height/(r.width < 700 ? 9000 : 16000));    // about as many nodes as the dish
+    const Mx = r.width/unit, My = r.height/unit;
+    rdpr = gl ? Math.min(1.5, dpr) : dpr;
+    canvas.width = Math.round(r.width*rdpr); canvas.height = Math.round(r.height*rdpr);
+    glowCanvas.width = Math.round(r.width*dpr); glowCanvas.height = Math.round(r.height*dpr);
+    dens.width = Math.max(2, Math.round(r.width*DS)); dens.height = Math.max(2, Math.round(r.height*DS));
+    const toRect =(b, pad) => ({ x0: (b.left - r.left)/unit - pad, x1: (b.right - r.left)/unit + pad, y0: (b.top - r.top)/unit - pad, y1: (b.bottom - r.top)/unit + pad });
+    // the slime keeps clear of the captions
+    const holes = [...field.querySelectorAll('.node-title')].map(t => toRect(t.getBoundingClientRect(), .6));
+    // the works are the food
+    const foods = [], works = [];
+    field.querySelectorAll('.node img').forEach(img => {
+      const rect = toRect(img.getBoundingClientRect(), 0);
+      if (rect.x1 - rect.x0 < 2 || rect.y1 - rect.y0 < 2) return;
+      works.push(rect);
+      foods.push({ work: img.closest('.node').dataset.work, rect, x: (rect.x0 + rect.x1)/2, y: (rect.y0 + rect.y1)/2 });
+    });
+    // and a few oat flakes on the open agar between them
+    const clear = (x, y, m) => !works.some(w => x > w.x0 - m && x < w.x1 + m && y > w.y0 - m && y < w.y1 + m)
+                            && !holes.some(h => x > h.x0 - 4 && x < h.x1 + 4 && y > h.y0 - 4 && y < h.y1 + 4);
+    const free = Mx*My - works.reduce((a, w) => a + (w.x1 - w.x0)*(w.y1 - w.y0), 0);
+    const flakes = [], want = Math.round(free/1500);
+    for (let t = 0; t < 4000 && flakes.length < want; t++) {
+      const x = 7 + Math.random()*(Mx - 14), y = 7 + Math.random()*(My - 14);
+      if (clear(x, y, 8) && flakes.every(f => Math.hypot(f.x - x, f.y - y) > 24)) flakes.push({ x, y, r: P.OAT_R, s: Math.random()*6 });
     }
-    mapFood(r);
-    steps = 0; inited = true;
+    S = createSim(Mx, My, holes, works);
+    S.setOats([...foods, ...flakes]);
+    // inoculate under the work nearest the middle of the field
+    let seed = null, bd = Infinity;
+    for (const o of S.oats) { if (!o.work) continue; const d = (o.x - Mx/2)**2 + (o.y - My/2)**2; if (d < bd) { bd = d; seed = o; } }
+    seed ? S.inoculate(seed.x, seed.y) : S.inoculate(Mx/2, My/2);
     return true;
   }
 
-  function mapFood(r) {
-    r = r || field.getBoundingClientRect();
-    food = [];
-    field.querySelectorAll('.node img').forEach(img => {
-      const b = img.getBoundingClientRect();
-      const x0 = Math.max(1, Math.floor((b.left - r.left)/cell)), x1 = Math.min(W-2, Math.ceil((b.right - r.left)/cell));
-      const y0 = Math.max(1, Math.floor((b.top - r.top)/cell)),  y1 = Math.min(H-2, Math.ceil((b.bottom - r.top)/cell));
-      if (x1 <= x0 || y1 <= y0) return;
-      // a handful of attachment points around the edge, like oat flakes on agar
-      const cells = [], per = 2*((x1-x0)+(y1-y0)), pts = 8;
-      for (let k = 0; k < pts; k++) {
-        let d = ((k + 0.5 + (Math.random()-0.5)*0.6) / pts) * per, x, y;
-        if (d < x1-x0) { x = x0 + d; y = y0 - 1; }
-        else if ((d -= x1-x0) < y1-y0) { x = x1 + 1; y = y0 + d; }
-        else if ((d -= y1-y0) < x1-x0) { x = x1 - d; y = y1 + 1; }
-        else { d -= x1-x0; x = x0 - 1; y = y1 - d; }
-        x |= 0; y |= 0;
-        for (let oy = -1; oy <= 1; oy++) for (let ox = -1; ox <= 1; ox++) {
-          const X = x+ox, Y = y+oy;
-          if (X > 0 && X < W-1 && Y > 0 && Y < H-1) cells.push(Y*W+X);
-        }
-      }
-      food.push({ work: img.closest('.node').dataset.work, cells: Int32Array.from(cells) });
-    });
+  // ───── drawing ─────
+  // the slime as density (or, without WebGL, as flat pearl): the foraging sheet, the slime
+  // pooled on food it has reached, and the tubes in eight thickness classes
+  function paintSlime(c, k, rgb, widen, sheet) {
+    const { N, E, X, Y, EA, EB, D, st, age, hidden } = S, sc = unit*k;
+    const A16 = P.A*1.6, hr = sc*sheet;
+    for (let n = 0; n < N; n++) {
+      if (!st[n] || hidden[n] || age[n] >= A16) continue;
+      const a = 1 - age[n]/A16; c.fillStyle = `rgba(${rgb},${(a*a*.28).toFixed(3)})`;
+      c.beginPath(); c.arc(X[n]*sc, Y[n]*sc, hr, 0, 6.283); c.fill();
+    }
+    for (const o of S.oats) {
+      if (o.rect || !o.reached) continue;
+      const gx = o.x*sc, gy = o.y*sc, gr = (o.r + 2.5)*sc, g = c.createRadialGradient(gx, gy, 0, gx, gy, gr);
+      g.addColorStop(0, `rgba(${rgb},.95)`); g.addColorStop(.6, `rgba(${rgb},.6)`); g.addColorStop(1, `rgba(${rgb},0)`);
+      c.fillStyle = g; c.beginPath(); c.arc(gx, gy, gr, 0, 6.283); c.fill();
+    }
+    const BN = 8, paths = Array.from({ length: BN }, () => []);
+    for (let e = 0; e < E; e++) {
+      const d = D[e]; if (d < P.drawMin || (hidden[EA[e]] && hidden[EB[e]])) continue;
+      paths[Math.min(BN-1, Math.floor(Math.sqrt(d)*BN))].push(e);
+    }
+    c.lineCap = 'round';
+    const lw = DISH_UNIT*k*widen;
+    for (let b = 0; b < BN; b++) {
+      const arr = paths[b]; if (!arr.length) continue; const t = (b + .5)/BN;
+      c.lineWidth = Math.max(.5, lw*(.2 + t*P.wMax));
+      c.strokeStyle = `rgba(${rgb},${(.35 + .65*t).toFixed(2)})`;
+      c.beginPath();
+      for (const e of arr) { c.moveTo(X[EA[e]]*sc, Y[EA[e]]*sc); c.lineTo(X[EB[e]]*sc, Y[EB[e]]*sc); }
+      c.stroke();
+    }
   }
 
-  function step() {
-    const { SA, RA, SO, SS, DEP } = P;
-    const w = W, h = H, t = trail;
-    for (let i = 0; i < N; i++) {
-      const x = ax[i], y = ay[i]; let a = aa[i];
-      const fl = sense(x, y, a - SA, SO, t, w, h), fc = sense(x, y, a, SO, t, w, h), fr = sense(x, y, a + SA, SO, t, w, h);
-      if (fc > fl && fc > fr) { /* keep heading */ }
-      else if (fc < fl && fc < fr) a += Math.random() < 0.5 ? -RA : RA;
-      else if (fl < fr) a += RA;
-      else if (fr < fl) a -= RA;
-      a += (Math.random() - 0.5) * 0.06;
-      let nx = x + Math.cos(a)*SS, ny = y + Math.sin(a)*SS;
-      if (nx < 1 || nx >= w-1 || ny < 1 || ny >= h-1) {
-        nx = Math.min(w-1.01, Math.max(1, nx)); ny = Math.min(h-1.01, Math.max(1, ny));
-        a = Math.random()*Math.PI*2;
+  // WebGL: smooth the density in two blur passes, then shade it. Density travels in two
+  // 8-bit channels (value, remainder) so its slopes, and so the lighting, stay smooth.
+  const LOOK = { food: .62, bump: 7, light: .2, sigma: 2, widen: 1.8, sheet: 1.9, oatGlow: 4.5 };
+  const VS = 'attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
+  const HEAD = '#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n'
+    + 'varying vec2 v;uniform sampler2D t;float val(vec2 q){vec4 c=texture2D(t,q);return c.r+c.g/255.;}\n';
+  const BLUR = HEAD + `uniform vec2 dir;uniform float w[5];uniform float raw;
+float at(vec2 q){vec4 c=texture2D(t,q);return raw>.5?c.r:c.r+c.g/255.;}
+void main(){float s=at(v)*w[0];for(int i=1;i<5;i++){vec2 o=dir*float(i);s+=(at(v+o)+at(v-o))*w[i];}
+s=clamp(s,0.,1.);gl_FragColor=vec4(floor(s*255.)/255.,fract(s*255.),0.,1.);}`;
+  const SHADE = HEAD + `uniform vec2 px;uniform float foodScale,bump,rad;uniform vec3 L[7];
+const vec3 V=vec3(0.,0.,1.);
+vec3 fresnel(vec3 f0,float c){return f0+(1.-f0)*pow(1.-c,5.);}
+// nacre: interference in a thin film (n = 1.36), d nm thick, seen at acos(nv) from the normal
+vec3 nacre(float nv,float d){
+  float sn=sqrt(max(1.-nv*nv,0.))/1.36,cs=sqrt(max(1.-sn*sn,0.));
+  vec3 k=.5+.5*cos(2.72*d*cs*6.2831853/vec3(680.,535.,440.)+vec3(.45,2.35,4.2));
+  k=k*k*(3.-2.*k);return clamp(k*vec3(1.08,1.18,1.32),0.,1.);}
+vec3 spec(vec3 N,vec3 l,vec3 f0,float r){
+  vec3 H=normalize(l+V);float nl=max(dot(N,l),0.),nv=max(N.z,.001),nh=max(dot(N,H),0.),a2=r*r*r*r;
+  float q=nh*nh*(a2-1.)+1.,k=(r+1.)*(r+1.)/8.;
+  float g=nl/(nl*(1.-k)+k)*nv/(nv*(1.-k)+k);
+  return a2/(3.14159*q*q)*g/max(4.*nl*nv,.001)*fresnel(f0,max(dot(H,V),0.))*nl;}
+void main(){
+  float c=val(v),hx=val(v+vec2(px.x,0.))-val(v-vec2(px.x,0.)),hy=val(v+vec2(0.,px.y))-val(v-vec2(0.,px.y));
+  vec3 N=normalize(vec3(-hx*bump,-hy*bump,1.));
+  float food=c*foodScale,fv=1.-exp(-food*2.4),trail=pow(fv,.68),core=fv*fv*.55;
+  float gloss=smoothstep(.02,.26,food),pres=smoothstep(.006,.08,food),nv=max(N.z,.001);
+  float x=clamp(food,0.,.5),d=mix(370.,600.,(1.-exp(-4.*x))/(1.-exp(-2.)));
+  vec3 film=nacre(nv,d),f0=clamp(mix(vec3(.045),vec3(.065)+film*.34,.8),0.,1.);
+  vec3 ff=fresnel(f0,nv)*pres,fc=fresnel(vec3(.035),nv)*pres*(.22+gloss*.58);
+  vec3 body=1.-clamp(ff+fc*(1.-ff),0.,.92);
+  vec3 pearl=clamp(mix(vec3(.32,.34,.36),vec3(1.),trail)+film*.2*pres*(.3+core*.35),0.,1.);
+  vec3 dif=vec3(.22,.24,.26),fs=vec3(0.),gs=vec3(0.);
+  float rb=mix(.34,.105,gloss),rc=mix(.18,.055,gloss);
+  for(int i=0;i<7;i++){dif+=rad*max(dot(N,L[i]),0.);fs+=spec(N,L[i],f0,rb)*rad;gs+=spec(N,L[i],vec3(.035),rc)*rad;}
+  vec3 col=pearl*body*dif*max(trail,pres*.26)+fs*pres*(.42+core*.85)+gs*pres*(.18+gloss*.82)+body*film*pres*(.05+core*.1);
+  float a=clamp(max(pres*.82,trail*.68),0.,1.);
+  float hb=0.;for(int i=0;i<8;i++){float an=float(i)*.7853982;hb+=val(v+vec2(cos(an),sin(an))*px*7.);}
+  float bl=smoothstep(0.,.3,hb/8.*foodScale)*.14*(1.-a);
+  gl_FragColor=vec4(min(col,vec3(1.))*a+vec3(.86,.87,.92)*bl,a+bl);}`;
+  // a ring of white lights above the dish, and one overhead
+  const LIGHTS = new Float32Array([...Array.from({ length: 6 }, (_, i) => {
+    const az = i*Math.PI/3 + .3, el = .7; return [Math.cos(az)*Math.cos(el), Math.sin(az)*Math.cos(el), Math.sin(el)];
+  }).flat(), .15, .25, .956]);
+  const BLURW = (() => { const w = [0, 1, 2, 3, 4].map(i => Math.exp(-i*i/(2*LOOK.sigma*LOOK.sigma))); const t = w[0] + 2*(w[1] + w[2] + w[3] + w[4]); return new Float32Array(w.map(x => x/t)); })();
+  let glr = null;
+  function glInit() {
+    const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    const prog = (fs, names) => {
+      const o = gl.createProgram(); gl.attachShader(o, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(o, sh(gl.FRAGMENT_SHADER, fs));
+      gl.bindAttribLocation(o, 0, 'p'); gl.linkProgram(o); if (!gl.getProgramParameter(o, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(o));
+      const u = {}; for (const n of names) u[n] = gl.getUniformLocation(o, n === 'w' || n === 'L' ? n + '[0]' : n); return { o, u };
+    };
+    const tex = () => {
+      const o = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, o);
+      for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
+      return o;
+    };
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    gl.disable(gl.BLEND); gl.activeTexture(gl.TEXTURE0);
+    return { blur: prog(BLUR, ['t', 'dir', 'w', 'raw']), shade: prog(SHADE, ['t', 'px', 'foodScale', 'bump', 'rad', 'L']),
+             src: tex(), a: tex(), b: tex(), fa: gl.createFramebuffer(), fb: gl.createFramebuffer(), w: 0, h: 0 };
+  }
+  function shadeGL() {
+    if (!glr) glr = glInit();
+    const w = dens.width, h = dens.height;
+    if (glr.w !== w || glr.h !== h) {
+      for (const [t, f] of [[glr.a, glr.fa], [glr.b, glr.fb]]) {
+        gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, f); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0);
       }
-      ax[i] = nx; ay[i] = ny; aa[i] = a;
-      t[(ny|0)*w + (nx|0)] += DEP;
+      glr.w = w; glr.h = h;
     }
-    // food sources
-    for (const f of food) {
-      const amt = P.FOOD * foodScale * (fedWork ? (f.work === fedWork ? 2.4 : 0.35) : 1);
-      const c = f.cells;
-      for (let k = 0; k < c.length; k++) t[c[k]] += amt;
-    }
-    // light bleaches attractant around the cursor
-    if (light.on) {
-      const R = P.LIGHT, cx = light.x|0, cy = light.y|0;
-      for (let y = Math.max(1, cy-R); y < Math.min(h-1, cy+R); y++)
-        for (let x = Math.max(1, cx-R); x < Math.min(w-1, cx+R); x++) {
-          const dx = x-cx, dy = y-cy;
-          if (dx*dx+dy*dy < R*R) t[y*w+x] *= 0.15;
-        }
-    }
-    // diffuse (separable 3-tap mean) and decay
-    for (let y = 0; y < h; y++) {
-      const o = y*w;
-      tmp[o] = (t[o]*2 + t[o+1]) / 3;
-      for (let x = 1; x < w-1; x++) tmp[o+x] = (t[o+x-1] + t[o+x] + t[o+x+1]) / 3;
-      tmp[o+w-1] = (t[o+w-2] + t[o+w-1]*2) / 3;
-    }
-    const k = P.DECAY / 3;
-    for (let x = 0; x < w; x++) { t[x] = (tmp[x]*2 + tmp[x+w]) * k; t[(h-1)*w+x] = (tmp[(h-1)*w+x]*2 + tmp[(h-2)*w+x]) * k; }
-    for (let i = w; i < (h-1)*w; i++) t[i] = (tmp[i-w] + tmp[i] + tmp[i+w]) * k;
-    steps++;
+    gl.bindTexture(gl.TEXTURE_2D, glr.src); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, dens);
+    const B = glr.blur; gl.useProgram(B.o); gl.uniform1i(B.u.t, 0); gl.uniform1fv(B.u.w, BLURW); gl.viewport(0, 0, w, h);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, glr.fa); gl.uniform2f(B.u.dir, 1/w, 0); gl.uniform1f(B.u.raw, 1); gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.bindTexture(gl.TEXTURE_2D, glr.a);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, glr.fb); gl.uniform2f(B.u.dir, 0, 1/h); gl.uniform1f(B.u.raw, 0); gl.drawArrays(gl.TRIANGLES, 0, 3);
+    const Sh = glr.shade; gl.useProgram(Sh.o); gl.bindTexture(gl.TEXTURE_2D, glr.b);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform1i(Sh.u.t, 0); gl.uniform2f(Sh.u.px, 1/w, 1/h);
+    gl.uniform1f(Sh.u.foodScale, LOOK.food); gl.uniform1f(Sh.u.bump, LOOK.bump); gl.uniform1f(Sh.u.rad, LOOK.light); gl.uniform3fv(Sh.u.L, LIGHTS);
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
-  function sense(x, y, a, so, t, w, h) {
-    const sx = (x + Math.cos(a)*so) | 0, sy = (y + Math.sin(a)*so) | 0;
-    if (sx < 0 || sx >= w || sy < 0 || sy >= h) return -1;
-    return t[sy*w + sx];
+  if (gl) {
+    canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); glr = null; });
+    canvas.addEventListener('webglcontextrestored', () => { glr = null; if (S) draw(); });
   }
+
+  // the food glows as warm points of light; the work being fed glows along its edges
+  function drawGlow() {
+    const sc = unit*dpr;
+    gctx.clearRect(0, 0, glowCanvas.width, glowCanvas.height);
+    for (const o of S.oats) {
+      if (!o.rect || !o.reached || o.work !== fedWork) continue;
+      const q = o.rect, l = .8*sc;           // the stroke itself sits under the image; only its glow shows
+      gctx.save();
+      gctx.shadowColor = 'rgba(255,235,36,.6)'; gctx.shadowBlur = 3*sc;
+      gctx.strokeStyle = 'rgba(255,235,36,.6)'; gctx.lineWidth = l;
+      gctx.strokeRect(q.x0*sc + l, q.y0*sc + l, (q.x1 - q.x0)*sc - 2*l, (q.y1 - q.y0)*sc - 2*l);
+      gctx.restore();
+    }
+    gctx.globalCompositeOperation = 'lighter';
+    for (const o of S.oats) {
+      if (o.rect) continue;
+      const gx = o.x*sc, gy = o.y*sc, gr = LOOK.oatGlow*sc, g = gctx.createRadialGradient(gx, gy, 0, gx, gy, gr);
+      g.addColorStop(0, 'rgba(255,255,120,1)'); g.addColorStop(.2, 'rgba(255,235,36,.5)');
+      g.addColorStop(.52, 'rgba(255,210,0,.14)'); g.addColorStop(1, 'rgba(255,210,0,0)');
+      gctx.fillStyle = g; gctx.beginPath(); gctx.arc(gx, gy, gr, 0, 6.283); gctx.fill();
+    }
+    gctx.globalCompositeOperation = 'source-over';
+  }
+
   function draw() {
-    const t = trail, n = t.length, g = P.GAIN * gainScale;
-    for (let i = 0; i < n; i++) { let v = (t[i]*g)|0; if (v > 1023) v = 1023; px[i] = LUT[v]; }
-    ctx.putImageData(image, 0, 0);
+    if (gl) {
+      if (gl.isContextLost()) return;
+      dctx.globalCompositeOperation = 'source-over'; dctx.fillStyle = '#000'; dctx.fillRect(0, 0, dens.width, dens.height);
+      dctx.globalCompositeOperation = 'lighter';
+      paintSlime(dctx, DS, '255,255,255', LOOK.widen, LOOK.sheet);
+      shadeGL();
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      paintSlime(ctx, rdpr, '226,228,238', 1, 1.3);
+    }
+    drawGlow();
   }
-  let frame = 0;
+
   function loop() {
     if (!running) return;
-    if (++frame % 6 === 0) buildLUT(Math.sin(performance.now()/7000) * P.DRIFT);
-    step(); draw();
+    // two model steps a frame, as in the dish; one on devices too slow for two
+    const t0 = performance.now();
+    for (let i = 0; i < P.spd; i++) { S.step(); if (performance.now() - t0 > 9) break; }
+    draw();
     raf = requestAnimationFrame(loop);
   }
   function settleThenStill() {
     // reduced motion: grow the network without showing the motion, then show one still frame
-    let left = 520;
-    (function chunk(){
-      for (let i = 0; i < 26 && left > 0; i++, left--) step();
-      if (left > 0) requestAnimationFrame(chunk); else draw();
+    let left = 1500;
+    (function chunk() {
+      for (let i = 0; i < 6 && left > 0; i++, left--) S.step();
+      if (left > 0 && (S.young > 0 || S.frame < 300)) requestAnimationFrame(chunk); else draw();
     })();
   }
-  function setLabel() { toggle.textContent = running ? 'Pause' : 'Play'; }
   function start() {
-    if (!inited && !init()) return;
-    if (reduceMotion && steps === 0) { settleThenStill(); wanted = false; setLabel(); return; }
-    if (!wanted || running) { setLabel(); return; }
-    running = true; setLabel(); raf = requestAnimationFrame(loop);
+    if (!S && !init()) return;
+    if (reduceMotion && S.frame === 0) { settleThenStill(); wanted = false; return; }
+    if (!wanted || running) return;
+    running = true; raf = requestAnimationFrame(loop);
   }
-  function stop() { running = false; cancelAnimationFrame(raf); setLabel(); }
-
-  toggle.addEventListener('click', () => { wanted = !running; wanted ? start() : stop(); });
-  field.addEventListener('pointermove', e => {
-    const r = field.getBoundingClientRect();
-    light.x = (e.clientX - r.left)/cell; light.y = (e.clientY - r.top)/cell; light.on = true;
-  });
-  field.addEventListener('pointerleave', () => { light.on = false; });
+  function stop() { running = false; cancelAnimationFrame(raf); }
+  function restart() {
+    const was = running; stop(); S = null;
+    if (document.body.dataset.route === 'home' && init() && (was || reduceMotion)) start();
+  }
 
   let rt = 0;
   addEventListener('resize', () => {
     clearTimeout(rt);
     rt = setTimeout(() => {
-      if (!inited) return;
+      if (!S) return;
       const r = field.getBoundingClientRect();
-      if (Math.abs(r.width - lastW) > lastW*0.12 || Math.abs(r.height - lastH) > lastH*0.2) {
-        const was = running; stop(); inited = false;
-        if (document.body.dataset.route === 'home') { init(); if (was || reduceMotion) start(); }
-      } else mapFood(r);
+      if (Math.abs(r.width - lastW) > lastW*0.12 || Math.abs(r.height - lastH) > lastH*0.2) restart();
     }, 250);
   });
   if ('IntersectionObserver' in window) {
@@ -951,7 +1252,15 @@ const Sim = (() => {
       if (e.isIntersecting) { if (wanted) start(); } else if (running) { stop(); }
     })).observe(field);
   }
-  return { start, stop, feed(w){ fedWork = w; }, remap(){ if (inited) mapFood(); } };
+  return {
+    start, stop,
+    feed(w) { fedWork = w; },
+    remap() {            // after load: rebuild only if the layout moved under the model
+      if (!S) return;
+      const r = field.getBoundingClientRect();
+      if (Math.abs(r.width - lastW) > 2 || Math.abs(r.height - lastH) > 2) restart();
+    }
+  };
 })();
 
 /* ───────────── feeding: hover a work in the index or the field ───────────── */
